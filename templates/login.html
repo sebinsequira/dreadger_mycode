@@ -12,10 +12,21 @@
 {% block page_content %}
 <body>
 <div class="page-header">
-    <h1>Login</h1>
+    <h1 style="color:silver;">Login</h1>
 </div>
-<div class="col-md-4">
-    {{ wtf.quick_form(form) }}
+
+<div class="container">
+<div align="left">
+    <form action=""  method="post">  
+    <p style="font-size:175%;color:silver;">Username:</p> 
+    <input type="text" style="background-color: #E6E6E6;" name="username" value="{{ request.form.username }}" >
+    <br/>	<br/>
+    <p style="font-size:175%;color:silver;">Password:</p> 
+	<input type="password" style="background-color: #E6E6E6;" name="password" value="{{ request.form.password }}">
+	<br/>	<br/>	
+    <button id="loginButton" type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
 </div>
 </body>
 {% endblock %}
