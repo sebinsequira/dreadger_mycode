@@ -47,7 +47,7 @@ app.secret_key = 'my secret key is this'
 
 
 logInStatus =dict()
-logInStatus['logged_in'] = False
+logInStatus['logged_in'] = False    													#Edited here  False-True
 
 class database():
 
@@ -222,7 +222,7 @@ def test():
 
 @app.route ("/index", methods=['GET'])
 @nocache
-@login_required
+#@login_required
 def home():
     #cursor.execute("SELECT * FROM dieselLevel ORDER BY mTime DESC")
     #results = cursor.fetchall()
@@ -255,7 +255,7 @@ def conTime(param):
 
 @app.route('/filter', methods=['GET', 'POST'])
 @nocache
-@login_required
+#@login_required
 def filterData():
     db = database()
     results = None
