@@ -33,17 +33,17 @@
  
 
 <div class="page-header">
-  <h2>Diesel Level</h2>
+  <h2 style="color:silver;">Diesel Level</h2>
 </div>
 <br/>
-  <div class="container">
+  
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th width="20" height="20">Sl No</th>
-            <th width="117" height="20">Date / Time</th>
-            <th width="117" height="20">Level</th>
+            <th >Sl No</th>
+            <th >Date / Time</th>
+            <th >Level</th>
           </tr>
         </thead>
         <tbody>
@@ -52,15 +52,15 @@
           {% for result in results %}
           {%set i=i+1%}
           <tr>
-            <th width="20" height="20">{{ i }}</th>
-            <th width="117" height="20">{{ result[2] }}</th>
-            <th width="117" height="20">{{ result[1] }}</th>
+            <th >{{ i }}</th>
+            <th >{{ result[2] }}</th>
+            <th >{{ result[1] }}</th>
           </tr>
           {% endfor %}
       {% endif %}
         </tbody>
       </table>
-</div>
+
 </div>
 </div>
 {% else %}
