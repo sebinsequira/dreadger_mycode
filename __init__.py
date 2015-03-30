@@ -433,15 +433,15 @@ def page_not_found(error):
 	return 'This page does not exist',404"""
 
 if __name__ == "__main__":
-	"""
-	db=database()
+	
+	#db=database()
 	try:
-		#db.db_init()
+		db.db_init()
 		for i in range(1,100):
 			db.insertDb('dev',i,datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 	except Exception as e:
 		print 'DB_init:'+str(e)
-	"""
+	
 			
 	app.run(host='0.0.0.0',debug=True)
 
