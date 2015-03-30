@@ -205,7 +205,7 @@ def login():
 		else:
 			#session['logged_in'] = True
 			logInStatus['logged_in'] = True
-			flash('You have logged in')
+			#flash('You have logged in')
 			return redirect(url_for('home'))
 	return render_template('login.html')
 
@@ -252,7 +252,7 @@ def home():
 @app.route('/logout')
 def logout():
 	logInStatus['logged_in']=False
-	flash('You were just logged out')
+	#flash('You were just logged out')
 	return redirect(url_for('login'))
 
 def validate(data):
@@ -306,6 +306,7 @@ def filterData():
 			fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
 		except ValueError as e:
 			if 'format' in str(e):
+				flash('(From, '+str(fromDate)+'): '+str(e))
 				flash('(From, '+str(fromDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
 			else:
 				flash('(From, '+str(fromDate)+'): '+str(e))
