@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% block title %}Filter{% endblock %}
-{% block filterPage%}<a class="navbar-brand" href="{{ url_for('home')}}">Index</a>{%endblock%}
+{% block filterPage%}<a id="navbarText3" class="navbar-brand" href="{{ url_for('home')}}">Index</a>{%endblock%}
 {% block page_content %}
 
 <div>
@@ -11,16 +11,16 @@
 </div>
   <form action=""  method="post">
     <p><b>From:</b>&emsp;     
-    <input type="date" name="username" value="{{ request.form.username }}" >
-    &emsp;<input type="text" placeholder="Hour(24 Hr Format)" name="password" value="{{ request.form.password }}">
-    &emsp;<input type="text" placeholder="Minute" name="password" value="{{ request.form.password }}"></p>
+    <input type="date" name="fromDate" style="background-color: #E6E6E6;" value="{{ request.form.username }}" >
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Hour(24 Hr Format)" name="fromHours" value="1">
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Minute" name="fromMinutes" value="1" ></p>
     <p><b>To: </b>&emsp;&emsp;
-    <input type="date" name="username" value="{{ request.form.username }}" >
-    &emsp;<input type="text" placeholder="Hour(24 Hr Format)" name="password" value="{{ request.form.password }}">
-    &emsp;<input type="text" placeholder="Minute" name="password" value="{{ request.form.password }}"></p>
+    <input type="date" name="toDate" style="background-color: #E6E6E6;"  value="{{ request.form.username }}">
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Hour(24 Hr Format)" name="toHours" value="1">
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Minute" name="toMinutes" value="1"></p>
 
     <br/><!--<input type="submit" value="OK" align="">!-->
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" style="background-color: #E6E6E6;" class="btn btn-default">Submit</button>
 
   </form>
 
