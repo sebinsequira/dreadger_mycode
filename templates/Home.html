@@ -6,7 +6,7 @@
 
 
 <div class="page-header">
-    <h1>Latest</h1>
+    <h1 style="color:silver;">Latest</h1>
 </div>
 <br/>
 <div class="container">
@@ -36,7 +36,7 @@
 </div>
 
 <div class="page-header">
-  <h2>Diesel Level</h2>
+  <h2 style="color:silver;">Diesel Level</h2>
 <form action="" align="right">
 <select name="filter">
 <option value="">1 Day</option>
@@ -53,9 +53,9 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th width="20" height="20">Sl No</th>
-        		<th width="117" height="20">Date / Time</th>
-        		<th width="117" height="20">Level</th>
+            <th  width="20" height="20">Sl No</th>
+        		<th   width="117" height="20">Date / Time</th>
+        		<th   width="117" height="20">Level</th>
         	</tr>
         </thead>
         <tbody>
@@ -64,9 +64,9 @@
           {% for result in results %}
           {%set i=i+1%}
           <tr>
-            <th width="20" height="20">{{ i }}</th>
-            <th width="117" height="20">{{ result[2] }}</th>
-            <th width="117" height="20">{{ result[1] }}</th>
+            <th   width="20" height="20">{{ i }}</th>
+            <th   width="117" height="20">{{ result[2] }}</th>
+            <th   width="117" height="20">{{ result[1] }}</th>
           </tr>
           {% endfor %}
     	{% endif %}

@@ -303,8 +303,7 @@ def filterData():
 		toTime= toDate+' '+toHours+':'+toMinutes+':00'
 
 		results=db.dataFilter(fromTime,toTime)
-	else:
-		flash(str(request.method))
+	
 	
 	
 	if not results:

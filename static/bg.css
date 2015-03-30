@@ -1,6 +1,6 @@
 body {
     background-image: url("/static/img/noise.png");
-    color:silver;
+    color:black;
     font-size:160%;
 }
 
@@ -37,5 +37,6 @@ body {
 }
 
 table{
+	color:silver;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }

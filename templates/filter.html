@@ -7,15 +7,15 @@
 
 <div>
 <div class="page-header">
-    <h1>Filter</h1>
+    <h1 style="color:silver;">Filter</h1>
 </div>
   <form action=""  method="post">
-    <p><b>From:</b>&emsp;     
+    <p ><b style="color:silver;">From:</b>&emsp;     
     <input type="date" name="fromDate" style="background-color: #E6E6E6;" value="{{ request.form.username }}" >
     &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Hour(24 Hr Format)" name="fromHours" value="1">
     &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Minute" name="fromMinutes" value="1" ></p>
-    <p><b>To: </b>&emsp;&emsp;
-    <input type="date" name="toDate" style="background-color: #E6E6E6;"  value="{{ request.form.username }}">
+    <p ><b style="color:silver;">To: </b>&emsp;&emsp;
+    <input type="date" name="toDate" style="background-color: #E6E6E6;" style="color:black;" value="{{ request.form.username }}">
     &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Hour(24 Hr Format)" name="toHours" value="1">
     &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Minute" name="toMinutes" value="1"></p>
 
@@ -61,7 +61,8 @@
         </tbody>
       </table>
 {% else %}
-<p><b>The table is empty</b></p>
+<br/><br/>
+<p style="color:silver;"><b>The table is empty</b></p>
 {%endif%}
     </div>
   </div>
