@@ -87,10 +87,11 @@ class database():
 		conn=sqlite3.connect("dieselLevel.db")
 		c=conn.cursor()
 		#sql = "DELETE FROM table1 WHERE time=? and level=?"
-		sql = "SELECT * FROM table1 where time>=? and time<=?"
+		sql = "SELECT * FROM table1 where time>=? and time<=? ORDER BY time desc"
 		c.execute(sql,[fromTime,toTime])
-		conn.commit()
+		data=c.fetchall()
 		conn.close()
+		return data
 
 
 def nocache(view):
@@ -306,7 +307,6 @@ def filterData():
 			fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
 		except ValueError as e:
 			if 'format' in str(e):
-				flash('(From, '+str(fromDate)+'): '+str(e))
 				flash('(From, '+str(fromDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
 			else:
 				flash('(From, '+str(fromDate)+'): '+str(e))
@@ -314,18 +314,19 @@ def filterData():
 
 		try:
 			toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
-			toTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
+			toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
 		except ValueError as e:
 			if 'format' in str(e):
 				flash('(To, '+str(toDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
 			else:
 				flash('(To, '+str(toDate)+'): '+str(e))
+
 			return render_template('filter.html',results=results,fromDate=fromDate,toDate=toDate)
 
 		print 'from:'+str(type(fromTime))+': '+fromTime
 		print 'to:'+str(type(toTime))+': '+str(toTime)
 		results=db.dataFilter(fromTime,toTime)
-	
+		
 	
 	
 	if not results:
@@ -432,8 +433,9 @@ def internal_server_error(e):
 def page_not_found(error):
 	return 'This page does not exist',404"""
 
+
 if __name__ == "__main__":
-	
+	"""
 	#db=database()
 	try:
 		db.db_init()
@@ -441,7 +443,7 @@ if __name__ == "__main__":
 			db.insertDb('dev',i,datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 	except Exception as e:
 		print 'DB_init:'+str(e)
-	
+	"""
 			
 	app.run(host='0.0.0.0',debug=True)
 
