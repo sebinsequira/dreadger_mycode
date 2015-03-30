@@ -11,13 +11,13 @@
 </div>
   <form action=""  method="post">
     <p ><b style="color:silver;">From:</b>&emsp;     
-    <input type="date" name="fromDate" style="background-color: #E6E6E6;" value="{{ request.form.username }}" >
-    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Hour(24 Hr Format)" name="fromHours" value="1">
-    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Minute" name="fromMinutes" value="1" ></p>
+    <input type="date" name="fromDate" style="background-color: #E6E6E6;" value="{{ fromDate }}" >
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Hour(24 Hr Format)" name="fromHours" value="00">
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Minute" name="fromMinutes" value="00" ></p>
     <p ><b style="color:silver;">To: </b>&emsp;&emsp;
-    <input type="date" name="toDate" style="background-color: #E6E6E6;" style="color:black;" value="{{ request.form.username }}">
-    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Hour(24 Hr Format)" name="toHours" value="1">
-    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Minute" name="toMinutes" value="1"></p>
+    <input type="date" name="toDate" style="background-color: #E6E6E6;" style="color:black;" value="{{ toDate }}">
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Hour(24 Hr Format)" name="toHours" value="00">
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Minute" name="toMinutes" value="00"></p>
 
     <br/><!--<input type="submit" value="OK" align="">!-->
     <button type="submit" style="background-color: #E6E6E6;" class="btn btn-default">Submit</button>
