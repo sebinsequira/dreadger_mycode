@@ -297,11 +297,32 @@ def filterData():
 		toHours=request.form['toHours']
 		toMinutes=request.form['toMinutes']
 
-		#print fromDate+' '+fromHours+':'+fromMinutes+':00'
-		#print toDate+' '+toHours+':'+toMinutes+':00'
+		
 		fromTime= fromDate+' '+fromHours+':'+fromMinutes+':00'
 		toTime= toDate+' '+toHours+':'+toMinutes+':00'
+		
+		try:
+			fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
+			fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
+		except ValueError as e:
+			if 'format' in str(e):
+				flash('(From, '+str(fromDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
+			else:
+				flash('(From, '+str(fromDate)+'): '+str(e))
+			return render_template('filter.html',results=results,fromDate=fromDate,toDate=toDate)
 
+		try:
+			toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
+			toTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
+		except ValueError as e:
+			if 'format' in str(e):
+				flash('(To, '+str(toDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
+			else:
+				flash('(To, '+str(toDate)+'): '+str(e))
+			return render_template('filter.html',results=results,fromDate=fromDate,toDate=toDate)
+
+		print 'from:'+str(type(fromTime))+': '+fromTime
+		print 'to:'+str(type(toTime))+': '+str(toTime)
 		results=db.dataFilter(fromTime,toTime)
 	
 	
@@ -416,7 +437,7 @@ if __name__ == "__main__":
 	try:
 		#db.db_init()
 		for i in range(1,100):
-			db.insertDb('dev',i,datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
+			db.insertDb('dev',i,datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 	except Exception as e:
 		print 'DB_init:'+str(e)
 	"""
