@@ -1,7 +1,7 @@
 body {
     background-image: url("/static/img/noise.png");
     color:black;
-    font-size:160%;
+    
 }
 
 #navbar{
@@ -10,7 +10,7 @@ body {
 
 
 #navbarText1{
-	  font-size:110%;
+	  
 	  font-weight:bolder;
 }
 /* mouse over link */
@@ -19,12 +19,12 @@ body {
 }
 
 #navbarText2{
-	  font-size:130%;
+	  
 	  font-weight:bolder;
 }
 
 #navbarText3{
-	  font-size:130%;
+	  
 	  font-weight:bolder;
 }
 
