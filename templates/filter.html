@@ -5,7 +5,7 @@
 {% block filterPage%}<a id="navbarText3" class="navbar-brand" href="{{ url_for('home')}}">Index</a>{%endblock%}
 {% block page_content %}
 
-<div>
+<div class="container">
 <div class="page-header">
     <h1 style="color:silver;">Filter</h1>
 </div>
@@ -31,7 +31,7 @@
 
 {% if  results %}
  
-</div>
+
 <div class="page-header">
   <h2>Diesel Level</h2>
 </div>
@@ -60,12 +60,18 @@
       {% endif %}
         </tbody>
       </table>
+</div>
+</div>
+</div>
 {% else %}
 <br/><br/>
+
+
 <p style="color:silver;"><b>The table is empty</b></p>
+
 {%endif%}
-    </div>
-  </div>
+    
+  
 
         
 {% endblock %}
