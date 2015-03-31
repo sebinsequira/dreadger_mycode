@@ -4,9 +4,9 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bootstrap import Bootstrap
 from functools import wraps
 from datetime import datetime
-from flask.ext.mail import Mail
-from flask.ext.moment import Moment
-from flask.ext.login import LoginManager
+#from flask.ext.mail import Mail
+#from flask.ext.moment import Moment
+#from flask.ext.login import LoginManager
 
 from flask.ext.wtf import Form
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField,DateTimeField
@@ -35,7 +35,7 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)"""
 
 bootstrap = Bootstrap(app)
-moment = Moment(app)
+#moment = Moment(app)
 db = SQLAlchemy(app)
 #cursor = mysql.get_db().cursor()
 

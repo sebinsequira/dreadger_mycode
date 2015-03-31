@@ -10,10 +10,8 @@
     $(document).ready(
             function() {
                 setInterval(function() {
-                    var randomnumber = Math.floor(Math.random() * 100);
-                    $('#show').text(
-                            'I am getting refreshed every 3 seconds..! Random Number ==> '
-                                    + randomnumber);
+                    
+                    $('#show').load(' #show', function(){$(this).children().unwrap()});
                 }, 3000);                           
             });
 </script>
@@ -69,7 +67,7 @@
 <br/>
   
   <div class="table-responsive">
-     <div id="show">      </div>            <!--For auto refresh without page reload!-->
+     <div id="show">               <!--For auto refresh without page reload!-->
               <table class="table table-bordered">
                 <thead>
                   <tr>
@@ -92,7 +90,7 @@
             	{% endif %}
                 </tbody>
               </table>
-      
+        </div> 
   </div>
 {% else %}
 <p><b>The table is empty</b></p>
