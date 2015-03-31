@@ -2,9 +2,15 @@
 
 {% block title %}Login{% endblock %}
 
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='bg.css')}}">
+{% endblock %}
+
 {% block navbar %}
 
-<div class="navbar navbar-inverse" role="navigation">
+<div class="navbar navbar-inverse" role="navigation" id="navbar">
     <div class="container">
         <div class="navbar-header">
             
@@ -16,7 +22,7 @@
         </div>
         <div class="navbar-right">
             
-            <a class="navbar-brand" href="/logout">Sign Out</a>
+            <a id="navbarText1" class="navbar-brand" href="/logout">Sign Out</a>
         </div>
 
 

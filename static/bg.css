@@ -1,0 +1,42 @@
+body {
+    background-image: url("/static/img/noise.png");
+    color:black;
+    
+}
+
+#navbar{
+	background-image: url("/static/img/new.jpg");
+}
+
+
+#navbarText1{
+	  
+	  font-weight:bolder;
+}
+/* mouse over link */
+#navbarText1:hover {
+    color: white;
+}
+
+#navbarText2{
+	  
+	  font-weight:bolder;
+}
+
+#navbarText3{
+	  
+	  font-weight:bolder;
+}
+
+#loginButton{
+	background-color:silver;
+}
+
+#loginButton:hover{
+	background-color:white;
+}
+
+table{
+	color:silver;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}

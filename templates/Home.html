@@ -1,12 +1,32 @@
 {% extends "base.html" %}
 {% block title %}Report{% endblock %}
-{% block metas %}<meta http-equiv="refresh" content="5">{% endblock %}
-{% block indexPage%} <a class="navbar-brand" href="{{ url_for('filterData') }}">Filter</a>{%endblock%}
+
+{% block indexPage%} <a id="navbarText2"class="navbar-brand" href="{{ url_for('filterData') }}">Filter</a>{%endblock%}
+
+{% block scripts %} <!--Script for auto-reload every 3 seconds!-->
+<script type="text/javascript"
+    src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>
+    $(document).ready(
+            function() {
+                setInterval(function() {
+                    var randomnumber = Math.floor(Math.random() * 100);
+                    $('#show').text(
+                            'I am getting refreshed every 3 seconds..! Random Number ==> '
+                                    + randomnumber);
+                }, 3000);                           
+            });
+</script>
+{{super()}}
+{% endblock %}
+
+
+
 {% block page_content %}
 
 
 <div class="page-header">
-    <h1>Latest</h1>
+    <h1 style="color:silver;">Latest</h1>
 </div>
 <br/>
 <div class="container">
@@ -36,48 +56,58 @@
 </div>
 
 <div class="page-header">
-  <h2>Diesel Level</h2>
+  <h2 style="color:silver;">Diesel Level</h2>
 <form action="" align="right">
 <select name="filter">
-<option value="">1 Day</option>
-<option value="">1 Hour</option>
-<option value="">2 Hour</option>
-<option value="">30 Mins</option>
+<option value="2h">2 Hours</option>
+<option value="1h">1 Hour</option>
+<option value="30m">30 Mins</option>
 </select>
 &emsp;<input type="submit">
 </form>
 </div>
 <br/>
-  <div class="container">
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th width="20" height="20">Sl No</th>
-        		<th width="117" height="20">Date / Time</th>
-        		<th width="117" height="20">Level</th>
-        	</tr>
-        </thead>
-        <tbody>
-    	{%if results != None %}
-          {%set i=0%}
-          {% for result in results %}
-          {%set i=i+1%}
-          <tr>
-            <th width="20" height="20">{{ i }}</th>
-            <th width="117" height="20">{{ result[2] }}</th>
-            <th width="117" height="20">{{ result[1] }}</th>
-          </tr>
-          {% endfor %}
-    	{% endif %}
-        </tbody>
-      </table>
+  
+  <div class="table-responsive">
+     <div id="show">      </div>            <!--For auto refresh without page reload!-->
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th  width="20" height="20">Sl No</th>
+                		<th   width="117" height="20">Date / Time</th>
+                		<th   width="117" height="20">Level</th>
+                	</tr>
+                </thead>
+                <tbody>
+            	{%if results != None %}
+                  {%set i=0%}
+                  {% for result in results %}
+                  {%set i=i+1%}
+                  <tr>
+                    <th   width="20" height="20">{{ i }}</th>
+                    <th   width="117" height="20">{{ result[2] }}</th>
+                    <th   width="117" height="20">{{ result[1] }}</th>
+                  </tr>
+                  {% endfor %}
+            	{% endif %}
+                </tbody>
+              </table>
+      
+  </div>
 {% else %}
 <p><b>The table is empty</b></p>
 {%endif%}
-    </div>
-  </div>
+    
+  
 
 
 
 {% endblock %}
+
+
+
+
+
+
+ 
+   
