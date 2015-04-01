@@ -1,0 +1,18 @@
+<?php
+   
+$dbhandle = sqlite_open('dieselLevel.db', 0666, $error);
+
+if (!$dbhandle) die ($error);
+    
+$query = "SELECT * FROM Friends";
+$result = sqlite_query($dbhandle, $query);
+if (!$result) die("Cannot execute query.");
+
+$row = sqlite_fetch_array($result, SQLITE_ASSOC); 
+print_r($row);
+echo "<br>";
+
+
+sqlite_close($dbhandle);
+
+?>
