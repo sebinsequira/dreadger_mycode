@@ -1,12 +1,12 @@
-from flask import Flask, flash, request, jsonify, url_for, render_template, redirect
+from flask import Flask, flash, request, jsonify, url_for, render_template, redirect,send_from_directory
 
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bootstrap import Bootstrap
 from functools import wraps
 from datetime import datetime
-from flask.ext.mail import Mail
-from flask.ext.moment import Moment
-from flask.ext.login import LoginManager
+#from flask.ext.mail import Mail
+#from flask.ext.moment import Moment
+#from flask.ext.login import LoginManager
 
 from flask.ext.wtf import Form
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField,DateTimeField
@@ -35,7 +35,7 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)"""
 
 bootstrap = Bootstrap(app)
-moment = Moment(app)
+#moment = Moment(app)
 db = SQLAlchemy(app)
 #cursor = mysql.get_db().cursor()
 
@@ -228,9 +228,9 @@ def login():
 		return redirect(url_for('home'))
 	return render_template('Login.html',error=error)
 """
-@app.route('/user', methods=['GET', 'POST'])
+@app.route('/testScript.php')                                   # to download a file testScript.php
 def test():
-	return render_template('user.html')
+	return send_from_directory(app.static_folder, request.path[1:]) #send_from_directory used to download a file
 
 
 @app.route ("/index", methods=['GET'])
