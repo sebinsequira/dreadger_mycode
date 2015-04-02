@@ -1,18 +1,13 @@
-<?php
+
    
-$dbhandle = sqlite_open('dieselLevel.db', 0666, $error);
+<?php
+$db = new SQLite3('dieselLevel.db');
 
-if (!$dbhandle) die ($error);
+$results = $db->query('SELECT * FROM table1');
+echo "<table><tr><th>ID</th><th>Name</th></tr>";
+while ($row = $results->fetchArray()) {
+	echo "<tr><td>".$row["device"]."</td><td>".$row["level"]." ".$row["time"]."</td></tr>";
     
-$query = "SELECT * FROM Friends";
-$result = sqlite_query($dbhandle, $query);
-if (!$result) die("Cannot execute query.");
-
-$row = sqlite_fetch_array($result, SQLITE_ASSOC); 
-print_r($row);
-echo "<br>";
-
-
-sqlite_close($dbhandle);
-
+}
 ?>
+
