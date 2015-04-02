@@ -2,35 +2,24 @@
 <html>
 <head>
 <meta http-equiv="refresh" content="3"/>
+
 </head>
 
-<div class="table-responsive">
-              <table class="table_table-bordered">
-                <thead>
-                  <tr>
-                    <th  width="20" height="20">Sl No</th>
-                    <th   width="117" height="20">Date / Time</th>
-                    <th   width="117" height="20">Level</th>
-                  </tr>
-                </thead>
-                <tbody>
-              {%if results != None %}
-                  {%set i=0%}
-                  {% for result in results %}
-                  {%set i=i+1%}
-                  <tr>
-                    <th   width="20" height="20">{{ i }}</th>
-                    <th   width="117" height="20">{{ result[2] }}</th>
-                    <th   width="117" height="20">{{ result[1] }}</th>
-                  </tr>
-                  {% endfor %}
-              {% endif %}
-                </tbody>
-              </table>
-</div>
+<body>
 
-{% else %}
-<p><b>The table is empty</b></p>
-{%endif%}
+  <?php
+    $db = new SQLite3('dieselLevel.db');
+
+    $results = $db->query('SELECT * FROM table1');
+    echo "<table><tr><th>ID</th><th>Name</th></tr>";
+    while ($row = $results->fetchArray()) {
+      echo "<tr><td>".$row["device"]."</td><td>".$row["level"]." ".$row["time"]."</td></tr>";
+       }
+    echo "</table>";
+?>
+
+</body>
+
+
 
 </html>
