@@ -46,25 +46,38 @@ class database():
         conn.commit()
         conn.close()
 
-def strTimeProp(start, end, format, prop):
-    """Get a time at a proportion of a range of two formatted times.
+    def randomDate(start, end, format, prop=random.random()):
+        """Get a time at a proportion of a range of two formatted times.
 
-    start and end should be strings specifying times formated in the
-    given format (strftime-style), giving an interval [start, end].
-    prop specifies how a proportion of the interval to be taken after
-    start.  The returned time will be in the specified format.
-    """
+        start and end should be strings specifying times formated in the
+        given format (strftime-style), giving an interval [start, end].
+        prop specifies how a proportion of the interval to be taken after
+        start.  The returned time will be in the specified format.
+        """
 
-    stime = time.mktime(time.strptime(start, format))
-    etime = time.mktime(time.strptime(end, format))
+        stime = time.mktime(time.strptime(start, format))
+        etime = time.mktime(time.strptime(end, format))
 
-    ptime = stime + prop * (etime - stime)
+        ptime = stime + prop * (etime - stime)
 
-    return time.strftime(format, time.localtime(ptime))
+        time = time.strftime(format, time.localtime(ptime))
+        time = time.strptime(time, '%Y-%m-%d %H:%M:%S')
+        return time
 
 
-def randomDate(start, end, prop):
-    return strTimeProp(start, end, '%Y-%m-%d %H:%M:%S', prop)
+        """def randomDate(start, end, prop=random.random()):
+        return strTimeProp(start, end, '%Y-%m-%d %H:%M:%S', prop)"""
+    def randomPacket(self):
+        i=1
+        self.db_init()
+        while i in range(1,2):
+            device='d'
+            date=randomDate("2012-01-01 1:30:00", "2016-01-01 4:50:00", random.random())
+            level=str(random.randrange(100, 900, 2))
+            
+            #self.insertDb(device,level,date)
+            i=i+1
+
 
 
 def Main():

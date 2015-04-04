@@ -1,23 +1,14 @@
 
-
+<!DOCTYPE html>
 <html>
-<head>
-<script src="jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-   $.ajax({
-        url:'phpScript.php',
-        type:'GET', 
-        data:"parameter=$results",
-       success:function(data)
-       {
-              $("#thisdiv").html(data);
-           }
-    });
-});
-</script>
-</head>
 <body>
-<div id="thisdiv"></div>
+
+<h1>My first PHP page</h1>
+
+<?php
+echo 'Hello World!';
+
+?>
+
 </body>
-</html>
+</html> 
