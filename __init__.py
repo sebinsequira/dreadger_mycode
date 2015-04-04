@@ -4,19 +4,15 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bootstrap import Bootstrap
 from functools import wraps
 from datetime import datetime
-#from flask.ext.mail import Mail
-#from flask.ext.moment import Moment
-#from flask.ext.login import LoginManager
+
 
 from flask.ext.wtf import Form
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField,DateTimeField
 from wtforms.validators import Required, Email,Length
 from flask import make_response
 from functools import update_wrapper
-from datetime import datetime 
 import time
-
-import sqlite3
+import random
 
 
 #from flask.ext.mysql import MySQL
@@ -28,16 +24,11 @@ import sqlite3
 #app = Flask (__name__, static_url_path='\C:\Users\$$\Desktop\dreadger_bootstrap-2march20\static')
 app = Flask (__name__)
 
-"""app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'aaggss'
-app.config['MYSQL_DATABASE_DB'] = 'dreadger'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-mysql.init_app(app)"""
+
 
 bootstrap = Bootstrap(app)
-#moment = Moment(app)
 db = SQLAlchemy(app)
-#cursor = mysql.get_db().cursor()
+
 
 
 
@@ -47,52 +38,74 @@ app.secret_key = 'my secret key is this'
 
 
 logInStatus =dict()
-logInStatus['logged_in'] = True    													#Edited here  False-True
+logInStatus['logged_in'] = False    			#Determines initial state, if false the logs out automatically when pgm restarts
 
 class database():
 
-	def db_init(self):
-		conn = sqlite3.connect("dieselLevel.db")
-		c=conn.cursor()
-		try:
-			#c.execute("DROP TABLE table1")
-			c.execute("CREATE TABLE table1(device TEXT,level TEXT,time TEXT)")
-			conn.close()
-		except Exception as e:
-			print ('db_init ERROR:'+str(e))
-			pass
-		finally:
-			conn.close()
-	def fetchData(self):
-		conn=sqlite3.connect("dieselLevel.db")
-		c=conn.cursor()
-		c.execute("SELECT * FROM table1 ORDER BY time desc")
-		data=c.fetchall()
-		conn.close()
-		return data
-	def insertDb(self,device,level,currentTime):
-		conn=sqlite3.connect("dieselLevel.db")
-		c=conn.cursor()
-		c.execute("INSERT INTO table1 values(?,?,?)",( device,str(level),str(currentTime) ))
-		conn.commit()
-		conn.close()
-	def deleteDb(self,time,level):
-		conn=sqlite3.connect("dieselLevel.db")
-		c=conn.cursor()
-		sql = "DELETE FROM table1 WHERE time=? and level=?"
-		c.execute(sql,[time,level])
-		conn.commit()
-		conn.close()
-	def dataFilter(self,fromTime,toTime):
-		conn=sqlite3.connect("dieselLevel.db")
-		c=conn.cursor()
-		#sql = "DELETE FROM table1 WHERE time=? and level=?"
-		sql = "SELECT * FROM table1 where time>=? and time<=? ORDER BY time desc"
-		c.execute(sql,[fromTime,toTime])
-		data=c.fetchall()
-		conn.close()
-		return data
+    def db_init(self):
+        db.create_all()
 
+    def fetchAll(self):
+        try:												# Will fail if table doesn't exist
+            data = dieselLevel.query.order_by(dieselLevel.mTime.desc()).all() # Select * FROM TABLE ORDER BY mTime
+        except Exception as e:
+            flash('fetchAll: '+str(e))
+            #print 'Error:' + str(e)
+        #print data.__repr__()
+        return data
+    def insertDb(self,device,level,currentTime,ip):
+        try:
+            data=dieselLevel(device,level,currentTime,ip)
+            db.session.add(data)
+            db.session.commit()
+        except Exception as e:
+            flash('insertDb: '+str(e))
+        
+    
+    def filterRange(self,fromTime,toTime):
+    	print "---------------------------"
+        results = dieselLevel.query.filter(dieselLevel.mTime <= toTime).filter(dieselLevel.mTime >= fromTime).order_by(dieselLevel.mTime.desc()).all()
+        print results.__repr__()
+        print "---------------------------"
+        return results
+
+    def dummyData(self):
+        try:
+            self.db_init()
+            for i in range(1,50):
+                res = datetime.now().strftime("%Y-%m-%d %H:%M:%S")   #Converting to proper format in string
+                res = datetime.strptime(res,"%Y-%m-%d %H:%M:%S")    # Converting to proper format in datetime
+                self.insertDb('dev',i,res,'192.168.1.1')
+        except Exception as e:
+        	flash('DB_init:'+str(e))
+            #print 'DB_init:'+str(e)
+
+    def randomDate(self,start, end, format, prop):
+        """
+        Function returns a random date between start and end dates
+        """
+
+        stime = time.mktime(time.strptime(start, format))
+        etime = time.mktime(time.strptime(end, format))
+
+        ptime = stime + prop * (etime - stime)
+
+        res = time.strftime(format, time.localtime(ptime))
+        res = datetime.strptime(res,"%Y-%m-%d %H:%M:%S") 
+        return res
+
+
+        
+    def randomPacket(self,start,end,ip):
+        dbObj=database()
+        i=1
+        while i in range(1,10):
+            device='d'
+            date=dbObj.randomDate(start,end,'%Y-%m-%d %H:%M:%S',random.random())
+            level=str(random.randrange(100, 900, 2))
+            dbObj.insertDb(device,level,date,ip)
+            i=i+1
+            
 
 def nocache(view):
 	@wraps(view)
@@ -145,12 +158,20 @@ class filterForm(Form):
 	
 
 class dieselLevel(db.Model):
-	__tablename__ = 'dieselLevel'
-	id = db.Column(db.Integer, primary_key=True)
-	device = db.Column(db.String(25))
-	level = db.Column(db.Integer)
-	mTime = db.Column(db.DateTime)
-	ip = db.Column(db.String(15))
+    __tablename__ = 'dieselLevel'
+    id = db.Column(db.Integer, primary_key=True)
+    device = db.Column(db.String(25))
+    level = db.Column(db.Integer)
+    mTime = db.Column(db.DateTime)
+    ip = db.Column(db.String(15))
+
+    def __init__(self, device, level,mTime,ip):
+        self.device = device
+        self.level = level
+        self.mTime = mTime
+        self.ip = ip
+    def __repr__(self):
+        return str(self.device)+','+str(self.level)+','+str(self.mTime)+','+str(self.ip)+'\n'
 
 class user(db.Model):
 	__tablename__ = 'userTable'
@@ -228,7 +249,7 @@ def login():
 		return redirect(url_for('home'))
 	return render_template('Login.html',error=error)
 """
-@app.route('/testScript.php')                                   # to download a file testScript.php
+@app.route('/test.php')                                   # to download a file testScript.php
 def test():
 	return send_from_directory(app.static_folder, request.path[1:]) #send_from_directory used to download a file
 
@@ -237,12 +258,10 @@ def test():
 @nocache
 @login_required
 def home():
-	#cursor.execute("SELECT * FROM dieselLevel ORDER BY mTime DESC")
-	#results = cursor.fetchall()
-	db = database()
+	dbObj = database()
 	results = None
-	results = db.fetchData()
-	#print results,type(results)
+	results = dbObj.fetchAll()
+	#print 'Results =   = = == = >',results[0].mTime,results[0].level
 	if not results:
 		results=None
 	return render_template('Home.html',results=results)
@@ -256,30 +275,9 @@ def logout():
 	#flash('You were just logged out')
 	return redirect(url_for('login'))
 
-def validate(data):
-	try:
-		datetime.strptime(data, '%d/%m/%Y %H:%M') 
-		return 1 
-	except:
-		return None
 
-def conTime(param):
-	return datetime.strptime(param, '%d/%m/%Y %H:%M')
 
-"""@app.route('/', methods=['GET', 'POST'])
-def login():
-	error = None
-	if request.method == 'POST':
-		if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-			#error = 'Invalid Credentials.'
-			flash('The username or password you entered is incorrect.')
 
-		else:
-			#session['logged_in'] = True
-			logInStatus['logged_in'] = True
-			flash('You have logged in')
-			return redirect(url_for('home'))
-	return render_template('login.html')"""
 
 
 @app.route('/filter', methods=['GET', 'POST'])
@@ -287,7 +285,7 @@ def login():
 @login_required
 def filterData():
 	results=None
-	db=database()
+	dbObj=database()
 	if request.method == 'POST':
 		
 		fromDate=request.form['fromDate']
@@ -304,33 +302,47 @@ def filterData():
 		
 		try:
 			fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
-			fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
+			#fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
 		except ValueError as e:
 			if 'format' in str(e):
 				flash('(From, '+str(fromDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
 			else:
 				flash('(From, '+str(fromDate)+'): '+str(e))
-			return render_template('filter.html',results=results,fromDate=fromDate,toDate=toDate)
+			return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
 
 		try:
 			toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
-			toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
+			#toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
 		except ValueError as e:
 			if 'format' in str(e):
 				flash('(To, '+str(toDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
 			else:
 				flash('(To, '+str(toDate)+'): '+str(e))
 
-			return render_template('filter.html',results=results,fromDate=fromDate,toDate=toDate)
+			return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
 
-		print 'from:'+str(type(fromTime))+': '+fromTime
+		print 'from:'+str(type(fromTime))+': '+str(fromTime)
 		print 'to:'+str(type(toTime))+': '+str(toTime)
-		results=db.dataFilter(fromTime,toTime)
+
+		results=dbObj.filterRange(fromTime,toTime)
 		
 	
 	
 	if not results:
 		results=None
+
+
+
+	try:
+		fromDate
+		toDate
+	except NameError:
+		return render_template('filter.html',results=results)                                  # To make sure the date and time data doesn't vanish when clicking accept
+	else:
+		return render_template('filter.html',results=results,fromDate=fromDate,toDate=toDate)
+
+
+
 	return render_template('filter.html',results=results)
 
 """
@@ -435,15 +447,8 @@ def page_not_found(error):
 
 
 if __name__ == "__main__":
-	"""
-	#db=database()
-	try:
-		db.db_init()
-		for i in range(1,100):
-			db.insertDb('dev',i,datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-	except Exception as e:
-		print 'DB_init:'+str(e)
-	"""
-			
+	dbObj=database()
+	dbObj.db_init()
+	#dbObj.randomPacket("2010-01-01 1:30:00", "2020-01-01 4:50:00",'192.168.1.1')				
 	app.run(host='0.0.0.0',debug=True)
 
