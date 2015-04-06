@@ -6,57 +6,24 @@
 
 
 {% block page_content %}
-
-
 <div class="page-header">
-    <h1 style="color:silver;">Latest</h1>
-</div>
-<br/>
-<div class="container">
-<div class="table-responsive" >
-{% if  results %}
- <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th width="10" height="20">Sl No:</th>
-      <th width="30" height="20">Date / Time</th>
-      <th width="20" height="20">Level</th>
-    </tr>
-  </thead>
-    <tbody>
+    <h2 style="color:silver;">Latest</h2>
+    <form action="" align="right">
 
-      <tr>
-        <th >1</th>
 
-        <th >{{ results[0].mTime }}</th>
-        <th >{{ results[0].level }}</th> 
-
-      </tr>
-	
-    </tbody>
-  </table>
-  </div>
+    <select name="filter">
+    <option value="2h">2 Hours</option>
+    <option value="1h">1 Hour</option>
+    <option value="30m">30 Mins</option>
+    </select>
+    &emsp;<input type="submit">
+    </form>
 </div>
 
-<div class="page-header">
-  <h2 style="color:silver;">Diesel Level</h2>
-<form action="" align="right">
-
-
-<select name="filter">
-<option value="2h">2 Hours</option>
-<option value="1h">1 Hour</option>
-<option value="30m">30 Mins</option>
-</select>
-&emsp;<input type="submit">
-</form>
-</div>
 <br/>
 
                     
-<iframe src="{{url_for('.static', filename='table.php')}}" width="100%" height="auto"></iframe>
-{% else %}
-<p><b>The table is empty</b></p>
-{%endif%}
+<iframe allowtransparency="true" style="background: #FFFFFF;" src="{{url_for('.static', filename='table.php')}}" width="100%" height="98"></iframe>
+
 
 {% endblock %}
