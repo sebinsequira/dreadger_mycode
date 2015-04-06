@@ -2,12 +2,12 @@
 {% extends "base.html" %}
 {% block title %}Report{% endblock %}
 
-{% block indexPage%} <a id="navbarText2"class="navbar-brand" href="{{ url_for('filterData') }}">Filter</a>{%endblock%}
+<!--Filter page starts here!-->
 
 
 {% block page_content %}
 <div class="page-header">
-    <h2 style="color:silver;">Latest</h2>
+    <h1 style="color:silver;">Latest</h1>
     <form action="" align="right">
 
 
@@ -25,5 +25,72 @@
                     
 <iframe allowtransparency="true" style="background: #FFFFFF;" src="{{url_for('.static', filename='table.php')}}" width="100%" height="98"></iframe>
 
+
+<div class="container">
+<div class="page-header">
+    <h1 style="color:silver;">Filter</h1>
+</div>
+<br>
+  <form action=""  method="post">
+    <p ><b style="color:silver;">From:</b>&emsp;     
+    <input type="date" name="fromDate" style="background-color: #E6E6E6;" value="{{ fromDate }}" >
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Hour(24 Hr Format)" name="fromHours" value="00">
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Minute" name="fromMinutes" value="00" ></p>
+    <p ><b style="color:silver;">To: </b>&emsp;&emsp;
+    <input type="date" name="toDate" style="background-color: #E6E6E6;" style="color:black;" value="{{ toDate }}">
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Hour(24 Hr Format)" name="toHours" value="00">
+    &emsp;<input type="text" style="background-color: #E6E6E6;" placeholder="Minute" name="toMinutes" value="00"></p>
+
+    <br/><!--<input type="submit" value="OK" align="">!-->
+    <button type="submit" style="background-color: #E6E6E6;" class="btn btn-default">Submit</button>
+
+  </form>
+
+
+</div>
+
+<div class="table-responsive" >
+
+{% if  results %}
+ 
+
+<div class="page-header">
+  <h2 style="color:silver;">Diesel Level</h2>
+</div>
+<br/>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th >Sl No</th>
+            <th >Date / Time</th>
+            <th >Level</th>
+          </tr>
+        </thead>
+        <tbody>
+      {%if results != None %}
+          {%set i=0%}
+          {% for result in results %}
+          {%set i=i+1%}
+          <tr>
+            <th >{{ i }}</th>
+            <th >{{ result.mTime }}</th>
+            <th >{{ result.level }}</th>
+          </tr>
+          {% endfor %}
+      {% endif %}
+        </tbody>
+      </table>
+
+</div>
+</div>
+{% else %}
+<br/><br/>
+
+
+<p style="color:silver;"><b>The table is empty</b></p>
+
+{%endif%}
 
 {% endblock %}
