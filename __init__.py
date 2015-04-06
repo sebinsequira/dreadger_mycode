@@ -38,7 +38,7 @@ app.secret_key = 'my secret key is this'
 
 
 logInStatus =dict()
-logInStatus['logged_in'] = False    			#Determines initial state, if false the logs out automatically when pgm restarts
+logInStatus['logged_in'] = True    			#Determines initial state, if false the logs out automatically when pgm restarts
 
 class database():
 
@@ -63,10 +63,10 @@ class database():
         
     
     def filterRange(self,fromTime,toTime):
-    	print "---------------------------"
+    	#print "---------------------------"
         results = dieselLevel.query.filter(dieselLevel.mTime <= toTime).filter(dieselLevel.mTime >= fromTime).order_by(dieselLevel.mTime.desc()).all()
-        print results.__repr__()
-        print "---------------------------"
+        #print results.__repr__()
+        #print "---------------------------"
         return results
 
     def dummyData(self):
@@ -321,8 +321,8 @@ def filterData():
 
 			return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
 
-		print 'from:'+str(type(fromTime))+': '+str(fromTime)
-		print 'to:'+str(type(toTime))+': '+str(toTime)
+		#print 'from:'+str(type(fromTime))+': '+str(fromTime)
+		#print 'to:'+str(type(toTime))+': '+str(toTime)
 
 		results=dbObj.filterRange(fromTime,toTime)
 		
