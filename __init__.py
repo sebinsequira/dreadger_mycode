@@ -38,8 +38,8 @@ app.secret_key = 'my secret key is this'
 
 
 logInStatus =dict()
-logInStatus['logged_in'] = True    			#Determines initial state, if false the logs out automatically when pgm restarts
-
+logInStatus['logged_in'] = False   			#Determines initial state, if false the logs out automatically when pgm restarts
+											# Don't use true!! Might cause error when clicking back button
 class database():
 
     def db_init(self):
@@ -167,6 +167,9 @@ def login_required(f):
 @app.route('/', methods=['GET', 'POST'])
 def login():
 	error = None
+	if request.method == 'GET' and logInStatus['logged_in'] == True:   # TO remove bug when clicking back button while logged in
+		return redirect(url_for('home'))
+
 	if request.method == 'POST':
 		if request.form['username'] != 'admin' or request.form['password'] != 'admin':
 			#error = 'Invalid Credentials.'
