@@ -33,7 +33,7 @@ db = SQLAlchemy(app)
 
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:aaggss@localhost/dreadger'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:aaggss@localhost/dreadger'
 app.secret_key = 'my secret key is this'
 
 
@@ -362,14 +362,6 @@ def logs():
 			return jsonify(items=json_results)    
 	return render_template('log.html')"""
 
-
-@app.errorhandler(404)
-def page_not_found(e):
-	return render_template('404.html'), 404
-
-@app.errorhandler(500)
-def internal_server_error(e):
-	return render_template('500.html'), 500
 
 
 
