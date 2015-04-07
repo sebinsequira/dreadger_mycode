@@ -10,34 +10,17 @@
 
 {% block navbar %}
 
-<div class="navbar navbar-inverse" role="navigation" id="navbar">
-    <div class="container">
-        <div class="navbar-header">
+    <div class="navbar navbar-inverse" role="navigation" id="navbar">
+        <div class="container">
+           
             
-            {% block filterPage%}{%endblock%}
+            <div class="navbar-right">
+                
+                <a id="navbarText1" class="navbar-brand" href="/logout">Sign Out</a>
+            </div>
         </div>
-        <div class="navbar-header">
-            
-           {% block indexPage%}{%endblock%}
-        </div>
-        <div class="navbar-right">
-            
-            <a id="navbarText1" class="navbar-brand" href="/logout">Sign Out</a>
-        </div>
-
-
-
-
-        <!--<div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a class="navbar-brand" href="{#{{ url_for('main.index') }}#}">Filter</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-               <a class="navbar-brand" href="/logout">Sign Out</a>
-            </ul>
-        </div>>!-->
     </div>
-</div>
+
 {% endblock %}
 
 {% block content %}
