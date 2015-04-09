@@ -189,7 +189,7 @@ def login():
 	form = LoginForm()
 	if request.method == 'POST':
 		userName=request.form['username']
-		print '--------->((('+str(userName)+')))<--------, '+ str(type(userName))
+		#print '--------->((('+str(userName)+')))<--------, '+ str(type(userName))
 		user = User.query.filter_by(email=userName).first()
 		if user is not None and user.verify_password(request.form['password']):
 			login_user(user)
