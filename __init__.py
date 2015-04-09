@@ -410,8 +410,9 @@ def logs():
 
 
 if __name__ == "__main__":
-	dbObj=database()
-	dbObj.db_init()
+	#dbObj=database()
+	#dbObj.db_init()
 	#dbObj.randomPacket("2010-01-01 1:30:00", "2020-01-01 4:50:00",'192.168.1.1')				
+	db.create_all()
 	app.run(host='0.0.0.0',debug=True)
 
