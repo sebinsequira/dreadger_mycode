@@ -1,5 +1,5 @@
-from flask import Flask, flash, request, jsonify, url_for, render_template, redirect,send_from_directory
-
+#from flask import Flask, flash, request, jsonify, url_for, render_template, redirect,send_from_directory
+from flask import Flask, flash, request, jsonify, url_for, render_template, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bootstrap import Bootstrap
 from functools import wraps
@@ -7,18 +7,19 @@ from datetime import datetime
 
 
 from flask.ext.wtf import Form
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField,DateTimeField
+from wtforms import StringField, SubmitField,PasswordField,BooleanField
+#from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField,DateTimeField
 from wtforms.validators import Required, Email,Length
 from flask import make_response
 from functools import update_wrapper
 import time
 import random
 
+from flask.ext.login import LoginManager, UserMixin, login_required,login_user,logout_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 #from flask.ext.mysql import MySQL
- 
-#mysql = MySQL()
-#app = Flask(__name__)
+
 
 
 #app = Flask (__name__, static_url_path='\C:\Users\$$\Desktop\dreadger_bootstrap-2march20\static')
@@ -28,18 +29,47 @@ app = Flask (__name__)
 
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
-
-
-
-
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:aaggss@localhost/dreadger'
 app.secret_key = 'my secret key is this'
-
+login_manager = LoginManager()
+login_manager.session_protection ='strong'
+login_manager.init_app(app)
 
 logInStatus =dict()
 logInStatus['logged_in'] = False   			#Determines initial state, if false the logs out automatically when pgm restarts
 											# Don't use true!! Might cause error when clicking back button
+
+class LoginForm(Form):
+	email=StringField('Email',validators=[Required(),Length(1,64),Email()])
+	password=PasswordField('Password',validators=[Required()])
+	remember_me = BooleanField('Keep me logged in')
+	submit = SubmitField('Login')
+
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(64), unique=True, index=True)
+    username = db.Column(db.String(64), unique=True, index=True)
+    password_hash = db.Column(db.String(128))
+
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+    
+ 
+ 
+
+
 class database():
 
     def db_init(self):
@@ -135,24 +165,11 @@ class dieselLevel(db.Model):
     def __repr__(self):
         return str(self.device)+','+str(self.level)+','+str(self.mTime)+','+str(self.ip)+'\n'
 
-class user(db.Model):
-	__tablename__ = 'userTable'
-	id = db.Column(db.Integer, primary_key=True)
-	username = db.Column(db.String(40),unique=True)
-	password = db.Column(db.String(40))
-	email = db.Column(db.String(50))
-	registered_on = db.Column(db.DateTime)
 
-	def __init__(self,id,username,password,email,registered_on):
-		self.id = id
-		self.username = username
-		self.password = password
-		self.email = email
-		self.registered_on = datetime.utcnow()
 		
 
 
-def login_required(f):
+"""def login_required(f):
 	@wraps(f)
 	def decorated_function(*args, **kwargs):
 		if logInStatus['logged_in']:
@@ -161,10 +178,38 @@ def login_required(f):
 			flash('You need to login first')
 			return redirect(url_for('login'))
 	return decorated_function
+"""
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+ 
+@app.route('/',methods=['GET','POST'])
+def login():
+	form = LoginForm()
+	if request.method == 'POST':
+		userName=request.form['username']
+		print '--------->((('+str(userName)+')))<--------, '+ str(type(userName))
+		user = User.query.filter_by(email=userName).first()
+		if user is not None and user.verify_password(request.form['password']):
+			login_user(user)
+			return redirect(request.args.get('next') or url_for('home'))
+		flash ('Invalid credentials!!')
+	return render_template('login.html')
 
 
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route("/logout",methods=["GET"])
+@login_required
+def logout():
+	form = LoginForm()
+	logout_user()
+	flash("You've logged out!!")
+	return redirect(url_for('login'))
+
+
+"""@app.route('/', methods=['GET', 'POST'])
 def login():
 	error = None
 	if request.method == 'GET' and logInStatus['logged_in'] == True:   # TO remove bug when clicking back button while logged in
@@ -181,12 +226,10 @@ def login():
 			#flash('You have logged in')
 			return redirect(url_for('home'))
 	return render_template('login.html')
+"""
 
 
 
-@app.route('/test.php')                                   # to download a file testScript.php
-def test():
-	return send_from_directory(app.static_folder, request.path[1:]) #send_from_directory used to download a file
 
 
 @app.route ("/index", methods=['GET', 'POST'])
@@ -255,13 +298,13 @@ def home():
 
 	#return render_template('filter.html',results=results)
 
-	
+"""
 @app.route('/logout')
 def logout():
 	logInStatus['logged_in']=False
 	#flash('You were just logged out')
 	return redirect(url_for('login'))
-
+"""
 
 
 
