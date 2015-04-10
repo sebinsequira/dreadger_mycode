@@ -38,7 +38,7 @@
         <div class="form-group">
           <label for="sel1">Hour:</label>
           <select name="fromHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
-            {% for i in range(0,25) %}
+            {% for i in range(0,24) %}
             <option value="{{ i }}">{{ i }}</option>
             {% endfor %}
           </select>
@@ -49,17 +49,16 @@
           <div class="form-group">
             <label for="sel1">Min:</label>
             <select name="fromMin" class="form-control" id="sel1" style="background-color: #E6E6E6;">
-              {% for i in range(0,25) %}
+              {% for i in range(0,60) %}
               <option value="{{ i }}">{{ i }}</option>
               {% endfor %}
             </select>
           </div>
       </div>
     </div>
-  </form>
-
+  
 <b style="color:silver;"><h3>To</h3></b>
-  <form class="form-inline" role="form">
+  
     <div class="row" style="color:silver;">
      
       <!--     
@@ -79,7 +78,7 @@
         <div class="form-group">
           <label for="sel1">Hour:</label>
           <select name="toHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
-            {% for i in range(0,25) %}
+            {% for i in range(0,24) %}
             <option value="{{ i }}">{{ i }}</option>
             {% endfor %}
           </select>
@@ -90,7 +89,7 @@
           <div class="form-group">
             <label for="sel1">Min:</label>
             <select name="toMin" class="form-control" id="sel1" style="background-color: #E6E6E6;">
-              {% for i in range(0,25) %}
+              {% for i in range(0,60) %}
               <option value="{{ i }}">{{ i }}</option>
               {% endfor %}
             </select>
@@ -99,7 +98,7 @@
     </div>
     <br/>
     <div class="col-md-1">
-      <button type="submit" style="background-color: #E6E6E6;" class="btn btn-default" >Submit</button>
+      <button type="submit" formmethod="post" style="background-color: #E6E6E6;" class="btn btn-default" >Submit</button>
     </div>
   </form>
 

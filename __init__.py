@@ -240,18 +240,22 @@ def home():
 	results=None
 	dbObj=database()
 	if request.method == 'POST':
-		
+
 		fromDate=request.form['fromDate']
-		fromHours=request.form['fromHours']
-		fromMinutes=request.form['fromMinutes']
+		fromHour=request.form['fromHour']
+		fromMin=request.form['fromMin']
 
 		toDate=request.form['toDate']
-		toHours=request.form['toHours']
-		toMinutes=request.form['toMinutes']
+		toHour=request.form['toHour']
+		toMin=request.form['toMin']
 
 		
-		fromTime= fromDate+' '+fromHours+':'+fromMinutes+':00'
-		toTime= toDate+' '+toHours+':'+toMinutes+':00'
+
+		print 'From:'+ str(fromDate) +','+str(fromHour)+','+str(fromMin)
+		print 'From:'+ str(toDate) +','+str(toHour)+','+str(toMin)
+
+		fromTime= fromDate+' '+fromHour+':'+fromMin+':00'
+		toTime= toDate+' '+toHour+':'+toMin+':00'
 		
 		try:
 			fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
@@ -272,7 +276,7 @@ def home():
 			else:
 				flash('(To, '+str(toDate)+'): '+str(e))
 
-			return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
+			return render_template('Home.html',results=None,fromDate=fromDate,toDate=toDate)
 
 		#print 'from:'+str(type(fromTime))+': '+str(fromTime)
 		#print 'to:'+str(type(toTime))+': '+str(toTime)
@@ -281,22 +285,25 @@ def home():
 		
 	
 	
-	if not results:
-		results=None
+		if not results:
+			results=None
 
 
+		
+		try:
+			fromDate
+			toDate
+		except NameError:
+			return render_template('Home.html',results=results)                                  # To make sure the date and time data doesn't vanish when clicking accept
+			#return "Hello"
+		else:
+			return render_template('Home.html',results=results,fromDate=fromDate,toDate=toDate)
+			#return render_template('Home.html',results=results)
+			#return "Hello World"
+		
 
-	try:
-		fromDate
-		toDate
-	except NameError:
-		return render_template('Home.html',results=results)                                  # To make sure the date and time data doesn't vanish when clicking accept
-	else:
-		return render_template('Home.html',results=results,fromDate=fromDate,toDate=toDate)
 
-
-
-	#return render_template('filter.html',results=results)
+	return render_template('Home.html',results=results)
 
 """
 @app.route('/logout')
