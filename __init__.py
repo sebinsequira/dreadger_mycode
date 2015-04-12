@@ -251,8 +251,8 @@ def home():
 
 		
 
-		print 'From:'+ str(fromDate) +','+str(fromHour)+','+str(fromMin)
-		print 'From:'+ str(toDate) +','+str(toHour)+','+str(toMin)
+		#print 'From:'+ str(fromDate) +','+str(fromHour)+','+str(fromMin)
+		#print 'From:'+ str(toDate) +','+str(toHour)+','+str(toMin)
 
 		fromTime= fromDate+' '+fromHour+':'+fromMin+':00'
 		toTime= toDate+' '+toHour+':'+toMin+':00'
@@ -420,6 +420,6 @@ if __name__ == "__main__":
 	#dbObj=database()
 	#dbObj.db_init()
 	#dbObj.randomPacket("2010-01-01 1:30:00", "2020-01-01 4:50:00",'192.168.1.1')				
-	db.create_all()
+	#db.create_all()
 	app.run(host='0.0.0.0',debug=True)
 
