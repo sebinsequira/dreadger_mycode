@@ -87,7 +87,7 @@ def Main():
     db.db_init()
     while i in range(1,100):
         device='d'
-        date=randomDate("2012-01-01 1:30:00", "2016-01-01 4:50:00", random.random())
+        date=randomDate("2015-01-01 00:00:00", "2015-01-10 00:00:00", random.random())
         level=str(random.randrange(100, 900, 2))
        	
         db.insertDb(device,level,date)
