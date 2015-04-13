@@ -21,7 +21,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 #from flask.ext.mysql import MySQL
 
 
-
+POSTS_PER_PAGE = 5  # pagination
 #app = Flask (__name__, static_url_path='\C:\Users\$$\Desktop\dreadger_bootstrap-2march20\static')
 app = Flask (__name__)
 
@@ -80,8 +80,8 @@ class database():
         try:												# Will fail if table doesn't exist
             data = dieselLevel.query.order_by(dieselLevel.mTime.desc()).all() # Select * FROM TABLE ORDER BY mTime
         except Exception as e:
-            flash('fetchAll: '+str(e))
-            #print 'Error:' + str(e)
+            #flash('fetchAll: '+str(e))
+            print 'Error:' + str(e)
         #print data.__repr__()
         return data
     def insertDb(self,device,level,currentTime,ip):
@@ -90,12 +90,13 @@ class database():
             db.session.add(data)
             db.session.commit()
         except Exception as e:
-            flash('insertDb: '+str(e))
+            #flash('insertDb: '+str(e))
+            print 'insertDb: '+str(e)
         
     
-    def filterRange(self,fromTime,toTime):
+    def filterRange(self,fromTime,toTime,page):
     	#print "---------------------------"
-        results = dieselLevel.query.filter(dieselLevel.mTime <= toTime).filter(dieselLevel.mTime >= fromTime).order_by(dieselLevel.mTime.desc()).all()
+        results = dieselLevel.query.filter(dieselLevel.mTime <= toTime).filter(dieselLevel.mTime >= fromTime).order_by(dieselLevel.mTime.desc()).paginate(page, POSTS_PER_PAGE, False)
         #print results.__repr__()
         #print "---------------------------"
         return results
@@ -108,8 +109,8 @@ class database():
                 res = datetime.strptime(res,"%Y-%m-%d %H:%M:%S")    # Converting to proper format in datetime
                 self.insertDb('dev',i,res,'192.168.1.1')
         except Exception as e:
-        	flash('DB_init:'+str(e))
-            #print 'DB_init:'+str(e)
+        	#flash('DB_init:'+str(e))
+            print 'DB_init:'+str(e)
 
     def randomDate(self,start, end, format, prop):
         """
@@ -158,7 +159,8 @@ class dieselLevel(db.Model):
     mTime = db.Column(db.DateTime)
     ip = db.Column(db.String(15))
 
-    def __init__(self, device, level,mTime,ip):
+    def __init__(self, id,device, level,mTime,ip):
+    	#self.id=id
         self.device = device
         self.level = level
         self.mTime = mTime
@@ -240,14 +242,16 @@ def login():
 
 
 @app.route ("/index", methods=['GET', 'POST'])
+@app.route ("/index/", methods=['GET', 'POST'])
+@app.route('/index/<int:page>', methods=['GET', 'POST'])
 @nocache
 @login_required
-def home():
+def home(page=1,fromTime=None,toTime=None):
 	#-------------Filter Page starts here--------------#  
-	results=None
+	
 	dbObj=database()
 	if request.method == 'POST':
-
+		results=None
 		fromDate=request.form['fromDate']
 		fromHour=request.form['fromHour']
 		fromMin=request.form['fromMin']
@@ -256,14 +260,13 @@ def home():
 		toHour=request.form['toHour']
 		toMin=request.form['toMin']
 
-		
-
 		#print 'From:'+ str(fromDate) +','+str(fromHour)+','+str(fromMin)
 		#print 'From:'+ str(toDate) +','+str(toHour)+','+str(toMin)
 
 		fromTime= fromDate+' '+fromHour+':'+fromMin+':00'
 		toTime= toDate+' '+toHour+':'+toMin+':00'
 		
+		"""
 		try:
 			fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
 			#fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
@@ -272,8 +275,11 @@ def home():
 				flash('(From, '+str(fromDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
 			else:
 				flash('(From, '+str(fromDate)+'): '+str(e))
-			return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
+			print "------------>1: " + 'results= None, ' + str(len(results.items))
+			return render_template('home.html',results=None,fromDate=fromDate,toDate=toDate)
+		"""
 
+		"""
 		try:
 			toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
 			#toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
@@ -282,18 +288,27 @@ def home():
 				flash('(To, '+str(toDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
 			else:
 				flash('(To, '+str(toDate)+'): '+str(e))
-
+			print "------------>2: " + 'results= None, ' + str(len(results.items))
 			return render_template('Home.html',results=None,fromDate=fromDate,toDate=toDate)
-
+		"""
 		#print 'from:'+str(type(fromTime))+': '+str(fromTime)
 		#print 'to:'+str(type(toTime))+': '+str(toTime)
 
-		results=dbObj.filterRange(fromTime,toTime)
+		#results=dbObj.filterRange(fromTime,toTime,page)
+		"""fromTime='2008-02-16 00:00:00'
+		toTime='2015-04-12 00:00:00'"""
+		#1
 		
+
+		results = dieselLevel.query.filter(dieselLevel.mTime <= toTime).filter(dieselLevel.mTime >= fromTime).order_by(dieselLevel.mTime.desc()).paginate(page, POSTS_PER_PAGE, True)
 	
-	
+		print 'fromTime='+str(fromTime)
+		print 'toTime='+str(toTime)
+		print 'results='+str(results)
+		print 'request.method='+str(request.method)
+		"""
 		if not results:
-			results=None
+			results=None"""
 
 
 		
@@ -301,16 +316,37 @@ def home():
 			fromDate
 			toDate
 		except NameError:
-			return render_template('Home.html',results=results)                                  # To make sure the date and time data doesn't vanish when clicking accept
+			print "------------>3: " + 'results= ' + str(len(results.items))
+			return render_template('Home.html',results=results,fromTime=fromTime,toTime=toTime)        # If fromDate and toDate doesn't exist, then the page is being loaded for the first time                          
 			#return "Hello"
 		else:
-			return render_template('Home.html',results=results,fromDate=fromDate,toDate=toDate)
+			print "------------>4: " + 'results= ' + str(len(results.items))
+			return render_template('Home.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)  # To make sure the date and time data doesn't vanish when clicking accept
 			#return render_template('Home.html',results=results)
 			#return "Hello World"
 		
+	fromTime=request.args.get('fromTime','')
+	toTime=request.args.get('toTime','')
+	#2
+	print '-----------------------------------------------------------'
+	
+	if fromTime and toTime:
+		results = dieselLevel.query.filter(dieselLevel.mTime <= toTime).filter(dieselLevel.mTime >= fromTime).order_by(dieselLevel.mTime.desc()).paginate(page, POSTS_PER_PAGE, True)
+	else:
+		results=None
+		
+	"""print "------------>5: " + 'page= '+str(page)+'results= ' ,
+				if results:
+					str(len(results.items))
+				else:
+					print 'None'"""
 
-
-	return render_template('Home.html',results=results)
+	print 'fromTime='+str(fromTime)
+	print 'toTime='+str(toTime)
+	print 'results='+str(results)
+	print 'request.method='+str(request.method)
+	print '-----------------------------------------------------------'
+	return render_template('Home.html',results=results,fromTime=fromTime,toTime=toTime)
 
 """
 @app.route('/logout')
@@ -426,7 +462,7 @@ def logs():
 if __name__ == "__main__":
 	#dbObj=database()
 	#dbObj.db_init()
-	#dbObj.randomPacket("2010-01-01 1:30:00", "2020-01-01 4:50:00",'192.168.1.1')				
-	db.create_all()
+	#dbObj.randomPacket("2015-04-01 00:00:00", "2015-04-30 00:00:00",'192.168.1.1')				
+	#db.create_all()
 	app.run(host='0.0.0.0',debug=True)
 
