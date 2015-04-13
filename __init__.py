@@ -169,19 +169,6 @@ class dieselLevel(db.Model):
         return str(self.device)+','+str(self.level)+','+str(self.mTime)+','+str(self.ip)+'\n'
 
 
-		
-
-
-"""def login_required(f):
-	@wraps(f)
-	def decorated_function(*args, **kwargs):
-		if logInStatus['logged_in']:
-			return f(*args, **kwargs)
-		else:
-			flash('You need to login first')
-			return redirect(url_for('login'))
-	return decorated_function
-"""
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -205,40 +192,6 @@ def login():
 			return redirect(request.args.get('next') or url_for('home'))
 		flash ('Invalid credentials!!')
 	return render_template('login.html')
-
-
-
-
-@app.route("/logout",methods=["GET"])
-@login_required
-def logout():
-	form = LoginForm()
-	logout_user()
-	flash("You've logged out!!")
-	return redirect(url_for('login'))
-
-
-"""@app.route('/', methods=['GET', 'POST'])
-def login():
-	error = None
-	if request.method == 'GET' and logInStatus['logged_in'] == True:   # TO remove bug when clicking back button while logged in
-		return redirect(url_for('home'))
-
-	if request.method == 'POST':
-		if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-			#error = 'Invalid Credentials.'
-			flash('The username or password you entered is incorrect.')
-
-		else:
-			#session['logged_in'] = True
-			logInStatus['logged_in'] = True
-			#flash('You have logged in')
-			return redirect(url_for('home'))
-	return render_template('login.html')
-"""
-
-
-
 
 
 @app.route ("/index", methods=['GET', 'POST'])
@@ -266,7 +219,7 @@ def home(page=1,fromTime=None,toTime=None):
 		fromTime= fromDate+' '+fromHour+':'+fromMin+':00'
 		toTime= toDate+' '+toHour+':'+toMin+':00'
 		
-		"""
+		
 		try:
 			fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
 			#fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
@@ -277,9 +230,9 @@ def home(page=1,fromTime=None,toTime=None):
 				flash('(From, '+str(fromDate)+'): '+str(e))
 			print "------------>1: " + 'results= None, ' + str(len(results.items))
 			return render_template('home.html',results=None,fromDate=fromDate,toDate=toDate)
-		"""
+		
 
-		"""
+		
 		try:
 			toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
 			#toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
@@ -290,7 +243,7 @@ def home(page=1,fromTime=None,toTime=None):
 				flash('(To, '+str(toDate)+'): '+str(e))
 			print "------------>2: " + 'results= None, ' + str(len(results.items))
 			return render_template('Home.html',results=None,fromDate=fromDate,toDate=toDate)
-		"""
+		
 		#print 'from:'+str(type(fromTime))+': '+str(fromTime)
 		#print 'to:'+str(type(toTime))+': '+str(toTime)
 
@@ -300,15 +253,15 @@ def home(page=1,fromTime=None,toTime=None):
 		#1
 		
 
-		results = dieselLevel.query.filter(dieselLevel.mTime <= toTime).filter(dieselLevel.mTime >= fromTime).order_by(dieselLevel.mTime.desc()).paginate(page, POSTS_PER_PAGE, True)
-	
+		
+		results = dbObj.filterRange(fromTime,toTime,1)
 		print 'fromTime='+str(fromTime)
 		print 'toTime='+str(toTime)
 		print 'results='+str(results)
 		print 'request.method='+str(request.method)
-		"""
+		
 		if not results:
-			results=None"""
+			results=None
 
 
 		
@@ -331,7 +284,7 @@ def home(page=1,fromTime=None,toTime=None):
 	print '-----------------------------------------------------------'
 	
 	if fromTime and toTime:
-		results = dieselLevel.query.filter(dieselLevel.mTime <= toTime).filter(dieselLevel.mTime >= fromTime).order_by(dieselLevel.mTime.desc()).paginate(page, POSTS_PER_PAGE, True)
+		results = dbObj.filterRange(fromTime,toTime,page)
 	else:
 		results=None
 		
@@ -348,80 +301,15 @@ def home(page=1,fromTime=None,toTime=None):
 	print '-----------------------------------------------------------'
 	return render_template('Home.html',results=results,fromTime=fromTime,toTime=toTime)
 
-"""
-@app.route('/logout')
-def logout():
-	logInStatus['logged_in']=False
-	#flash('You were just logged out')
-	return redirect(url_for('login'))
-"""
 
-
-
-"""
-
-@app.route('/filter', methods=['GET', 'POST'])
-@nocache
+@app.route("/logout",methods=["GET"])
 @login_required
-def filterData():
-	results=None
-	dbObj=database()
-	if request.method == 'POST':
-		
-		fromDate=request.form['fromDate']
-		fromHours=request.form['fromHours']
-		fromMinutes=request.form['fromMinutes']
+def logout():
+	form = LoginForm()
+	logout_user()
+	flash("You've logged out!!")
+	return redirect(url_for('login'))
 
-		toDate=request.form['toDate']
-		toHours=request.form['toHours']
-		toMinutes=request.form['toMinutes']
-
-		
-		fromTime= fromDate+' '+fromHours+':'+fromMinutes+':00'
-		toTime= toDate+' '+toHours+':'+toMinutes+':00'
-		
-		try:
-			fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
-			#fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
-		except ValueError as e:
-			if 'format' in str(e):
-				flash('(From, '+str(fromDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
-			else:
-				flash('(From, '+str(fromDate)+'): '+str(e))
-			return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
-
-		try:
-			toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
-			#toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
-		except ValueError as e:
-			if 'format' in str(e):
-				flash('(To, '+str(toDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
-			else:
-				flash('(To, '+str(toDate)+'): '+str(e))
-
-			return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
-
-		#print 'from:'+str(type(fromTime))+': '+str(fromTime)
-		#print 'to:'+str(type(toTime))+': '+str(toTime)
-
-		results=dbObj.filterRange(fromTime,toTime)
-		
-	
-	
-	if not results:
-		results=None
-
-
-
-	try:
-		fromDate
-		toDate
-	except NameError:
-		return render_template('filter.html',results=results)                                  # To make sure the date and time data doesn't vanish when clicking accept
-	else:
-		return render_template('filter.html',results=results,fromDate=fromDate,toDate=toDate)
-
-"""
 
 	
 
