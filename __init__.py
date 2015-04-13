@@ -80,8 +80,8 @@ class database():
         try:												# Will fail if table doesn't exist
             data = dieselLevel.query.order_by(dieselLevel.mTime.desc()).all() # Select * FROM TABLE ORDER BY mTime
         except Exception as e:
-            #flash('fetchAll: '+str(e))
-            print 'Error:' + str(e)
+            flash('fetchAll: '+str(e))
+            #print 'Error:' + str(e)
         #print data.__repr__()
         return data
     def insertDb(self,device,level,currentTime,ip):
@@ -90,8 +90,8 @@ class database():
             db.session.add(data)
             db.session.commit()
         except Exception as e:
-            #flash('insertDb: '+str(e))
-            print 'insertDb: '+str(e)
+            flash('insertDb: '+str(e))
+            #print 'insertDb: '+str(e)
         
     
     def filterRange(self,fromTime,toTime,page):
@@ -109,8 +109,8 @@ class database():
                 res = datetime.strptime(res,"%Y-%m-%d %H:%M:%S")    # Converting to proper format in datetime
                 self.insertDb('dev',i,res,'192.168.1.1')
         except Exception as e:
-        	#flash('DB_init:'+str(e))
-            print 'DB_init:'+str(e)
+        	flash('DB_init:'+str(e))
+            #print 'DB_init:'+str(e)
 
     def randomDate(self,start, end, format, prop):
         """
@@ -228,7 +228,7 @@ def home(page=1,fromTime=None,toTime=None):
 				flash('(From, '+str(fromDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
 			else:
 				flash('(From, '+str(fromDate)+'): '+str(e))
-			print "------------>1: " + 'results= None, ' + str(len(results.items))
+			#print "------------>1: " + 'results= None, ' + str(len(results.items))
 			return render_template('home.html',results=None,fromDate=fromDate,toDate=toDate)
 		
 
@@ -241,7 +241,7 @@ def home(page=1,fromTime=None,toTime=None):
 				flash('(To, '+str(toDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
 			else:
 				flash('(To, '+str(toDate)+'): '+str(e))
-			print "------------>2: " + 'results= None, ' + str(len(results.items))
+			#print "------------>2: " + 'results= None, ' + str(len(results.items))
 			return render_template('Home.html',results=None,fromDate=fromDate,toDate=toDate)
 		
 		#print 'from:'+str(type(fromTime))+': '+str(fromTime)
@@ -255,10 +255,10 @@ def home(page=1,fromTime=None,toTime=None):
 
 		
 		results = dbObj.filterRange(fromTime,toTime,1)
-		print 'fromTime='+str(fromTime)
-		print 'toTime='+str(toTime)
-		print 'results='+str(results)
-		print 'request.method='+str(request.method)
+		#print 'fromTime='+str(fromTime)
+		#print 'toTime='+str(toTime)
+		#print 'results='+str(results)
+		#print 'request.method='+str(request.method)
 		
 		if not results:
 			results=None
@@ -269,11 +269,11 @@ def home(page=1,fromTime=None,toTime=None):
 			fromDate
 			toDate
 		except NameError:
-			print "------------>3: " + 'results= ' + str(len(results.items))
+			#print "------------>3: " + 'results= ' + str(len(results.items))
 			return render_template('Home.html',results=results,fromTime=fromTime,toTime=toTime)        # If fromDate and toDate doesn't exist, then the page is being loaded for the first time                          
 			#return "Hello"
 		else:
-			print "------------>4: " + 'results= ' + str(len(results.items))
+			#print "------------>4: " + 'results= ' + str(len(results.items))
 			return render_template('Home.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)  # To make sure the date and time data doesn't vanish when clicking accept
 			#return render_template('Home.html',results=results)
 			#return "Hello World"
@@ -281,7 +281,7 @@ def home(page=1,fromTime=None,toTime=None):
 	fromTime=request.args.get('fromTime','')
 	toTime=request.args.get('toTime','')
 	#2
-	print '-----------------------------------------------------------'
+	#print '-----------------------------------------------------------'
 	
 	if fromTime and toTime:
 		results = dbObj.filterRange(fromTime,toTime,page)
@@ -294,11 +294,11 @@ def home(page=1,fromTime=None,toTime=None):
 				else:
 					print 'None'"""
 
-	print 'fromTime='+str(fromTime)
-	print 'toTime='+str(toTime)
-	print 'results='+str(results)
-	print 'request.method='+str(request.method)
-	print '-----------------------------------------------------------'
+	#print 'fromTime='+str(fromTime)
+	#print 'toTime='+str(toTime)
+	#print 'results='+str(results)
+	#print 'request.method='+str(request.method)
+	#print '-----------------------------------------------------------'
 	return render_template('Home.html',results=results,fromTime=fromTime,toTime=toTime)
 
 
