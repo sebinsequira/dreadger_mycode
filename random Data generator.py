@@ -1,58 +1,96 @@
+from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+
 import time
 import random
-import time
-import sqlite3
+
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
+
+
+app = Flask (__name__)
+
+
+
+db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:aaggss@localhost/dreadger'
+app.secret_key = 'my secret key is this'
+
+
+
+
+"""class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(64), unique=True, index=True)
+    username = db.Column(db.String(64), unique=True, index=True)
+    password_hash = db.Column(db.String(128))
+
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+    """
+ 
+ 
+
 
 class database():
 
     def db_init(self):
-        conn = sqlite3.connect("dieselLevel.db")
-        c=conn.cursor()
-        try:
-            #c.execute("DROP TABLE table1")
-            c.execute("CREATE TABLE table1(device TEXT,level TEXT,time TEXT)")
-            conn.close()
+        db.create_all()
+
+    def fetchAll(self):
+        try:                                                # Will fail if table doesn't exist
+            data = dieselLevel.query.order_by(dieselLevel.mTime.desc()).all() # Select * FROM TABLE ORDER BY mTime
         except Exception as e:
-            print ('db_init ERROR:'+str(e))
-            pass
-        finally:
-            conn.close()
-    def fetchData(self):
-        conn=sqlite3.connect("dieselLevel.db")
-        c=conn.cursor()
-        c.execute("SELECT * FROM table1 ORDER BY time desc")
-        data=c.fetchall()
-        conn.close()
+            #flash('fetchAll: '+str(e))
+            print 'Error:' + str(e)
+        #print data.__repr__()
         return data
-    def insertDb(self,device,level,currentTime):
-        conn=sqlite3.connect("dieselLevel.db")
-        c=conn.cursor()
-        c.execute("INSERT INTO table1 values(?,?,?)",( device,str(level),str(currentTime) ))
-        conn.commit()
-        conn.close()
-    def deleteDb(self,time,level):
-        conn=sqlite3.connect("dieselLevel.db")
-        c=conn.cursor()
-        sql = "DELETE FROM table1 WHERE time=? and level=?"
-        c.execute(sql,[time,level])
-        conn.commit()
-        conn.close()
-    def dataFilter(self,fromTime,toTime):
-        conn=sqlite3.connect("dieselLevel.db")
-        c=conn.cursor()
-        #sql = "DELETE FROM table1 WHERE time=? and level=?"
-        sql = "SELECT * FROM table1 where time>=? and time<=?"
-        c.execute(sql,[fromTime,toTime])
-        conn.commit()
-        conn.close()
+    def insertDb(self,id,device,level,currentTime,ip):
+        try:
+            data=dieselLevel(id,device,level,currentTime,ip)
+            db.session.add(data)
+            db.session.commit()
+        except Exception as e:
+            #flash('insertDb: '+str(e))
+            print 'insertDb: '+str(e)
+        
+    
+    def filterRange(self,fromTime,toTime,page):
+        #print "---------------------------"
+        results = dieselLevel.query.filter(dieselLevel.mTime <= toTime).filter(dieselLevel.mTime >= fromTime).order_by(dieselLevel.mTime.desc()).paginate(page, POSTS_PER_PAGE, False)
+        #print results.__repr__()
+        #print "---------------------------"
+        return results
 
-    def randomDate(start, end, format, prop=random.random()):
-        """Get a time at a proportion of a range of two formatted times.
+    def dummyData(self):
+        try:
+            self.db_init()
+            for i in range(1,50):
+                res = datetime.now().strftime("%Y-%m-%d %H:%M:%S")   #Converting to proper format in string
+                res = datetime.strptime(res,"%Y-%m-%d %H:%M:%S")    # Converting to proper format in datetime
+                self.insertDb('dev',i,res,'192.168.1.1')
+        except Exception as e:
+            #flash('DB_init:'+str(e))
+            print 'DB_init:'+str(e)
 
-        start and end should be strings specifying times formated in the
-        given format (strftime-style), giving an interval [start, end].
-        prop specifies how a proportion of the interval to be taken after
-        start.  The returned time will be in the specified format.
+    def randomDate(self,start, end, format, prop):
+        """
+        Function returns a random date between start and end dates
         """
 
         stime = time.mktime(time.strptime(start, format))
@@ -60,40 +98,49 @@ class database():
 
         ptime = stime + prop * (etime - stime)
 
-        time = time.strftime(format, time.localtime(ptime))
-        time = time.strptime(time, '%Y-%m-%d %H:%M:%S')
-        return time
+        res = time.strftime(format, time.localtime(ptime))
+        res = datetime.strptime(res,"%Y-%m-%d %H:%M:%S") 
+        return res
 
 
-        """def randomDate(start, end, prop=random.random()):
-        return strTimeProp(start, end, '%Y-%m-%d %H:%M:%S', prop)"""
-    def randomPacket(self):
+        
+    def randomPacket(self,start,end,ip):
+        dbObj=database()
         i=1
-        self.db_init()
-        while i in range(1,2):
+        while i in range(1,50):
             device='d'
-            date=randomDate("2012-01-01 1:30:00", "2016-01-01 4:50:00", random.random())
+            date=dbObj.randomDate(start,end,'%Y-%m-%d %H:%M:%S',random.random())
             level=str(random.randrange(100, 900, 2))
-            
-            #self.insertDb(device,level,date)
+            dbObj.insertDb(i,device,level,date,ip)
             i=i+1
+            
 
 
 
-def Main():
+class dieselLevel(db.Model):
+    __tablename__ = 'dieselLevel'
+    id = db.Column(db.Integer, primary_key=True)
+    device = db.Column(db.String(25))
+    level = db.Column(db.Integer)
+    mTime = db.Column(db.DateTime)
+    ip = db.Column(db.String(15))
+
+    def __init__(self,id,device, level,mTime,ip):
+        #self.id=id
+        self.device = device
+        self.level = level
+        self.mTime = mTime
+        self.ip = ip
+    def __repr__(self):
+        return str(self.device)+','+str(self.level)+','+str(self.mTime)+','+str(self.ip)+'\n'
+
+
+
+
+if __name__ == "__main__":
+    dbObj=database()
+    #dbObj.db_init()
+    dbObj.randomPacket("2015-04-01 00:00:00", "2015-04-30 00:00:00",'192.168.1.1')              
+    #db.create_all()
     
-    i=1
-    db=database()
-    db.db_init()
-    while i in range(1,100):
-        device='d'
-        date=randomDate("2015-01-01 00:00:00", "2015-01-10 00:00:00", random.random())
-        level=str(random.randrange(100, 900, 2))
-       	
-        db.insertDb(device,level,date)
-        i=i+1
-     
-	    
 
-if __name__=='__main__':
-    Main()
