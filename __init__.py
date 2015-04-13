@@ -33,6 +33,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:aaggss@localhost/dreadger
 app.secret_key = 'my secret key is this'
 login_manager = LoginManager()
 login_manager.session_protection ='strong'
+login_manager.login_view = "/"
 login_manager.init_app(app)
 
 logInStatus =dict()
@@ -186,13 +187,19 @@ def load_user(user_id):
  
 @app.route('/',methods=['GET','POST'])
 def login():
-	form = LoginForm()
+	#form = LoginForm()
 	if request.method == 'POST':
 		userName=request.form['username']
-		#print '--------->((('+str(userName)+')))<--------, '+ str(type(userName))
+		
+		if 'checkbox' in request.form:
+			checkbox = True
+		else:
+			checkbox = False
+
+		#print '--------->((('+str(userName)+')))<--------, '+ str(checkbox) + ','+ str(type(checkbox))
 		user = User.query.filter_by(email=userName).first()
 		if user is not None and user.verify_password(request.form['password']):
-			login_user(user)
+			login_user(user,checkbox)
 			return redirect(request.args.get('next') or url_for('home'))
 		flash ('Invalid credentials!!')
 	return render_template('login.html')
@@ -251,8 +258,8 @@ def home():
 
 		
 
-		print 'From:'+ str(fromDate) +','+str(fromHour)+','+str(fromMin)
-		print 'From:'+ str(toDate) +','+str(toHour)+','+str(toMin)
+		#print 'From:'+ str(fromDate) +','+str(fromHour)+','+str(fromMin)
+		#print 'From:'+ str(toDate) +','+str(toHour)+','+str(toMin)
 
 		fromTime= fromDate+' '+fromHour+':'+fromMin+':00'
 		toTime= toDate+' '+toHour+':'+toMin+':00'
