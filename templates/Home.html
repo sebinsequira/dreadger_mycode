@@ -104,7 +104,6 @@
 </div>
 
 
-<div class="table-responsive" >
 
 {% if  results %}
  
@@ -137,21 +136,21 @@
       </table>
       <br/>
       
-      <ul class="pager">
-    	{% if results.has_prev %}
-	        <li><a href="{{ url_for('home', page=results.prev_num,fromTime=fromTime,toTime=toTime) }}">&lt;&lt; Newer results</a></li>
-      	{% else %}
-	        &lt;&lt; Newer results
-      	{% endif %}  
-	      
-      	{% if results.has_next %}
-	        <li><a href="{{ url_for('home', page=results.next_num,fromTime=fromTime,toTime=toTime) }}">Older results &gt;&gt;</a></li>
-      	{% else %}
-	        Older results &gt;&gt;{% endif %}
-	      
-      </ul>
-</div>
-</div>
+      
+	</div>
+	<ul class="pager">
+	    	{% if results.has_prev %}
+		        <li><a href="{{ url_for('home', page=results.prev_num,fromTime=fromTime,toTime=toTime) }}">&lt;&lt; Newer results</a></li>
+	      	{% else %}
+		        &lt;&lt; Newer results
+	      	{% endif %}  
+		      
+	      	{% if results.has_next %}
+		        <li><a href="{{ url_for('home', page=results.next_num,fromTime=fromTime,toTime=toTime) }}">Older results &gt;&gt;</a></li>
+	      	{% else %}
+		        Older results &gt;&gt;{% endif %}
+	</ul>
+
 {% else %}
 <br/><br/>
 
