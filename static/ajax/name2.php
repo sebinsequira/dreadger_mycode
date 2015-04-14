@@ -14,10 +14,11 @@
 ?>
 
 <?php while($rows = mysql_fetch_assoc($result)){ 
-    echo 1;
-    echo 2 ;
-   	echo 3 ;
-            
+    $return_data=array('sNo'=>'1','mTime'=>'2','level'=>'3');
+    header('Content-Type: application/json');
+    echo 123
+             
  } ?>
+
 
 

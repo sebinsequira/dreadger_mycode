@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Ajax db</title>
+	
 </head>
 <body>
 	Name: <input type="text" id="name">
@@ -29,11 +30,11 @@
 			var name= $('input#name').val();
 			if($.trim(name)!='')
 			{
-				$.post('ajax/name2.php',{name:name},function(sNo,mTime,level){
-						$('div#sNo').text(sNo);
-						$('div#mTime').text(mTime);
-						$('div#level').text(level);
-				});
+				$.post('ajax/name2.php',{name:name},function(data){
+						$('div#sNo').text(data.sNo);
+						$('div#mTime').text(data.mTime);
+						$('div#level').text(data.level);
+				},'json');
 			}
 		});
 	</script> 
