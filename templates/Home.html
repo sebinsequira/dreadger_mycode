@@ -64,15 +64,15 @@
       <div class="col-xs-12 col-md-2">
         <div class="form-group">
 
-          <label for="fromDate">Date:</label>
-          <input type="date" class="form-control" id="fromDate" name="fromDate" style="background-color: #E6E6E6;" value="{{ fromDate }}" > 
+          <label for="toDate">Date:</label>
+          <input type="date" class="form-control" id="toDate" name="toDate" style="background-color: #E6E6E6;" value="{{ toDate }}" > 
         </div>
       </div>
         
       <div class="col-xs-4 col-md-1">
         <div class="form-group">
           <label for="sel1">Hour:</label>
-          <select name="fromHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
+          <select name="toHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
             {% for i in range(0,24) %}
             <option value="{{ i }}">{{ i }}</option>
             {% endfor %}
@@ -83,7 +83,7 @@
       <div class="col-xs-4 col-md-1">
           <div class="form-group">
             <label for="sel1">Min:</label>
-            <select name="fromMin" class="form-control" id="sel1" style="background-color: #E6E6E6;">
+            <select name="toMin" class="form-control" id="sel1" style="background-color: #E6E6E6;">
               {% for i in range(0,60) %}
               <option value="{{ i }}">{{ i }}</option>
               {% endfor %}
