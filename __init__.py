@@ -229,7 +229,7 @@ def home(page=1,fromTime=None,toTime=None):
 			else:
 				flash('(From, '+str(fromDate)+'): '+str(e))
 			#print "------------>1: " + 'results= None, ' + str(len(results.items))
-			return render_template('home.html',results=None,fromDate=fromDate,toDate=toDate)
+			return render_template('Home.html',results=None,fromDate=fromDate,toDate=toDate)
 		
 
 		
