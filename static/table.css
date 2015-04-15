@@ -1,11 +1,13 @@
 body {
 
     color:black;
-    
+    background-image: url("/static/img/noise.png");
 }
 
 
 table{
-	color:black;
+	background-image: url("/static/img/noise.png");
+	font-weight: bold;
+	color:silver;
 
 }
