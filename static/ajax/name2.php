@@ -13,12 +13,12 @@
       { die(mysql_error()); }
 ?>
 
-<?php while($rows = mysql_fetch_assoc($result)){ 
-    $return_data=array('sNo'=>'1','mTime'=>'2','level'=>'3');
+<?php 
+    $rows = mysql_fetch_assoc($result);
+    $return_data=array('sNo'=>'1','mTime'=>$rows['mTime'],'level'=>$rows['level']);
     header('Content-Type: application/json');
-    echo 123
-             
- } ?>
-
+    echo json_encode($return_data);
+    exit();
+  ?>
 
 
