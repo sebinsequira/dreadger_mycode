@@ -45,9 +45,9 @@
 	</script>
 </head>
 <body>
-	
+	<!--
 	<div id="box"></div>
-	
+	!-->
 	
 	<div class="container">
 		<table class="table table-bordered">
