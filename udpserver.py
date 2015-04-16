@@ -13,6 +13,7 @@ import logging.handlers
 Base = declarative_base()
 
 #Setting up logging defaults
+"""
 LOG_FILENAME = "/tmp/udpserver.log"
 LOG_LEVEL = logging.DEBUG
 
@@ -29,7 +30,7 @@ formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
 handler.setFormatter(formatter)
 #Attach the handler to the logger
 logger.addHandler(handler)
-
+"""
 """
 Declaring the tables in the database
 DB name : dreadger
