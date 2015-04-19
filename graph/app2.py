@@ -1,6 +1,7 @@
-from flask import Flask, request,render_template
+from flask import Flask, request,render_template,jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 from datetime import datetime
+from random import randint
 
 import time
 app = Flask(__name__)
@@ -16,7 +17,7 @@ class dieselLevel(db.Model):
     ip = db.Column(db.String(15))
 
     def __init__(self, id,device, level,mTime,ip):
-    	#self.id=id
+        #self.id=id
         self.device = device
         self.level = level
         self.mTime = mTime
@@ -31,7 +32,7 @@ class database():
         db.create_all()
 
     def fetchAll(self):
-        try:												# Will fail if table doesn't exist
+        try:                                                # Will fail if table doesn't exist
             data = dieselLevel.query.order_by(dieselLevel.mTime.desc()).all() # Select * FROM TABLE ORDER BY mTime
         except Exception as e:
             flash('fetchAll: '+str(e))
@@ -49,7 +50,7 @@ class database():
         
     
     def filterRange(self,fromTime,toTime):
-    	#print "---------------------------"
+        #print "---------------------------"
         results = dieselLevel.query.filter(dieselLevel.mTime <= toTime).filter(dieselLevel.mTime >= fromTime).order_by(dieselLevel.mTime.desc())
         #print results.__repr__()
         #print "---------------------------"
@@ -63,7 +64,7 @@ class database():
                 res = datetime.strptime(res,"%Y-%m-%d %H:%M:%S")    # Converting to proper format in datetime
                 self.insertDb('dev',i,res,'192.168.1.1')
         except Exception as e:
-        	flash('DB_init:'+str(e))
+            flash('DB_init:'+str(e))
             #print 'DB_init:'+str(e)
 
     def randomDate(self,start, end, format, prop):
@@ -93,51 +94,60 @@ class database():
             i=i+1
 
 @app.route('/')
-def index(chartID = 'chart_ID', chart_type = 'bar', chart_height = 350):
-	chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}
-	series = [{"name": 'Label1', "data": [1,2,3]}, {"name": 'Label2', "data": [4, 5, 6]}]
-	title = {"text": 'My Title'}
-	xAxis = {"categories": ['xAxis Data1', 'xAxis Data2', 'xAxis Data3']}
-	yAxis = {"title": {"text": 'yAxis Label'}}
-	return render_template('index2.html', chartID=chartID, chart=chart, series=series, title=title, xAxis=xAxis, yAxis=yAxis)
+def index(chartID = 'chart_ID', chart_type = 'spline', chart_height = 350):
+    chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}
+    yAxis = {"title": {"text": 'yAxis Label'}}
+    title = {"text": 'My Title'}
+    results = dieselLevel.query.order_by(dieselLevel.mTime.desc()).limit(10)
+    level=[]
+    time=[]
+    for result in results:
+        level.append(int(result.level))
+        #level.append(randint(0,100))
+        time.append(result.mTime)
+
+
+    series = [{"name": 'Diesel Level', "data": [x for x in level]}]
+        
+    xAxis = {"categories": [str(x) for x in time]}
+    return render_template('graph.html', chartID=chartID, chart=chart, series=series, title=title, xAxis=xAxis, yAxis=yAxis)
 
 @app.route('/graph',methods=['GET','POST'])
-def graph(chartID = 'chart_ID', chart_type = 'line', chart_height = 500):	#-------------Filter Page starts here--------------#  
-	
-	dbObj=database()
-	results=None
-	level=[]
-	time=[]
-	if request.method == 'POST':
-		results=None
-		fromDate=request.form['fromDate']
-		toDate=request.form['toDate']
-		
-		fromTime= fromDate+' '+'00:00:00'
-		toTime= toDate+' '+'00:00:00'
+def graph(chartID = 'chart_ID', chart_type = 'line', chart_height = 500):   #-------------Filter Page starts here--------------#  
+    
+    dbObj=database()
+    results=None
+    level=[]
+    time=[]
+    if request.method == 'POST':
+        results=None
+        fromDate=request.form['fromDate']
+        toDate=request.form['toDate']
+        
+        fromTime= fromDate+' '+'00:00:00'
+        toTime= toDate+' '+'00:00:00'
 
-		fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
-		toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
+        fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
+        toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
 
-		results = dbObj.filterRange(fromTime,toTime)
+        results = dbObj.filterRange(fromTime,toTime)
 
-		
+        
 
-		chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}
-		title = {"text": 'My Title'}
-		yAxis = {"title": {"text": 'Time'}}
+        chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}
+        title = {"text": 'My Title'}
+        yAxis = {"title": {"text": 'Time'}}
 
-		for result in results:
-			level.append(int(result.level))
-			time.append(result.mTime)
-		print str(time[0])
-		print type(time)
+        for result in results:
+            level.append(int(result.level))
+            time.append(result.mTime)
+        
 
-		series = [{"name": 'Diesel Level', "data": [x for x in level]}]
-		
-		xAxis = {"categories": [str(x) for x in time]}
-		return render_template('index2.html', chartID=chartID, chart=chart, series=series, title=title, xAxis=xAxis, yAxis=yAxis)
-	return render_template('index2.html', results=None)
+        series = [{"name": 'Diesel Level', "data": [x for x in level]}]
+        
+        xAxis = {"categories": [str(x) for x in time]}
+        return render_template('index2.html', chartID=chartID, chart=chart, series=series, title=title, xAxis=xAxis, yAxis=yAxis)
+    return render_template('index2.html', results=None)
  
 if __name__ == "__main__":
-	app.run(debug = True, host='0.0.0.0', port=8080, passthrough_errors=True)
+    app.run(debug = True, host='0.0.0.0', port=8080, passthrough_errors=True)
