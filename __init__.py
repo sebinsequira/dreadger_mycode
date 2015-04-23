@@ -156,7 +156,7 @@ class dieselLevel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     device = db.Column(db.String(25))
     level = db.Column(db.Integer)
-    mTime = db.Column(db.DateTime)
+    mTime = db.Column(db.DateTime,unique=True)  # If not unique then there will be logical errors
     ip = db.Column(db.String(15))
 
     def __init__(self, id,device, level,mTime,ip):
