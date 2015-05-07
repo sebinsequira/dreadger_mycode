@@ -9,9 +9,7 @@
     <h2 style="color:silver;">Latest</h2>
 </div>
                     
-<!--
-<iframe allowtransparency="true" style="background: #FFFFFF;" src="{{url_for('.static', filename='index2.php')}}" width="100%" height="98"></iframe> 
-!-->  
+
 
 <iframe  scrolling="no" frameborder="0" allowtransparency="true" src="{{url_for('.static', filename='index2.php')}}" width="100%" height="98"></iframe> 
 
@@ -23,26 +21,33 @@
     
     {% if results == None %}
     
-      <div class="row">
-        <div class="col-md-2 col-md-offset-5">
-          <span class="label label-default" >Enter query to show results</span>
+      
+        <div class="col-xs-12 col-xs-offset-2 col-sm-offset-3">
+          <h4><span class="label label-default" >Enter query to show results</span></h4>
         </div>
-      </div> 
+      
 
     {% elif results.pages == 0 %}
 
-      <div class="row">
-        <div class="col-md-2 col-md-offset-5">
-          <span class="label label-default">Query returned 0 results</span>
+     
+        <div class="col-xs-12 col-xs-offset-2 col-sm-offset-3">
+          <h4><span class="label label-default">Query returned 0 results</span></h4>
         </div>
-      </div> 
+     
     
     {% else %}
       
     {% endif %}
   </div>
 
+<!-- Debug code
 
+<h1 class="visible-xs">xs</h1>
+<h1 class="visible-sm">sm</h1>
+<h1 class="visible-md">md</h1>
+<h1 class="visible-lg">lg</h1>
+
+-->
 
 <b style="color:silver;"><h3>From</h3></b> 
 
@@ -51,16 +56,15 @@
   <form class="form" role="form">
     <div class="row" style="color:silver;">
     
-      <div class="col-xs-12 col-sm-3 col-md-3">
-       
+      <div class="col-xs-12 col-sm-4">
         <div class="form-group">
-
-          <label for="fromDate">Date:</label>
-          <input type="date" class="form-control" id="fromDate" name="fromDate" style="background-color: #E6E6E6;" value="{{ fromDate }}" > 
+			<label for="fromDate">Date:</label>
+          	
+          	<input type="date" class="form-control" id="fromDate" name="fromDate" style="background-color: #E6E6E6;" value="{{ fromDate }}" > 
         </div>
       </div>
         
-      <div class="col-xs-4 col-sm-1 col-md-1">
+      <div class="col-xs-4 col-sm-2">
         <div class="form-group">
           <label for="sel1">Hour:</label>
           <select name="fromHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
@@ -71,7 +75,7 @@
         </div>
       </div>
         
-      <div class="col-xs-4 col-sm-1 col-md-1">
+      <div class="col-xs-4 col-sm-2">
           <div class="form-group">
             <label for="sel1">Min:</label>
             <select name="fromMin" class="form-control" id="sel1" style="background-color: #E6E6E6;">
@@ -87,10 +91,10 @@
 <b style="color:silver;"><h3>To</h3></b> 
 
 <div class="container">
-  <form class="form-inline" role="form">
+ 
     <div class="row" style="color:silver;">
     
-      <div class="col-xs-12  col-sm-3 col-md-3">
+      <div class="col-xs-12 col-sm-4">
         <div class="form-group">
 
           <label for="toDate">Date:</label>
@@ -98,7 +102,7 @@
         </div>
       </div>
         
-      <div class="col-xs-4 col-sm-1 col-md-1">
+      <div class="col-xs-4 col-sm-2">
         <div class="form-group">
           <label for="sel1">Hour:</label>
           <select name="toHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
@@ -109,7 +113,7 @@
         </div>
       </div>
         
-      <div class="col-xs-4 col-sm-1 col-md-1">
+      <div class="col-xs-4 col-sm-2">
           <div class="form-group">
             <label for="sel1">Min:</label>
             <select name="toMin" class="form-control" id="sel1" style="background-color: #E6E6E6;">
@@ -143,10 +147,11 @@
 {% if  results != None and results.pages !=0 %}
  
 
-<div class="page-header">
-  <h3 style="color:silver;">Diesel Level</h3>
-</div>
-<br/>
+  <div class="page-header">
+    <h2 style="color:silver;">Diesel Level</h2>
+  </div>
+  <br/>
+
   
     <div class="table-responsive">
       <table class="table table-bordered">
@@ -158,51 +163,69 @@
           </tr>
         </thead>
         <tbody>
-      {%if results != None and results != 1%}
+      {%if results != None%}
+          {% set cntr = 1 %}
+          
           {% for result in results.items %}
+          
           <tr>
-            <th >{{ result.id }}</th>
+            <th >{{ (results.page-1)* results.per_page +cntr }}</th>
             <th >{{ result.mTime }}</th>
             <th >{{ result.level }}</th>
           </tr>
+          {% set cntr = cntr+1 %}
           {% endfor %}
       {% endif %}
         </tbody>
       </table>
       <br/>
+    </div>
+  
+  <nav>
+
+    <ul class="pagination">
       
+      {% if results.has_prev %}
+      <li>
+        <a href="{{ url_for('home', page=results.prev_num,fromTime=fromTime,toTime=toTime) }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+        </li>
+      {% else %}
+      <li class="disabled">
+        <a href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {% endif %}
+
+      {% set cntr = 1 %}
       
-	</div>
-	<ul class="pager">
-	    	{% if results.has_prev %}
-		        <li><a href="{{ url_for('home', page=results.prev_num,fromTime=fromTime,toTime=toTime) }}">&lt;&lt; Newer results</a></li>
-	      	{% else %}
-		        &lt;&lt; Newer results
-	      	{% endif %}  
-		      
-	      	{% if results.has_next %}
-		        <li><a href="{{ url_for('home', page=results.next_num,fromTime=fromTime,toTime=toTime) }}">Older results &gt;&gt;</a></li>
-	      	{% else %}
-		        Older results &gt;&gt;
-          {% endif %}
-	</ul>
+      {% for cntr in range(1,results.pages+1) %}
+        
+        <li><a href="{{ url_for('home', page=cntr,fromTime=fromTime,toTime=toTime) }}">{{cntr}}</a></li>
+        {% set cntr = cntr+1 %}
+      
+      {% endfor %}
+      {% if results.has_next %}
+        <li>
+          <a href="{{ url_for('home', page=results.next_num,fromTime=fromTime,toTime=toTime) }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      {% else %}
+      <li class="disabled">
+        <a href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+
 
 
 {%endif%}
   
-  <!-- Debug code!-->
-  <!--
-  <br/>
-  page=results.prev_num: {{results.prev_num}}
-  <br/>
-  page=results.next_num: {{results.next_num}}
-  <br/>
-  <br/>
-  fromTime:{{fromTime}}
-  <br/>
-  toTime:{{toTime}}
-  <br/>
-  page:{{page}}
-  <br/>
-	-->
+
 {% endblock %}
