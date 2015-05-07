@@ -43,6 +43,11 @@
   </div>
 
 
+<h1 class="visible-xs">xs</h1>
+<h1 class="visible-sm">sm</h1>
+<h1 class="visible-md">md</h1>
+<h1 class="visible-lg">lg</h1>
+
 
 <b style="color:silver;"><h3>From</h3></b> 
 
@@ -51,16 +56,15 @@
   <form class="form" role="form">
     <div class="row" style="color:silver;">
     
-      <div class="col-xs-12 col-sm-3 col-md-3">
-       
+      <div class="col-xs-12 col-sm-4">
         <div class="form-group">
-
-          <label for="fromDate">Date:</label>
-          <input type="date" class="form-control" id="fromDate" name="fromDate" style="background-color: #E6E6E6;" value="{{ fromDate }}" > 
+			<label for="fromDate">Date:</label>
+          	
+          	<input type="date" class="form-control" id="fromDate" name="fromDate" style="background-color: #E6E6E6;" value="{{ fromDate }}" > 
         </div>
       </div>
         
-      <div class="col-xs-4 col-sm-1 col-md-1">
+      <div class="col-xs-2 col-sm-2">
         <div class="form-group">
           <label for="sel1">Hour:</label>
           <select name="fromHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
@@ -71,7 +75,7 @@
         </div>
       </div>
         
-      <div class="col-xs-4 col-sm-1 col-md-1">
+      <div class="col-xs-2 col-sm-2">
           <div class="form-group">
             <label for="sel1">Min:</label>
             <select name="fromMin" class="form-control" id="sel1" style="background-color: #E6E6E6;">
@@ -87,10 +91,10 @@
 <b style="color:silver;"><h3>To</h3></b> 
 
 <div class="container">
-  <form class="form-inline" role="form">
+  <form class="form" role="form">
     <div class="row" style="color:silver;">
     
-      <div class="col-xs-12  col-sm-3 col-md-3">
+      <div class="col-xs-12 col-sm-4">
         <div class="form-group">
 
           <label for="toDate">Date:</label>
@@ -98,7 +102,7 @@
         </div>
       </div>
         
-      <div class="col-xs-4 col-sm-1 col-md-1">
+      <div class="col-xs-2 col-sm-2">
         <div class="form-group">
           <label for="sel1">Hour:</label>
           <select name="toHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
@@ -109,7 +113,7 @@
         </div>
       </div>
         
-      <div class="col-xs-4 col-sm-1 col-md-1">
+      <div class="col-xs-2 col-sm-2">
           <div class="form-group">
             <label for="sel1">Min:</label>
             <select name="toMin" class="form-control" id="sel1" style="background-color: #E6E6E6;">
