@@ -185,13 +185,13 @@
 	    	{% if results.has_prev %}
 		        <li><a href="{{ url_for('home', page=results.prev_num,fromTime=fromTime,toTime=toTime) }}">&laquo; Newer results</a></li>
 	      	{% else %}
-		        &laquo; Newer results
+		        <li><a href="#">&laquo; Newer results</a></li>
 	      	{% endif %}  
 		      {{results.page}}/{{results.pages}}
 	      	{% if results.has_next %}
 		        <li><a href="{{ url_for('home', page=results.next_num,fromTime=fromTime,toTime=toTime) }}">Older results &raquo;</a></li>
 	      	{% else %}
-		        Older results &raquo;
+		        <li><a href="#">Older results &raquo;</a></li>
           {% endif %}
 	</ul>
 
