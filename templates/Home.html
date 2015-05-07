@@ -163,12 +163,16 @@
         </thead>
         <tbody>
       {%if results != None and results != 1%}
+          {% set cntr = 1 %}
+          
           {% for result in results.items %}
+          
           <tr>
-            <th >{{ result.id }}</th>
+            <th >{{ (results.page-1)* results.per_page +cntr }}</th>
             <th >{{ result.mTime }}</th>
             <th >{{ result.level }}</th>
           </tr>
+          {% set cntr = cntr+1 %}
           {% endfor %}
       {% endif %}
         </tbody>
@@ -179,15 +183,15 @@
 	</div>
 	<ul class="pager">
 	    	{% if results.has_prev %}
-		        <li><a href="{{ url_for('home', page=results.prev_num,fromTime=fromTime,toTime=toTime) }}">&lt;&lt; Newer results</a></li>
+		        <li><a href="{{ url_for('home', page=results.prev_num,fromTime=fromTime,toTime=toTime) }}">&laquo; Newer results</a></li>
 	      	{% else %}
-		        &lt;&lt; Newer results
+		        &laquo; Newer results
 	      	{% endif %}  
-		      
+		      {{results.page}}/{{results.pages}}
 	      	{% if results.has_next %}
-		        <li><a href="{{ url_for('home', page=results.next_num,fromTime=fromTime,toTime=toTime) }}">Older results &gt;&gt;</a></li>
+		        <li><a href="{{ url_for('home', page=results.next_num,fromTime=fromTime,toTime=toTime) }}">Older results &raquo;</a></li>
 	      	{% else %}
-		        Older results &gt;&gt;
+		        Older results &raquo;
           {% endif %}
 	</ul>
 
