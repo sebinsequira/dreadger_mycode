@@ -38,7 +38,7 @@
     {% else %}
       
     {% endif %}
-  </div>
+</div>
 
 <!-- Debug code
 
@@ -57,22 +57,22 @@
     <div class="row" style="color:silver;">
     
       <div class="col-xs-12 col-sm-4">
-        <div class="form-group">
-			<label for="fromDate">Date:</label>
-          	
-          	<input type="date" class="form-control" id="fromDate" name="fromDate" style="background-color: #E6E6E6;" value="{{ fromDate }}" > 
-        </div>
+		    <div class="form-group">
+				<label for="fromDate">Date:</label>
+		      	
+		      	<input type="date" class="form-control" id="fromDate" name="fromDate" style="background-color: #E6E6E6;" value="{{ fromDate }}" > 
+		    </div>
       </div>
         
       <div class="col-xs-4 col-sm-2">
-        <div class="form-group">
-          <label for="sel1">Hour:</label>
-          <select name="fromHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
-            {% for i in range(0,24) %}
-            <option value="{{ i }}">{{ i }}</option>
-            {% endfor %}
-          </select>
-        </div>
+		    <div class="form-group">
+		      <label for="sel1">Hour:</label>
+		      <select name="fromHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
+		        {% for i in range(0,24) %}
+		        <option value="{{ i }}">{{ i }}</option>
+		        {% endfor %}
+		      </select>
+		    </div>
       </div>
         
       <div class="col-xs-4 col-sm-2">
@@ -95,22 +95,22 @@
     <div class="row" style="color:silver;">
     
       <div class="col-xs-12 col-sm-4">
-        <div class="form-group">
+	        <div class="form-group">
 
-          <label for="toDate">Date:</label>
-          <input type="date" class="form-control" id="toDate" name="toDate" style="background-color: #E6E6E6;" value="{{ toDate }}" > 
-        </div>
+	          <label for="toDate">Date:</label>
+	          <input type="date" class="form-control" id="toDate" name="toDate" style="background-color: #E6E6E6;" value="{{ toDate }}" > 
+	        </div>
       </div>
         
       <div class="col-xs-4 col-sm-2">
-        <div class="form-group">
-          <label for="sel1">Hour:</label>
-          <select name="toHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
-            {% for i in range(0,24) %}
-            <option value="{{ i }}">{{ i }}</option>
-            {% endfor %}
-          </select>
-        </div>
+	        <div class="form-group">
+	          <label for="sel1">Hour:</label>
+	          <select name="toHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
+	            {% for i in range(0,24) %}
+	            <option value="{{ i }}">{{ i }}</option>
+	            {% endfor %}
+	          </select>
+	        </div>
       </div>
         
       <div class="col-xs-4 col-sm-2">
@@ -202,8 +202,16 @@
       {% set cntr = 1 %}
       
       {% for cntr in range(1,results.pages+1) %}
+        {% if cntr== results.page%}
+        	
+        	<li class="active"><a href="{{ url_for('home', page=cntr,fromTime=fromTime,toTime=toTime) }}">{{cntr}}</a></li>
+
+        {% else %}
         
-        <li><a href="{{ url_for('home', page=cntr,fromTime=fromTime,toTime=toTime) }}">{{cntr}}</a></li>
+        	<li><a href="{{ url_for('home', page=cntr,fromTime=fromTime,toTime=toTime) }}">{{cntr}}</a></li>
+        
+        {% endif %}
+        
         {% set cntr = cntr+1 %}
       
       {% endfor %}
@@ -222,7 +230,6 @@
       {% endif %}
     </ul>
   </nav>
-
 
 
 {%endif%}
