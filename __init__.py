@@ -1,4 +1,3 @@
-#from flask import Flask, flash, request, jsonify, url_for, render_template, redirect,send_from_directory
 from flask import Flask, flash, request, jsonify, url_for, render_template, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bootstrap import Bootstrap
@@ -8,7 +7,6 @@ from datetime import datetime
 
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField,PasswordField,BooleanField
-#from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField,DateTimeField
 from wtforms.validators import Required, Email,Length
 from flask import make_response
 from functools import update_wrapper
@@ -18,10 +16,9 @@ import random
 from flask.ext.login import LoginManager, UserMixin, login_required,login_user,logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
-#from flask.ext.mysql import MySQL
 
 
-POSTS_PER_PAGE = 5  # pagination
+POSTS_PER_PAGE = 20  # pagination
 #app = Flask (__name__, static_url_path='\C:\Users\$$\Desktop\dreadger_bootstrap-2march20\static')
 app = Flask (__name__)
 
@@ -36,10 +33,10 @@ login_manager.session_protection ='strong'
 login_manager.login_view = "/"
 login_manager.init_app(app)
 
-logInStatus =dict()
+"""logInStatus =dict()
 logInStatus['logged_in'] = False   			#Determines initial state, if false the logs out automatically when pgm restarts
 											# Don't use true!! Might cause error when clicking back button
-
+"""
 class LoginForm(Form):
 	email=StringField('Email',validators=[Required(),Length(1,64),Email()])
 	password=PasswordField('Password',validators=[Required()])
@@ -315,34 +312,7 @@ def logout():
 	
 
 	
-"""
-@app.route('/logs', methods=['GET', 'POST'])
-@login_required
-def logs():
-	if request.method == 'POST':
-		result = []
-		if (validate(request.form['param1'])):
-			if (validate(request.form['param2'])):
-		#print '1'
-				results = dieselLevel.query.filter(conTime(request.form['param1']) < dieselLevel.mTime).filter(dieselLevel.mTime < conTime(request.form['param2'])).order_by(dieselLevel.mTime.desc()).all()
-			else:
-		#print '2'
-				results = dieselLevel.query.filter(conTime(request.form['param1']) < dieselLevel.mTime).order_by(dieselLevel.mTime.desc()).all()
-		else:
-			if (validate(request.form['param2'])):
-				#print '3'                
-				results = dieselLevel.query.filter(dieselLevel.mTime < conTime(request.form['param2'])).order_by(dieselLevel.mTime.desc()).all()
-			else:
-				return render_template('log.html')
-		json_results = []
-		for result in results:
-			d = { 'device' : result.device,
-			'level': result.level,
-			'datetime' : result.mTime, 
-			'ip' : result.ip}
-			json_results.append(d)
-			return jsonify(items=json_results)    
-	return render_template('log.html')"""
+
 
 
 
