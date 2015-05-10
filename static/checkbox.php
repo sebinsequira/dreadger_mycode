@@ -71,11 +71,11 @@
 		        <tr>
 		        	<td><div id="sNo"></div></td>
 		        	
-		        	<div id="hide_time">
+		        	<div id="hide_time"><b>we	we</b></div>
 		        		<td>
 		        			<div id="mTime"></div>
 		        		</td>
-		        	</div>
+		        	
 		        	
 		        	<td><div id="level"></div></td>
 				</tr>
