@@ -86,14 +86,14 @@
   <h2 class="page-header">Flowchart</h2>
   <div class="row">
     <div class="col-xs-12">
-  <p class="lead text-center bg-info btn text-info center-block"></p>
+  <p class="lead text-center bg-info btn text-info center-block"><div id="mTime"></div></p>
       <div class="row">
         <div class="col-xs-6 text-center">
-           <p class="btn"><span class="glyphicon glyphicon-arrow-down"><div id="mTime"></div></span>
+           <p class="btn"><span class="glyphicon glyphicon-arrow-down"></span>
         </div>
         <div class="col-xs-6 text-center">
           <p class="btn">
-          <span class="glyphicon glyphicon-arrow-down"><div id="level"></div></span></p>
+          <span class="glyphicon glyphicon-arrow-down"></span></p>
         </div>
       </div>
 
@@ -101,7 +101,7 @@
   </div>
   <div class="row">
     <div class="col-xs-6 text-center">
-  <p class="center-block"><span class="btn btn-success btn-lg">data</span></p>
+  <p class="center-block"><span class="btn btn-success btn-lg"><div id="level"></div></span></p>
     </div>
  <!-- ###################### --> 
 	
