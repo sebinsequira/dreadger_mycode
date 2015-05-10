@@ -3,8 +3,6 @@
 {% block title %}Filter{% endblock %}
 
 {% block scripts %}
-<script src="{{url_for('.static', filename='myscripts.js')}}"></script>
-{{super()}}
 <script type="text/javascript">
 		$(document).ready(function(){
 			var number=10;
@@ -51,6 +49,8 @@
 	})
 
 	</script>
+{{super()}}
+
 {% endblock %}
 
 
@@ -114,7 +114,7 @@
 <!--Ends here $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 
 
-
+`
 
 
 
