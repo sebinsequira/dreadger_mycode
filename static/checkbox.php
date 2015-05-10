@@ -43,13 +43,15 @@
 		});
 
 	</script>
+	
 	<script type="text/javascript">
 		$(function(){
 		   $('.toggler').click(function(){
-		       $('div#mTime').toggle(this.checked);
+		       $('div#hide_time').toggle(this.checked);
 		   });
 		})
 	</script>
+
 </head>
 <body>
 	<!--
@@ -68,7 +70,13 @@
 	        <tbody>
 		        <tr>
 		        	<td><div id="sNo"></div></td>
-		        	<td><div id="mTime"></div></td>
+		        	
+		        	<div id="hide_time">
+		        		<td>
+		        			<div id="mTime"></div>
+		        		</td>
+		        	</div>
+		        	
 		        	<td><div id="level"></div></td>
 				</tr>
 			</tbody>
