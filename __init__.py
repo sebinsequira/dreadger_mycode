@@ -307,8 +307,8 @@ def home(page=1,fromTime=None,toTime=None):
 @nocache
 @login_required
 def home(page=1,fromTime=None,toTime=None):
-	#-------------Filter Page starts here--------------#  
-	
+
+
 	dbObj=database()
 	if request.method == 'POST':
 		results=None
@@ -417,7 +417,6 @@ def logout():
 	logout_user()
 	flash("You've logged out!!")
 	return redirect(url_for('login'))
-
 
 	
 
