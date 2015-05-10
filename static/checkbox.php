@@ -81,22 +81,19 @@
 
 	<!-- ##############################-->
 
-  <div class="container">
-  <h1 class="text-center">Can I use...this service?</h1>
-  </div>
-</header>
+
 <div class="container">
-  <h2 class="page-header">Step 1: Where is the data?</h2>
+  <h2 class="page-header">Flowchart</h2>
   <div class="row">
     <div class="col-xs-12">
-  <p class="lead text-center bg-info btn text-info center-block">Is the data in the system?</p>
+  <p class="lead text-center bg-info btn text-info center-block"></p>
       <div class="row">
         <div class="col-xs-6 text-center">
-           <p class="btn"><span class="glyphicon glyphicon-arrow-down"></span>
+           <p class="btn"><span class="glyphicon glyphicon-arrow-down"><div id="mTime"></div></span>
         </div>
         <div class="col-xs-6 text-center">
           <p class="btn">
-          <span class="glyphicon glyphicon-arrow-down"></span></p>
+          <span class="glyphicon glyphicon-arrow-down"><div id="level"></div></span></p>
         </div>
       </div>
 
@@ -105,9 +102,6 @@
   <div class="row">
     <div class="col-xs-6 text-center">
   <p class="center-block"><span class="btn btn-success btn-lg">data</span></p>
-      <p class="btn center-block"><span class="glyphicon glyphicon-arrow-right"></span></p>
-      
-      <p class="bg-success text-success btn">Okay! Proceed to step 2.</p>
     </div>
  <!-- ###################### --> 
 	
