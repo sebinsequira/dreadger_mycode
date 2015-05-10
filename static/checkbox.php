@@ -47,7 +47,7 @@
 	<script type="text/javascript">
 		$(function(){
 		   $('.toggler').click(function(){
-		       $('div#hide_time').toggle(this.checked);
+		       $('div.hide_time').toggle(this.checked);
 		   });
 		})
 	</script>
