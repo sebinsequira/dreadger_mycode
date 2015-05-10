@@ -46,10 +46,12 @@
 	
 	<script type="text/javascript">
 		$(function(){
-		   $('.toggler').click(function(){
-		       $('div.hide_time').toggle(this.checked);
+   		$('.toggler').click(function(){
+		       $('th.hide_level').toggle(this.checked);
+		       $('td.hide_level').toggle(this.checked);
 		   });
-		})
+	})
+
 	</script>
 
 </head>
@@ -63,25 +65,15 @@
 	        <thead>
 	          <tr>
 	            <th>#</th>
-	            
-	            <div class="hide_time">
-	            	<th>Time</th>
-	            </div>
-
-	            <th>Level</th>
+	            <th>Time</th>
+	            <th class="hide_level">Level</th>
 	          </tr>
 	        </thead>
 	        <tbody>
 		        <tr>
 		        	<td><div id="sNo"></div></td>
-		        	
-		        	<div class="hide_time">
-		        		<td>
-		        			<div id="mTime"></div>
-		        		</td>
-		        	</div>
-		        	
-		        	<td><div id="level"></div></td>
+		        	<td><div id="mTime"></div></td>
+		        	<td class="hide_level"><div id="level"></div></td>
 				</tr>
 			</tbody>
 		</table>
