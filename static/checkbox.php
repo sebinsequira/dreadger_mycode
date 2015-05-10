@@ -32,7 +32,7 @@
 					var name= 'dummyNoUse';
 					$.post('ajax/name2.php',{name:name},function(data){
 					$('div#sNo').text(data.sNo);
-					$('div#mTime').text(data.mTime);
+					$('span#mTime').text(data.mTime);
 					$('div#level').text(data.level);
 					},'json');
 					number=3;
@@ -72,7 +72,7 @@
 	        <tbody>
 		        <tr>
 		        	<td><div id="sNo"></div></td>
-		        	<td><div id="mTime"></div></td>
+		        	<td><span id="mTime"></span></td>
 		        	<td class="hide_level"><div id="level"></div></td>
 				</tr>
 			</tbody>
@@ -84,24 +84,28 @@
 
 <div class="container">
   <h2 class="page-header">Flowchart</h2>
+  
   <div class="row">
+    
     <div class="col-xs-12">
-  <p class="lead text-center bg-info btn text-info center-block"><div id="mTime"></div></p>
-      <div class="row">
-        <div class="col-xs-6 text-center">
-           <p class="btn"><span class="glyphicon glyphicon-arrow-down"></span>
-        </div>
-        <div class="col-xs-6 text-center">
-          <p class="btn">
-          <span class="glyphicon glyphicon-arrow-down"></span></p>
-        </div>
-      </div>
-
-    </div>
+  		<p class="lead text-center bg-info btn text-info center-block"><span id="mTime"></span></p>
+      	
+      	<div class="row">
+        	<div class="col-xs-6 text-center">
+           	<p class="btn"><span class="glyphicon glyphicon-arrow-down"></span></p>
+        	</div>
+        	
+        	<div class="col-xs-6 text-center">
+          	<p class="btn">
+          	<span class="glyphicon glyphicon-arrow-down"></span></p>
+        	</div>
+      	</div>
+	</div>
   </div>
+  
   <div class="row">
     <div class="col-xs-6 text-center">
-  <p class="center-block"><span class="btn btn-success btn-lg"><div id="level"></div></span></p>
+  <p class="center-block"><span class="btn btn-success btn-lg"><div display="inline" id="level"></div></span></p>
     </div>
  <!-- ###################### --> 
 	
