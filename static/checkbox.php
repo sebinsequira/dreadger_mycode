@@ -63,7 +63,11 @@
 	        <thead>
 	          <tr>
 	            <th>#</th>
-	            <th>Time</th>
+	            
+	            <div class="hide_time">
+	            	<th>Time</th>
+	            </div>
+
 	            <th>Level</th>
 	          </tr>
 	        </thead>
@@ -71,11 +75,11 @@
 		        <tr>
 		        	<td><div id="sNo"></div></td>
 		        	
-		        	<div id="hide_time"><b>we	we</b></div>
+		        	<div class="hide_time">
 		        		<td>
 		        			<div id="mTime"></div>
 		        		</td>
-		        	
+		        	</div>
 		        	
 		        	<td><div id="level"></div></td>
 				</tr>
