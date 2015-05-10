@@ -299,7 +299,117 @@ def home(page=1,fromTime=None,toTime=None):
 	#print '-----------------------------------------------------------'
 	return render_template('Home.html',results=results,fromTime=fromTime,toTime=toTime)
 
+#########################New code
 
+@app.route ("/filter", methods=['GET', 'POST'])
+@app.route ("/filter/", methods=['GET', 'POST'])
+@app.route('/filter/<int:page>', methods=['GET', 'POST'])
+@nocache
+@login_required
+def home(page=1,fromTime=None,toTime=None):
+	#-------------Filter Page starts here--------------#  
+	
+	dbObj=database()
+	if request.method == 'POST':
+		results=None
+		fromDate=request.form['fromDate']
+		fromHour=request.form['fromHour']
+		fromMin=request.form['fromMin']
+
+		toDate=request.form['toDate']
+		toHour=request.form['toHour']
+		toMin=request.form['toMin']
+
+		#print 'From:'+ str(fromDate) +','+str(fromHour)+','+str(fromMin)
+		#print 'From:'+ str(toDate) +','+str(toHour)+','+str(toMin)
+
+		fromTime= fromDate+' '+fromHour+':'+fromMin+':00'
+		toTime= toDate+' '+toHour+':'+toMin+':00'
+		
+		
+		try:
+			fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
+			#fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
+		except ValueError as e:
+			if 'format' in str(e):
+				flash('(From, '+str(fromDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
+			else:
+				flash('(From, '+str(fromDate)+'): '+str(e))
+			#print "------------>1: " + 'results= None, ' + str(len(results.items))
+			return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
+		
+
+		
+		try:
+			toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
+			#toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
+		except ValueError as e:
+			if 'format' in str(e):
+				flash('(To, '+str(toDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
+			else:
+				flash('(To, '+str(toDate)+'): '+str(e))
+			#print "------------>2: " + 'results= None, ' + str(len(results.items))
+			return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
+		
+		#print 'from:'+str(type(fromTime))+': '+str(fromTime)
+		#print 'to:'+str(type(toTime))+': '+str(toTime)
+
+		#results=dbObj.filterRange(fromTime,toTime,page)
+		"""fromTime='2008-02-16 00:00:00'
+		toTime='2015-04-12 00:00:00'"""
+		#1
+		
+
+		
+		results = dbObj.filterRange(fromTime,toTime,1)
+		#print 'fromTime='+str(fromTime)
+		#print 'toTime='+str(toTime)
+		#print 'results='+str(results)
+		#print 'request.method='+str(request.method)
+		
+		if not results:
+			results=None
+
+
+		
+		try:
+			fromDate
+			toDate
+		except NameError:
+			#print "------------>3: " + 'results= ' + str(len(results.items))
+			return render_template('filter.html',results=results,fromTime=fromTime,toTime=toTime)        # If fromDate and toDate doesn't exist, then the page is being loaded for the first time                          
+			#return "Hello"
+		else:
+			#print "------------>4: " + 'results= ' + str(len(results.items))
+			return render_template('filter.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)  # To make sure the date and time data doesn't vanish when clicking accept
+			#return render_template('filter.html',results=results)
+			#return "Hello World"
+		
+	fromTime=request.args.get('fromTime','')
+	toTime=request.args.get('toTime','')
+	#2
+	#print '-----------------------------------------------------------'
+	
+	if fromTime and toTime:
+		results = dbObj.filterRange(fromTime,toTime,page)
+	else:
+		results=None
+	
+		
+	"""print "------------>5: " + 'page= '+str(page)+'results= ' ,
+				if results:
+					str(len(results.items))
+				else:
+					print 'None'"""
+
+	#print 'fromTime='+str(fromTime)
+	#print 'toTime='+str(toTime)
+	#print 'results='+str(results)
+	#print 'request.method='+str(request.method)
+	#print '-----------------------------------------------------------'
+	return render_template('filter.html',results=results,fromTime=fromTime,toTime=toTime)
+
+##################################
 @app.route("/logout",methods=["GET"])
 @login_required
 def logout():
