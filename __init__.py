@@ -306,7 +306,7 @@ def home(page=1,fromTime=None,toTime=None):
 @app.route('/filter/<int:page>', methods=['GET', 'POST'])
 @nocache
 @login_required
-def home(page=1,fromTime=None,toTime=None):
+def home2(page=1,fromTime=None,toTime=None):
 
 
 	dbObj=database()
