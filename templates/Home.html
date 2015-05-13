@@ -42,16 +42,31 @@
     });
 
   </script>
-  
+  <!--
   <script type="text/javascript">
     $(function(){
       $('.toggler').click(function(){
            $('th.hide_level').toggle(this.checked);
            $('td.hide_level').toggle(this.checked);
+           
        });
   })
 
-  </script>
+  </script>-->
+  <script type="text/javascript">
+    $(document).on('change', 'table thead input', function() {
+    var checked = $(this).is(":checked");
+
+    var index = $(this).parent().index();
+        $('table tbody tr').each(function() {
+            if(checked) {
+                $(this).find("td").eq(index).show();   
+            } else {
+                $(this).find("td").eq(index).hide();   
+            }
+        });
+    });
+  </script>>
 {% endblock scripts %}
 
 {% block page_content %}
@@ -61,7 +76,8 @@
 <div class="page-header">
     <h2 style="color:silver;">Latest</h2>
 </div>
-                    
+
+              
 
 
 <!--Starts here$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
@@ -72,17 +88,29 @@
   <div class="container">
     <table class="table table-bordered">
           <thead>
-            <tr>
-              <th>#</th>
-              <th>Time</th>
-              <th class="hide_level">Level</th>
-            </tr>
+             <td>
+                 <input type="checkbox" checked="checked" />#
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />Time
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />Level
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />
+             </td>
           </thead>
+          
           <tbody>
+            
             <tr>
               <td><span id="sNo"></div></td>
               <td><span id="mTime"></span></td>
-              <td class="hide_level"><span id="level"></div></td>
+              <td><span id="level"></div></td>
         </tr>
       </tbody>
     </table>
@@ -234,21 +262,41 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th >Sl No</th>
-            <th >Date / Time</th>
-            <th >Level</th>
+            <td>
+                 <input type="checkbox" checked="checked" />#
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />Time
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />Level
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />Value 4
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />Value 5
+             </td>
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>#</td>
+             <td>Time</td>
+             <td>Level</td>
+             <td>Value4</td>
+             <td>Value5</td>
+          </tr>
+
       {%if results != None%}
           {% set cntr = 1 %}
           
           {% for result in results.items %}
           
           <tr>
-            <th >{{ (results.page-1)* results.per_page +cntr }}</th>
-            <th >{{ result.mTime }}</th>
-            <th >{{ result.level }}</th>
+            <td >{{ (results.page-1)* results.per_page +cntr }}</th>
+            <td >{{ result.mTime }}</th>
+            <td class="hide_level">{{ result.level }}</th>
           </tr>
           {% set cntr = cntr+1 %}
           {% endfor %}
