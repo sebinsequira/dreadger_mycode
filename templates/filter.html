@@ -9,10 +9,10 @@
 		$(document).ready(function(){
 			var number=10;
 			var name= 'dummyNoUse';
-			$.post('ajax/name2.php',{name:name},function(data){
-			$('div#sNo').text(data.sNo);
-			$('div#mTime').text(data.mTime);
-			$('div#level').text(data.level);
+			$.post("{{ url_for('static', filename='ajax/name2.php') }}",{name:name},function(data){
+			$('span#sNo').text(data.sNo);
+			$('span#mTime').text(data.mTime);
+			$('span#level').text(data.level);
 			},'json');
 			function redirect(num){
 				number=num;
