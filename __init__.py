@@ -33,10 +33,7 @@ login_manager.session_protection ='strong'
 login_manager.login_view = "/"
 login_manager.init_app(app)
 
-"""logInStatus =dict()
-logInStatus['logged_in'] = False   			#Determines initial state, if false the logs out automatically when pgm restarts
-											# Don't use true!! Might cause error when clicking back button
-"""
+
 class LoginForm(Form):
 	email=StringField('Email',validators=[Required(),Length(1,64),Email()])
 	password=PasswordField('Password',validators=[Required()])
@@ -64,90 +61,6 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
     
- 
- 
-
-
-class database():
-
-    def db_init(self):
-        db.create_all()
-
-    def fetchAll(self):
-        try:												# Will fail if table doesn't exist
-            data = dieselLevel.query.order_by(dieselLevel.mTime.desc()).all() # Select * FROM TABLE ORDER BY mTime
-        except Exception as e:
-            flash('fetchAll: '+str(e))
-            #print 'Error:' + str(e)
-        #print data.__repr__()
-        return data
-    def insertDb(self,device,level,currentTime,ip):
-        try:
-            data=dieselLevel(device,level,currentTime,ip)
-            db.session.add(data)
-            db.session.commit()
-        except Exception as e:
-            flash('insertDb: '+str(e))
-            #print 'insertDb: '+str(e)
-        
-    
-    def filterRange(self,fromTime,toTime,page):
-    	#print "---------------------------"
-        results = dieselLevel.query.filter(dieselLevel.mTime <= toTime).filter(dieselLevel.mTime >= fromTime).order_by(dieselLevel.mTime.desc()).paginate(page, POSTS_PER_PAGE, False)
-        #print results.__repr__()
-        #print "---------------------------"
-        return results
-
-    def dummyData(self):
-        try:
-            self.db_init()
-            for i in range(1,50):
-                res = datetime.now().strftime("%Y-%m-%d %H:%M:%S")   #Converting to proper format in string
-                res = datetime.strptime(res,"%Y-%m-%d %H:%M:%S")    # Converting to proper format in datetime
-                self.insertDb('dev',i,res,'192.168.1.1')
-        except Exception as e:
-        	flash('DB_init:'+str(e))
-            #print 'DB_init:'+str(e)
-
-    def randomDate(self,start, end, format, prop):
-        """
-        Function returns a random date between start and end dates
-        """
-
-        stime = time.mktime(time.strptime(start, format))
-        etime = time.mktime(time.strptime(end, format))
-
-        ptime = stime + prop * (etime - stime)
-
-        res = time.strftime(format, time.localtime(ptime))
-        res = datetime.strptime(res,"%Y-%m-%d %H:%M:%S") 
-        return res
-
-
-        
-    def randomPacket(self,start,end,ip):
-        dbObj=database()
-        i=1
-        while i in range(1,10):
-            device='d'
-            date=dbObj.randomDate(start,end,'%Y-%m-%d %H:%M:%S',random.random())
-            level=str(random.randrange(100, 900, 2))
-            dbObj.insertDb(device,level,date,ip)
-            i=i+1
-            
-
-def nocache(view):
-	@wraps(view)
-	def no_cache(*args, **kwargs):
-		response = make_response(view(*args, **kwargs))
-		response.headers['Last-Modified'] = datetime.now()
-		response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
-		response.headers['Pragma'] = 'no-cache'
-		response.headers['Expires'] = '-1'
-		return response
-	return update_wrapper(no_cache, view) 
-
-
 class dieselLevel(db.Model):
     __tablename__ = 'dieselLevel'
     id = db.Column(db.Integer, primary_key=True)
@@ -164,6 +77,91 @@ class dieselLevel(db.Model):
         self.ip = ip
     def __repr__(self):
         return str(self.device)+','+str(self.level)+','+str(self.mTime)+','+str(self.ip)+'\n'
+class dreadger(db.Model):
+    __tablename__ = 'db'
+    id                  = db.Column(db.Integer, primary_key=True)
+    dreadger_name       = db.Column(db.String(25))
+    time                = db.Column(db.DateTime,unique=True)  # If not unique then there will be logical errors
+    storage_tank_level  = db.Column(db.Integer)
+    storage_tank_cap    = db.Column(db.String(25))
+    service_tank_level  = db.Column(db.Integer)
+    service_tank_cap    = db.Column(db.String(25))
+    flowmeter_1_in      = db.Column(db.Integer)
+    flowmeter_1_out     = db.Column(db.Integer)
+    engine_1_status     = db.Column(db.String(25))
+    flowmeter_2_in      = db.Column(db.Integer)
+    flowmeter_2_out     = db.Column(db.Integer)
+    engine_2_status     = db.Column(db.String(25))
+
+    def __repr__(self):
+        return self.dreadger_name+ ',' +str(self.time)+ ',' +str(self.storage_tank_level)+ ',' +\
+                self.storage_tank_cap+ ',' +str(self.service_tank_level)+ ',' +self.service_tank_cap+ ',' +\
+                str(self.flowmeter_1_in)+ ',' +str(self.flowmeter_1_out)+ ',' +self.engine_1_status+ ',' +str(self.flowmeter_2_in)+ ',' +\
+                str(self.flowmeter_2_out)+ ',' +str(self.engine_2_status)+'\n'
+
+    def __init__(self, arg):
+        
+        self.dreadger_name       = arg['dreadger_name']
+        self.time                = arg['time']
+        self.storage_tank_level  = arg['storage_tank_level']
+        self.storage_tank_cap    = arg['storage_tank_cap']
+        self.service_tank_level  = arg['service_tank_level']
+        self.service_tank_cap    = arg['service_tank_cap']
+        self.flowmeter_1_in      = arg['flowmeter_1_in']
+        self.flowmeter_1_out     = arg['flowmeter_1_out']
+        self.engine_1_status     = arg['engine_1_status']
+        self.flowmeter_2_in      = arg['flowmeter_2_in']
+        self.flowmeter_2_out     = arg['flowmeter_2_out']
+        self.engine_2_status     = arg['engine_2_status']
+
+
+
+class database():
+
+    def db_init(self):
+        db.create_all()
+    def drop_all(self):
+        db.drop_all()
+
+    def fetchAll(self):
+        try:												# Will fail if table doesn't exist
+            data = dreadger.query.order_by(dreadger.time.desc()).all() # Select * FROM TABLE ORDER BY time
+        except Exception as e:
+            flash('fetchAll: '+str(e))
+            #print 'Error:' + str(e)
+        #print data.__repr__()
+        return data
+    def insertDb(self,arg):
+        try:
+            data=dreadger(arg)
+            db.session.add(data)
+            db.session.commit()
+        except Exception as e:
+            flash('insertDb: '+str(e))
+            #print 'insertDb: '+str(e)
+        
+    
+    def filterRange(self,fromTime,toTime,page):
+    	#print "---------------------------"
+        results = dreadger.query.filter(dreadger.time <= toTime).filter(dreadger.time >= fromTime).order_by(dreadger.time.desc()).paginate(page, POSTS_PER_PAGE, False)
+        #print results.__repr__()
+        #print "---------------------------"
+        return results
+            
+
+def nocache(view):
+	@wraps(view)
+	def no_cache(*args, **kwargs):
+		response = make_response(view(*args, **kwargs))
+		response.headers['Last-Modified'] = datetime.now()
+		response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
+		response.headers['Pragma'] = 'no-cache'
+		response.headers['Expires'] = '-1'
+		return response
+	return update_wrapper(no_cache, view) 
+
+
+
 
 
 
@@ -429,7 +427,7 @@ def logout():
 
 if __name__ == "__main__":
 	#dbObj=database()
-	#dbObj.db_init()
+	dbObj.db_init()
 	#dbObj.randomPacket("2015-04-01 00:00:00", "2015-04-30 00:00:00",'192.168.1.1')				
 	#db.create_all()
 	app.run(host='0.0.0.0',debug=True)
