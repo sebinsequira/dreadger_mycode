@@ -42,17 +42,7 @@
     });
 
   </script>
-  <!--
-  <script type="text/javascript">
-    $(function(){
-      $('.toggler').click(function(){
-           $('th.hide_level').toggle(this.checked);
-           $('td.hide_level').toggle(this.checked);
-           
-       });
-  })
-
-  </script>-->
+ 
   <script type="text/javascript">
     $(document).on('change', 'table thead input', function() {
     var checked = $(this).is(":checked");
@@ -72,51 +62,6 @@
 {% block page_content %}
 
 <a href="/filter"> Filter</a>
-
-<div class="page-header">
-    <h2 style="color:silver;">Latest</h2>
-</div>
-
-              
-
-
-<!--Starts here$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
-<div class="container" style="color:silver;">
-<input type="checkbox" name="myCB" value="A" class="toggler" checked="checked" /> show/hide above
-    <br/>
-</div>  
-  <div class="container">
-    <table class="table table-bordered">
-          <thead>
-             <td>
-                 <input type="checkbox" checked="checked" />#
-             </td>
-             <td>
-                 <input type="checkbox" checked="checked" />Time
-             </td>
-             <td>
-                 <input type="checkbox" checked="checked" />Level
-             </td>
-             <td>
-                 <input type="checkbox" checked="checked" />
-             </td>
-             <td>
-                 <input type="checkbox" checked="checked" />
-             </td>
-          </thead>
-          
-          <tbody>
-            
-            <tr>
-              <td><span id="sNo"></div></td>
-              <td><span id="mTime"></span></td>
-              <td><span id="level"></div></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>        
-
-  <!-- ############################## -->
 
 <div class="page-header">
     <h2 style="color:silver;">Filter</h2>
@@ -269,23 +214,51 @@
                  <input type="checkbox" checked="checked" />Time
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />Level
+                 <input type="checkbox" checked="checked" />storage tank level
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />Value 4
+                 <input type="checkbox" checked="checked" />storage tank cap
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />Value 5
+                 <input type="checkbox" checked="checked" />service tank level
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />service tank cap
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />flowmeter 1 in
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />flowmeter 1 out
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />engine 1 status
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />flowmeter 2 in
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />flowmeter 2 out
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />engine 2 status
              </td>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>#</td>
+             <td>#</td>
              <td>Time</td>
-             <td>Level</td>
-             <td>Value4</td>
-             <td>Value5</td>
+             <td>storage tank level</td>
+             <td>storage tank cap</td>
+             <td>service tank level</td>
+             <td>service tank cap</td>
+             <td>flowmeter 1 in</td>
+             <td>flowmeter 1 out</td>
+             <td>engine 1 status</td>
+             <td>flowmeter 2 in</td>
+             <td>flowmeter 2 out</td>
+             <td>engine 2 status</td>
           </tr>
 
       {%if results != None%}
@@ -293,10 +266,22 @@
           
           {% for result in results.items %}
           
+          
+          
           <tr>
-            <td >{{ (results.page-1)* results.per_page +cntr }}</th>
-            <td >{{ result.mTime }}</th>
-            <td class="hide_level">{{ result.level }}</th>
+            <td >{{ (results.page-1)* results.per_page +cntr }}</td>
+            <td >{{ result.time }}</td>
+            <td >{{ result.storage_tank_level}}</td>
+            <td >{{ result.storage_tank_cap}}</td>
+            <td >{{ result.service_tank_level}}</td>
+            <td >{{ result.service_tank_cap}}</td>
+            <td >{{ result.flowmeter_1_in}}</td>
+            <td >{{ result.flowmeter_1_out}}</td>
+            <td >{{ result.engine_1_status}}</td>
+            <td >{{ result.flowmeter_2_in}}</td>
+            <td >{{ result.flowmeter_2_out}}</td>
+            <td >{{ result.engine_2_status}}</td>
+
           </tr>
           {% set cntr = cntr+1 %}
           {% endfor %}
