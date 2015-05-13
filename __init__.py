@@ -189,12 +189,12 @@ def login():
 	return render_template('login.html')
 
 
-@app.route ("/index", methods=['GET', 'POST'])
-@app.route ("/index/", methods=['GET', 'POST'])
-@app.route('/index/<int:page>', methods=['GET', 'POST'])
+@app.route ("/filter", methods=['GET', 'POST'])
+@app.route ("/filter/", methods=['GET', 'POST'])
+@app.route('/filter/<int:page>', methods=['GET', 'POST'])
 @nocache
 @login_required
-def home(page=1,fromTime=None,toTime=None):
+def filter(page=1,fromTime=None,toTime=None):
 	#-------------Filter Page starts here--------------#  
 	
 	dbObj=database()
@@ -299,10 +299,10 @@ def home(page=1,fromTime=None,toTime=None):
 
 #########################New code
 
-@app.route ("/filter", methods=['GET', 'POST'])
+@app.route ("/home", methods=['GET', 'POST'])
 @nocache
 @login_required
-def home2(page=1):
+def home():
 	return render_template('home.html')
 
 ##################################
