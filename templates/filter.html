@@ -1,334 +1,311 @@
 
 {% extends "base.html" %}
-{% block title %}Filter{% endblock %}
+{% block title %}Report{% endblock %}
+
 
 {% block scripts %}
 
  {{super()}}
- <script type="text/javascript">
-		$(document).ready(function(){
-			var number=10;
-			var name= 'dummyNoUse';
-			$.post("{{ url_for('static', filename='ajax/name2.php') }}",{name:name},function(data){
-			$('span#time').text(data.time);
-		    $('span#storage_tank_level').text(data.storage_tank_level);
-		    $('span#storage_tank_cap').text(data.storage_tank_cap);
-		    $('span#service_tank_level').text(data.service_tank_level);
-		    $('span#service_tank_cap').text(data.service_tank_cap);
-		    $('span#flowmeter_1_in').text(data.flowmeter_1_in);
-		    $('span#flowmeter_1_out').text(data.flowmeter_1_out);
-		    $('span#engine_1_level').text(data.flowmeter_1_in-data.flowmeter_1_out);
-		    $('span#engine_1_status').text(data.engine_1_status);
-		    $('span#flowmeter_2_in').text(data.flowmeter_2_in);
-		    $('span#flowmeter_2_out').text(data.flowmeter_2_out);
-		    $('span#engine_2_level').text(data.flowmeter_2_in-data.flowmeter_2_out);
-		    $('span#engine_2_status').text(data.engine_2_status);
-			
-			},'json');
-			function redirect(num){
-				number=num;
-				countdown();
-			}
+  <script type="text/javascript">
+    $(document).on('change', 'table thead input', function() {
+    var checked = $(this).is(":checked");
 
-			function countdown(){
-				
-				
-				setTimeout(countdown,1000);
-				number--;
-				$('#box').html("Redirecting in "+number+" seconds.");
-				if(number<=0)
-				{
-					var name= 'dummyNoUse';
-					$.post("{{ url_for('static', filename='ajax/name2.php') }}",{name:name},function(data){
-					$('span#time').text(data.time);
-				    $('span#storage_tank_level').text(data.storage_tank_level);
-				    $('span#storage_tank_cap').text(data.storage_tank_cap);
-				    $('span#service_tank_level').text(data.service_tank_level);
-				    $('span#service_tank_cap').text(data.service_tank_cap);
-				    $('span#flowmeter_1_in').text(data.flowmeter_1_in);
-				    $('span#flowmeter_1_out').text(data.flowmeter_1_out);
-				    $('span#engine_1_level').text(data.flowmeter_1_in-data.flowmeter_1_out);
-				    $('span#engine_1_status').text(data.engine_1_status);
-				    $('span#flowmeter_2_in').text(data.flowmeter_2_in);
-				    $('span#flowmeter_2_out').text(data.flowmeter_2_out);
-				    $('span#engine_2_level').text(data.flowmeter_2_in-data.flowmeter_2_out);
-				    $('span#engine_2_status').text(data.engine_2_status);
-					},'json');
-					number=3;
-				}
-			}
-		redirect(3);
-
-		});
-</script>
-
+    var index = $(this).parent().index();
+        $('table tbody tr').each(function() {
+            if(checked) {
+                $(this).find("td").eq(index).show();   
+            } else {
+                $(this).find("td").eq(index).hide();   
+            }
+        });
+    });
+  </script>>
 {% endblock scripts %}
-
-
 
 {% block page_content %}
 
+<a href="/filter"> Filter</a>
+
+<div class="page-header">
+    <h2 style="color:silver;">Filter</h2>
+</div>
+
 <div class="container">
-  <h2 class="page-header" style="color:silver;">Flowchart</h2>
-  	
-  	<div class="pull-right">
-          <h4><span class="label label-default" > <span id="time"></span> </span></h4>
+    
+    {% if results == None %}
+    
+      
+        <div class="col-xs-12 col-xs-offset-2 col-sm-offset-3">
+          <h4><span class="label label-default" >Enter query to show results</span></h4>
+        </div>
+      
+
+    {% elif results.pages == 0 %}
+
+     
+        <div class="col-xs-12 col-xs-offset-2 col-sm-offset-3">
+          <h4><span class="label label-default">Query returned 0 results</span></h4>
+        </div>
+     
+    
+    {% else %}
+      
+    {% endif %}
+</div>
+
+<!-- Debug code
+
+<h1 class="visible-xs">xs</h1>
+<h1 class="visible-sm">sm</h1>
+<h1 class="visible-md">md</h1>
+<h1 class="visible-lg">lg</h1>
+
+-->
+
+<b style="color:silver;"><h3>From</h3></b> 
+
+<div class="container">
+
+  <form class="form" role="form">
+    <div class="row" style="color:silver;">
+    
+      <div class="col-xs-12 col-sm-4">
+		    <div class="form-group">
+				<label for="fromDate">Date:</label>
+		      	
+		      	<input type="date" class="form-control" id="fromDate" name="fromDate" style="background-color: #E6E6E6;" value="{{ fromDate }}" > 
+		    </div>
+      </div>
+        
+      <div class="col-xs-4 col-sm-2">
+		    <div class="form-group">
+		      <label for="sel1">Hour:</label>
+		      <select name="fromHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
+		        {% for i in range(0,24) %}
+		        <option value="{{ i }}">{{ i }}</option>
+		        {% endfor %}
+		      </select>
+		    </div>
+      </div>
+        
+      <div class="col-xs-4 col-sm-2">
+          <div class="form-group">
+            <label for="sel1">Min:</label>
+            <select name="fromMin" class="form-control" id="sel1" style="background-color: #E6E6E6;">
+              {% for i in range(0,60) %}
+              <option value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+            </select>
+          </div>
+      </div>
     </div>
-  	
-  	<h1 class="visible-xs" >
-  	<!--Code for extra small screen starts-->
-	  	<div class="container">
-		  	
-			
-					      
-			      	<div class="row">
-			      		<div class="col-xs-3 text-center col-xs-offset-3 other ">
-				        	<span style="color:black;" class="btn btn-info btn-xs">Storage Tank<br/> <span id='storage_tank_level'></span>
-				        	</span> 
-					    </div> 
-					</div>
-			      	
-			      	<div class="row">
-			      		<div class="col-xs-3 text-center col-xs-offset-3 other ">
-				        	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>  
-					    </div> 
-					</div>
+</div>  
 
-			      	
-		       		
-		       		<div class="row">
-		       			
-				        <div class="col-xs-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-left"></span></p>
-				        </div>
+<b style="color:silver;"><h3>To</h3></b> 
 
-				        <div class="col-xs-3">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Service Tank<br/><span id='service_tank_level'></span></span>
-				        </div>
+<div class="container">
+ 
+    <div class="row" style="color:silver;">
+    
+      <div class="col-xs-12 col-sm-4">
+	        <div class="form-group">
 
-				        <div class="col-xs-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-right"></span></p>
-				        </div>
-				        
-		       		</div>
+	          <label for="toDate">Date:</label>
+	          <input type="date" class="form-control" id="toDate" name="toDate" style="background-color: #E6E6E6;" value="{{ toDate }}" > 
+	        </div>
+      </div>
+        
+      <div class="col-xs-4 col-sm-2">
+	        <div class="form-group">
+	          <label for="sel1">Hour:</label>
+	          <select name="toHour" class="form-control" id="sel1" style="background-color: #E6E6E6;">
+	            {% for i in range(0,24) %}
+	            <option value="{{ i }}">{{ i }}</option>
+	            {% endfor %}
+	          </select>
+	        </div>
+      </div>
+        
+      <div class="col-xs-4 col-sm-2">
+          <div class="form-group">
+            <label for="sel1">Min:</label>
+            <select name="toMin" class="form-control" id="sel1" style="background-color: #E6E6E6;">
+              {% for i in range(0,60) %}
+              <option value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+            </select>
+          </div>
+      </div>
+    </div>
+</div>  
 
-		       		<div class="row">
-		      		    			        
-				        <div class="col-xs-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
-				        </div>
-				        <div class="col-xs-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
-				        </div>
 
-				        <div class="col-xs-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
-				        </div>
-		       		</div>
-		       		
-		       		<div class="row">
-		       			<div class="col-xs-3 ">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter IN 1<br/><span id='flowmeter_1_in'></span> </span>
-				        </div>
-		       			<div class="col-xs-3 col-xs-offset-3">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter IN 2<br/><span id='flowmeter_2_in'></span> </span>
-				        </div>
-		       		</div>
-
-		       		<div class="row">
-		      		    			        
-				        <div class="col-xs-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
-				        </div>
-				        <div class="col-xs-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
-				        </div>
-
-				        <div class="col-xs-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
-				        </div>
-		       		</div>
-
-		       		<div class="row">
-		      		    			        
-				        <div class="col-xs-3 text-center other ">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Engine 1<br/><span id="engine_1_level"></span></span>
-				        </div>
-				        
-				        <div class="col-xs-3 text-center col-xs-offset-3 other ">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Engine 2<br/><span id="engine_2_level"></span></span>
-				        </div>
-		       		</div>
-
-		       		<div class="row">
-		      		    			        
-				        <div class="col-xs-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
-				        </div>
-				        <div class="col-xs-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
-				        </div>
-
-				        <div class="col-xs-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
-				        </div>
-		       		</div>
-
-		       		<div class="row">
-		      		    			        
-				        <div class="col-xs-3 text-center other ">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter Out 1<br/><span id='flowmeter_1_out'></span> </span>
-				        </div>
-
-				        
-				        <div class="col-xs-3 text-center col-xs-offset-3 other ">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter Out 2<br/><span id='flowmeter_2_out'></span> </span>
-				        </div>
-		       		</div>
-
-		       		
-		       		<div class="row">
-		       			
-
-		       			<div class="col-xs-3 text-center other">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-right"></span></p>
-				        </div>
-				        <div class="col-xs-3 text-center other">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
-				        </div>
-		       			<div class="col-xs-3 text-center other">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-left"></span></p>
-				        </div>
-				        
-		       		</div>
-			    
-		
-			
+    <br/>
+    <div class="container">
+	    <div class="row">
+	    	<div class="col-md-2">
+	      		<button type="submit" formmethod="post" style="background-color: #E6E6E6;" class="btn btn-default" >Submit</button>
+	    	</div>
 		</div>
-  	<!--Code for extra small screen starts-->
-  	</h1>
-
-	<h1 class="hidden-xs" >
-	<!--Code for other screen size starts-->
-	  	<div class="container">
-		  	
-			
-					      
-			      	<div class="row">
-			      		<div class="col-sm-2 text-center col-sm-offset-5 other ">
-				        	<span style="color:black;" class="btn btn-info btn-lg">Storage Tank<br/> <span id='storage_tank_level'></span> 
-				        	</span> 
-					    </div> 
-					</div>
-			      	
-			      	<div class="row">
-			      		<div class="col-sm-2 text-center col-sm-offset-5 other ">
-				        	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>  
-					    </div> 
-					</div>
-
-			      	
-		       		
-		       			       		
-		       		
-		       		<div class="row">
-		       			<div class="col-sm-2 ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter IN 1<br/><span id="flowmeter_1_in"></span></span>
-				        </div>
-
-				        <div class="col-sm-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-left"></span></p>
-				        </div>
-
-				        <div class="col-sm-2">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Service Tank<br/><span id="service_tank_level"></span></span>
-				        </div>
-
-				        <div class="col-sm-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-right"></span></p>
-				        </div>
-
-		       			<div class="col-sm-2 ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter IN 2<br/><span id="flowmeter_2_in"></span></span>
-				        </div>
-		       		</div>
-
-		       		<div class="row">
-		      		    			        
-				        <div class="col-sm-2 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
-				        </div>
-				        <div class="col-sm-2 col-sm-offset-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
-				        </div>
-
-				        <div class="col-sm-2 col-sm-offset-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
-				        </div>
-		       		</div>
-
-		       		<div class="row">
-		      		    			        
-				        <div class="col-sm-2 text-center other ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Engine 1<br/><span id="engine_1_level"></span></span>
-				        </div>
-				        
-				        <div class="col-sm-2 text-center col-sm-offset-8 other ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Engine 2<br/><span id="engine_1_level"></span></span>
-				        </div>
-		       		</div>
-
-		       		<div class="row">
-		      		    			        
-				        <div class="col-sm-2 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
-				        </div>
-				        <div class="col-sm-2 col-sm-offset-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
-				        </div>
-
-				        <div class="col-sm-2 col-sm-offset-3 text-center other ">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
-				        </div>
-		       		</div>
-
-		       		<div class="row">
-		      		    			        
-				        <div class="col-sm-2 text-center other ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter Out 1<br/><span id="flowmeter_1_out"></span></span>
-				        </div>
-
-				        
-				        <div class="col-sm-2 text-center col-sm-offset-8 other ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter Out 2<br/><span id="flowmeter_2_out"></span></span>
-				        </div>
-		       		</div>
-
-		       		
-		       		<div class="row">
-		       			
-
-		       			<div class="col-sm-2 text-center other">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-right"></span></p>
-				        </div>
-				        <div class="col-sm-2 col-sm-offset-3 text-center other">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
-				        </div>
-		       			<div class="col-sm-2 col-sm-offset-3 text-center other">
-				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-left"></span></p>
-				        </div>
-				        
-		       		</div>
-			    
-		
-			
-		</div>
-		<!--Code for other screen size ends-->
-
-	</h1>
+	</div>
+  </form>
 
 
- <!-- ###################### --> 
+<br/>
 
-<!--Ends here $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+  
+
+<br/>
+{% if  results != None and results.pages !=0 %}
+ 
+
+  <div class="page-header">
+    <h2 style="color:silver;">Diesel Level</h2>
+  </div>
+  <br/>
+
+  
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td>
+                 <input type="checkbox" checked="checked" />#
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />Time
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />storage tank level
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />storage tank cap
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />service tank level
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />service tank cap
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />flowmeter 1 in
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />flowmeter 1 out
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />engine 1 status
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />flowmeter 2 in
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />flowmeter 2 out
+             </td>
+             <td>
+                 <input type="checkbox" checked="checked" />engine 2 status
+             </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+             <td>#</td>
+             <td>Time</td>
+             <td>storage tank level</td>
+             <td>storage tank cap</td>
+             <td>service tank level</td>
+             <td>service tank cap</td>
+             <td>flowmeter 1 in</td>
+             <td>flowmeter 1 out</td>
+             <td>engine 1 status</td>
+             <td>flowmeter 2 in</td>
+             <td>flowmeter 2 out</td>
+             <td>engine 2 status</td>
+          </tr>
+
+      {%if results != None%}
+          {% set cntr = 1 %}
+          
+          {% for result in results.items %}
+          
+          
+          
+          <tr>
+            <td >{{ (results.page-1)* results.per_page +cntr }}</td>
+            <td >{{ result.time }}</td>
+            <td >{{ result.storage_tank_level}}</td>
+            <td >{{ result.storage_tank_cap}}</td>
+            <td >{{ result.service_tank_level}}</td>
+            <td >{{ result.service_tank_cap}}</td>
+            <td >{{ result.flowmeter_1_in}}</td>
+            <td >{{ result.flowmeter_1_out}}</td>
+            <td >{{ result.engine_1_status}}</td>
+            <td >{{ result.flowmeter_2_in}}</td>
+            <td >{{ result.flowmeter_2_out}}</td>
+            <td >{{ result.engine_2_status}}</td>
+
+          </tr>
+          {% set cntr = cntr+1 %}
+          {% endfor %}
+      {% endif %}
+        </tbody>
+      </table>
+      <br/>
+    </div>
+  
+  <nav>
+
+    <ul class="pagination">
+      
+      {% if results.has_prev %}
+      <li>
+        <a href="{{ url_for('home', page=results.prev_num,fromTime=fromTime,toTime=toTime) }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+        </li>
+      {% else %}
+      <li class="disabled">
+        <a href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {% endif %}
+
+      {% set cntr = 1 %}
+      
+      {% for cntr in range(1,results.pages+1) %}
+        {% if cntr== results.page%}
+        	
+        	<li class="active"><a href="{{ url_for('home', page=cntr,fromTime=fromTime,toTime=toTime) }}">{{cntr}}</a></li>
+
+        {% else %}
+        
+        	<li><a href="{{ url_for('home', page=cntr,fromTime=fromTime,toTime=toTime) }}">{{cntr}}</a></li>
+        
+        {% endif %}
+        
+        {% set cntr = cntr+1 %}
+      
+      {% endfor %}
+      {% if results.has_next %}
+        <li>
+          <a href="{{ url_for('home', page=results.next_num,fromTime=fromTime,toTime=toTime) }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      {% else %}
+      <li class="disabled">
+        <a href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+
+{%endif%}
+  
+
 {% endblock %}
