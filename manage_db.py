@@ -50,8 +50,6 @@ class dreadger(db.Model):
     
 
 class database():
-
-    
     def db_init(self):
         db.create_all()
     def drop_all(self):
