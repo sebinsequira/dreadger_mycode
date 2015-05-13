@@ -1,0 +1,334 @@
+
+{% extends "base.html" %}
+{% block title %}Filter{% endblock %}
+
+{% block scripts %}
+
+ {{super()}}
+ <script type="text/javascript">
+		$(document).ready(function(){
+			var number=10;
+			var name= 'dummyNoUse';
+			$.post("{{ url_for('static', filename='ajax/fetch_from_db.php') }}",{name:name},function(data){
+			$('span#time').text(data.time);
+		    $('span#storage_tank_level').text(data.storage_tank_level);
+		    $('span#storage_tank_cap').text(data.storage_tank_cap);
+		    $('span#service_tank_level').text(data.service_tank_level);
+		    $('span#service_tank_cap').text(data.service_tank_cap);
+		    $('span#flowmeter_1_in').text(data.flowmeter_1_in);
+		    $('span#flowmeter_1_out').text(data.flowmeter_1_out);
+		    $('span#engine_1_level').text(data.flowmeter_1_in-data.flowmeter_1_out);
+		    $('span#engine_1_status').text(data.engine_1_status);
+		    $('span#flowmeter_2_in').text(data.flowmeter_2_in);
+		    $('span#flowmeter_2_out').text(data.flowmeter_2_out);
+		    $('span#engine_2_level').text(data.flowmeter_2_in-data.flowmeter_2_out);
+		    $('span#engine_2_status').text(data.engine_2_status);
+			
+			},'json');
+			function redirect(num){
+				number=num;
+				countdown();
+			}
+
+			function countdown(){
+				
+				
+				setTimeout(countdown,1000);
+				number--;
+				$('#box').html("Redirecting in "+number+" seconds.");
+				if(number<=0)
+				{
+					var name= 'dummyNoUse';
+					$.post("{{ url_for('static', filename='ajax/fetch_from_db.php') }}",{name:name},function(data){
+					$('span#time').text(data.time);
+				    $('span#storage_tank_level').text(data.storage_tank_level);
+				    $('span#storage_tank_cap').text(data.storage_tank_cap);
+				    $('span#service_tank_level').text(data.service_tank_level);
+				    $('span#service_tank_cap').text(data.service_tank_cap);
+				    $('span#flowmeter_1_in').text(data.flowmeter_1_in);
+				    $('span#flowmeter_1_out').text(data.flowmeter_1_out);
+				    $('span#engine_1_level').text(data.flowmeter_1_in-data.flowmeter_1_out);
+				    $('span#engine_1_status').text(data.engine_1_status);
+				    $('span#flowmeter_2_in').text(data.flowmeter_2_in);
+				    $('span#flowmeter_2_out').text(data.flowmeter_2_out);
+				    $('span#engine_2_level').text(data.flowmeter_2_in-data.flowmeter_2_out);
+				    $('span#engine_2_status').text(data.engine_2_status);
+					},'json');
+					number=3;
+				}
+			}
+		redirect(3);
+
+		});
+</script>
+
+{% endblock scripts %}
+
+
+
+{% block page_content %}
+
+<div class="container">
+  <h2 class="page-header" style="color:silver;">Flowchart</h2>
+  	
+  	<div class="pull-right">
+          <h4><span class="label label-default" > <span id="time"></span> </span></h4>
+    </div>
+  	
+  	<h1 class="visible-xs" >
+  	<!--Code for extra small screen starts-->
+	  	<div class="container">
+		  	
+			
+					      
+			      	<div class="row">
+			      		<div class="col-xs-3 text-center col-xs-offset-3 other ">
+				        	<span style="color:black;" class="btn btn-info btn-xs">Storage Tank<br/> <span id='storage_tank_level'></span>
+				        	</span> 
+					    </div> 
+					</div>
+			      	
+			      	<div class="row">
+			      		<div class="col-xs-3 text-center col-xs-offset-3 other ">
+				        	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>  
+					    </div> 
+					</div>
+
+			      	
+		       		
+		       		<div class="row">
+		       			
+				        <div class="col-xs-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-left"></span></p>
+				        </div>
+
+				        <div class="col-xs-3">
+				          	<span style="color:black;"class="btn btn-info btn-xs">Service Tank<br/><span id='service_tank_level'></span></span>
+				        </div>
+
+				        <div class="col-xs-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-right"></span></p>
+				        </div>
+				        
+		       		</div>
+
+		       		<div class="row">
+		      		    			        
+				        <div class="col-xs-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
+				        </div>
+				        <div class="col-xs-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
+				        </div>
+
+				        <div class="col-xs-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
+				        </div>
+		       		</div>
+		       		
+		       		<div class="row">
+		       			<div class="col-xs-3 ">
+				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter IN 1<br/><span id='flowmeter_1_in'></span> </span>
+				        </div>
+		       			<div class="col-xs-3 col-xs-offset-3">
+				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter IN 2<br/><span id='flowmeter_2_in'></span> </span>
+				        </div>
+		       		</div>
+
+		       		<div class="row">
+		      		    			        
+				        <div class="col-xs-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
+				        </div>
+				        <div class="col-xs-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
+				        </div>
+
+				        <div class="col-xs-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
+				        </div>
+		       		</div>
+
+		       		<div class="row">
+		      		    			        
+				        <div class="col-xs-3 text-center other ">
+				          	<span style="color:black;"class="btn btn-info btn-xs">Engine 1<br/><span id="engine_1_level"></span></span>
+				        </div>
+				        
+				        <div class="col-xs-3 text-center col-xs-offset-3 other ">
+				          	<span style="color:black;"class="btn btn-info btn-xs">Engine 2<br/><span id="engine_2_level"></span></span>
+				        </div>
+		       		</div>
+
+		       		<div class="row">
+		      		    			        
+				        <div class="col-xs-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
+				        </div>
+				        <div class="col-xs-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
+				        </div>
+
+				        <div class="col-xs-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
+				        </div>
+		       		</div>
+
+		       		<div class="row">
+		      		    			        
+				        <div class="col-xs-3 text-center other ">
+				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter Out 1<br/><span id='flowmeter_1_out'></span> </span>
+				        </div>
+
+				        
+				        <div class="col-xs-3 text-center col-xs-offset-3 other ">
+				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter Out 2<br/><span id='flowmeter_2_out'></span> </span>
+				        </div>
+		       		</div>
+
+		       		
+		       		<div class="row">
+		       			
+
+		       			<div class="col-xs-3 text-center other">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-right"></span></p>
+				        </div>
+				        <div class="col-xs-3 text-center other">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
+				        </div>
+		       			<div class="col-xs-3 text-center other">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-left"></span></p>
+				        </div>
+				        
+		       		</div>
+			    
+		
+			
+		</div>
+  	<!--Code for extra small screen starts-->
+  	</h1>
+
+	<h1 class="hidden-xs" >
+	<!--Code for other screen size starts-->
+	  	<div class="container">
+		  	
+			
+					      
+			      	<div class="row">
+			      		<div class="col-sm-2 text-center col-sm-offset-5 other ">
+				        	<span style="color:black;" class="btn btn-info btn-lg">Storage Tank<br/> <span id='storage_tank_level'></span> 
+				        	</span> 
+					    </div> 
+					</div>
+			      	
+			      	<div class="row">
+			      		<div class="col-sm-2 text-center col-sm-offset-5 other ">
+				        	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>  
+					    </div> 
+					</div>
+
+			      	
+		       		
+		       			       		
+		       		
+		       		<div class="row">
+		       			<div class="col-sm-2 ">
+				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter IN 1<br/><span id="flowmeter_1_in"></span></span>
+				        </div>
+
+				        <div class="col-sm-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-left"></span></p>
+				        </div>
+
+				        <div class="col-sm-2">
+				          	<span style="color:black;"class="btn btn-info btn-lg">Service Tank<br/><span id="service_tank_level"></span></span>
+				        </div>
+
+				        <div class="col-sm-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-right"></span></p>
+				        </div>
+
+		       			<div class="col-sm-2 ">
+				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter IN 2<br/><span id="flowmeter_2_in"></span></span>
+				        </div>
+		       		</div>
+
+		       		<div class="row">
+		      		    			        
+				        <div class="col-sm-2 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
+				        </div>
+				        <div class="col-sm-2 col-sm-offset-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
+				        </div>
+
+				        <div class="col-sm-2 col-sm-offset-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
+				        </div>
+		       		</div>
+
+		       		<div class="row">
+		      		    			        
+				        <div class="col-sm-2 text-center other ">
+				          	<span style="color:black;"class="btn btn-info btn-lg">Engine 1<br/><span id="engine_1_level"></span></span>
+				        </div>
+				        
+				        <div class="col-sm-2 text-center col-sm-offset-8 other ">
+				          	<span style="color:black;"class="btn btn-info btn-lg">Engine 2<br/><span id="engine_2_level"></span></span>
+				        </div>
+		       		</div>
+
+		       		<div class="row">
+		      		    			        
+				        <div class="col-sm-2 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
+				        </div>
+				        <div class="col-sm-2 col-sm-offset-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
+				        </div>
+
+				        <div class="col-sm-2 col-sm-offset-3 text-center other ">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-down"></span></p>
+				        </div>
+		       		</div>
+
+		       		<div class="row">
+		      		    			        
+				        <div class="col-sm-2 text-center other ">
+				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter Out 1<br/><span id="flowmeter_1_out"></span></span>
+				        </div>
+
+				        
+				        <div class="col-sm-2 text-center col-sm-offset-8 other ">
+				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter Out 2<br/><span id="flowmeter_2_out"></span></span>
+				        </div>
+		       		</div>
+
+		       		
+		       		<div class="row">
+		       			
+
+		       			<div class="col-sm-2 text-center other">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-right"></span></p>
+				        </div>
+				        <div class="col-sm-2 col-sm-offset-3 text-center other">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-up"></span></p>
+				        </div>
+		       			<div class="col-sm-2 col-sm-offset-3 text-center other">
+				          	<p class="btn"><span style="color:white;" class="glyphicon glyphicon-arrow-left"></span></p>
+				        </div>
+				        
+		       		</div>
+			    
+		
+			
+		</div>
+		<!--Code for other screen size ends-->
+
+	</h1>
+
+
+ <!-- ###################### --> 
+
+<!--Ends here $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+{% endblock %}
