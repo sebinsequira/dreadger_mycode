@@ -1,4 +1,4 @@
-from flask import Flask, flash, request, jsonify, url_for, render_template, redirect
+from flask import Flask, flash
 from flask.ext.sqlalchemy import SQLAlchemy
 from datetime import datetime
 import random
@@ -146,10 +146,34 @@ class database():
             level=str(random.randrange(100, 900, 2))
             dbObj.insertDb(device,level,date,ip)
             i=i+1
+    def fetchData(self):
+        try:
+            results = dreadger.query.order_by(dreadger.time.desc()).first()
+            dictRow={}
+            dictRow['dreadger_name']        = results.dreadger_name
+            dictRow['time']                 = results.time
+            dictRow['storage_tank_level']   = results.storage_tank_level
+            dictRow['storage_tank_cap']     = results.storage_tank_cap
+            dictRow['service_tank_level']   = results.service_tank_level
+            dictRow['service_tank_cap']     = results.service_tank_cap
+            dictRow['flowmeter_1_in']       = results.flowmeter_1_in
+            dictRow['flowmeter_1_out']      = results.flowmeter_1_out
+            dictRow['engine_1_status']      = results.engine_1_status
+            dictRow['flowmeter_2_in']       = results.flowmeter_2_in
+            dictRow['flowmeter_2_out']      = results.flowmeter_2_out
+            dictRow['engine_2_status']      = results.engine_2_status
+            return dictRow
+        except Exception as e:
+            #flash('insertDb: '+str(e))
+            print 'deleteDb: '+str(e)
 if __name__ == '__main__':
     dbObj = database()
     #dbObj.dummyRange()
     #dbObj.fetchAll()
-    dbObj.filterRange('2014-08-01 00:00:00','2014-12-30 00:00:00')
+    #dbObj.filterRange('2014-08-01 00:00:00','2014-12-30 00:00:00')
+    res=dbObj.fetchData()
+    for key in res:
+        print key,'\t',res[key]
+    
 
     
