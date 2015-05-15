@@ -113,7 +113,9 @@ if __name__ == '__main__':
             #s.add(dreadger(device, level, time, ip))
             data=data.strip()
             data=data.split(';')
-            print 'data: '+ data
+            for elem in data:
+                print elem,
+            print '\n'
             
 
             s.commit()
