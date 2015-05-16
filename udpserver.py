@@ -118,10 +118,10 @@ if __name__ == '__main__':
             print '\n'
             
 
-            s.commit()
+            #s.commit()
         except Exception as e:
             print e
             
 
-    s.close()   
+    #s.close()   
         
