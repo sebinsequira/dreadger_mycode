@@ -168,12 +168,13 @@ class database():
             print 'deleteDb: '+str(e)
 if __name__ == '__main__':
     dbObj = database()
+    dbObj.db_init()
     #dbObj.dummyRange()
     #dbObj.fetchAll()
     #dbObj.filterRange('2014-08-01 00:00:00','2014-12-30 00:00:00')
-    res=dbObj.fetchData()
-    for key in res:
-        print key,'\t',res[key]
+    """res=dbObj.fetchData()
+                for key in res:
+                    print key,'\t',res[key]"""
     
 
     
