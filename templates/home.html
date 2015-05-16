@@ -67,10 +67,11 @@
 
 
 {% block page_content %}
-<a href="/filter"> Filter</a>
+
 <div class="container">
+ 
   <h2 class="page-header" style="color:silver;">Flowchart</h2>
-  	
+  	</div>
   	<div class="pull-right">
           <h4><span class="label label-default" > <span id="time"></span> </span></h4>
     </div>
@@ -83,7 +84,10 @@
 					      
 			      	<div class="row">
 			      		<div class="col-xs-3 text-center col-xs-offset-3 other ">
-				        	<span style="color:black;" class="btn btn-info btn-xs">Storage Tank<br/> <span id='storage_tank_level'></span>
+				        	<span style="color:black;" class="btn btn-info btn-xs">
+				        	<b>
+				        	<span id="storage_tank_cap" style="color:rgb(184,0,0);"></span><br/>Storage Tank<br/> <span id='storage_tank_level' style="color:rgb(0, 32, 129);"></span>
+				        	</b>
 				        	</span> 
 					    </div> 
 					</div>
@@ -103,7 +107,13 @@
 				        </div>
 
 				        <div class="col-xs-3">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Service Tank<br/><span id='service_tank_level'></span></span>
+				          	<span style="color:black;"class="btn btn-info btn-xs">
+				          	<b>
+				          	<span id='service_tank_cap' style="color:rgb(184,0,0);"></span><br/>
+				          	Service Tank<br/>
+				          	<span id='service_tank_level' style="color:rgb(0, 32, 129);"></span>
+				          	</b>
+				          	</span>
 				        </div>
 
 				        <div class="col-xs-3 text-center other ">
@@ -128,10 +138,19 @@
 		       		
 		       		<div class="row">
 		       			<div class="col-xs-3 ">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter IN 1<br/><span id='flowmeter_1_in'></span> </span>
+				          	<span style="color:black;"class="btn btn-info btn-xs">
+				          	<b>
+				          	Flowmeter IN 1<br/>
+				          	<span id='flowmeter_1_in' style="color:rgb(0, 32, 129);"></span>
+				          	</b>
+				          	</span>
 				        </div>
 		       			<div class="col-xs-3 col-xs-offset-3">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter IN 2<br/><span id='flowmeter_2_in'></span> </span>
+				          	<span style="color:black;"class="btn btn-info btn-xs">
+				          	<b>
+				          	Flowmeter IN 2<br/><span id='flowmeter_2_in' style="color:rgb(0, 32, 129);"></span>
+				          	</b>
+				          	</span>
 				        </div>
 		       		</div>
 
@@ -152,11 +171,23 @@
 		       		<div class="row">
 		      		    			        
 				        <div class="col-xs-3 text-center other ">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Engine 1<br/><span id="engine_1_level"></span></span>
+				          	<span style="color:black;"class="btn btn-info btn-xs">
+				          	<b>
+				          	<span id="engine_1_status" style="color:rgb(184,0,0);"></span><br/>
+				          	Engine 1<br/>
+				          	<span id="engine_1_level" style="color:rgb(0, 32, 129);"></span>
+				          	</b>
+				          	</span>
 				        </div>
 				        
 				        <div class="col-xs-3 text-center col-xs-offset-3 other ">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Engine 2<br/><span id="engine_2_level"></span></span>
+				          	<span style="color:black;"class="btn btn-info btn-xs">
+				          	<b>
+				          	<span id="engine_2_status" style="color:rgb(184,0,0);"></span><br/>
+				          	Engine 1<br/>
+				          	<span id="engine_2_level" style="color:rgb(0, 32, 129);"></span>
+				          	</b>
+				          	</span>
 				        </div>
 		       		</div>
 
@@ -177,12 +208,21 @@
 		       		<div class="row">
 		      		    			        
 				        <div class="col-xs-3 text-center other ">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter Out 1<br/><span id='flowmeter_1_out'></span> </span>
+				          	<span style="color:black;"class="btn btn-info btn-xs">
+				          	<b>
+				          	Flowmeter Out 1<br/>
+				          	<span id='flowmeter_1_out' style="color:rgb(0, 32, 129);"></span>
+				          	</b>
+				          	</span>
 				        </div>
 
 				        
 				        <div class="col-xs-3 text-center col-xs-offset-3 other ">
-				          	<span style="color:black;"class="btn btn-info btn-xs">Flowmeter Out 2<br/><span id='flowmeter_2_out'></span> </span>
+				          	<span style="color:black;"class="btn btn-info btn-xs">
+				          	<b>
+				          	Flowmeter Out 2<br/><span id='flowmeter_2_out' style="color:rgb(0, 32, 129);"></span>
+				          	</b>
+				          	</span>
 				        </div>
 		       		</div>
 
@@ -205,19 +245,26 @@
 		
 			
 		</div>
-  	<!--Code for extra small screen starts-->
+  	<!--Code for extra small screen ends-->
   	</h1>
 
 	<h1 class="hidden-xs" >
 	<!--Code for other screen size starts-->
 	  	<div class="container">
 		  	
-			
+				
 					      
 			      	<div class="row">
 			      		<div class="col-sm-2 text-center col-sm-offset-5 other ">
-				        	<span style="color:black;" class="btn btn-info btn-lg">Storage Tank<br/> <span id='storage_tank_level'></span> 
+			      			
+				        	<span style="color:black;" class="btn btn-info btn-lg">
+				        	<b>
+				        	<span id="storage_tank_cap" style="color:rgb(184,0,0);"></span><br/>
+				        	Storage Tank<br/> 
+				        	<span id='storage_tank_level' style="color:rgb(0, 32, 129);"></span> 
+				        	</b>
 				        	</span> 
+
 					    </div> 
 					</div>
 			      	
@@ -233,7 +280,12 @@
 		       		
 		       		<div class="row">
 		       			<div class="col-sm-2 ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter IN 1<br/><span id="flowmeter_1_in"></span></span>
+				          	<span style="color:black;"class="btn btn-info btn-lg">
+				          	<b>
+				          	Flowmeter IN 1<br/>
+				          	<span id="flowmeter_1_in" style="color:rgb(0, 32, 129);"></span>
+				          	</b>
+				          	</span>
 				        </div>
 
 				        <div class="col-sm-3 text-center other ">
@@ -241,7 +293,11 @@
 				        </div>
 
 				        <div class="col-sm-2">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Service Tank<br/><span id="service_tank_level"></span></span>
+				          	<span style="color:black;"class="btn btn-info btn-lg">
+				          	<b>
+				          	<span id="service_tank_cap" style="color:rgb(184,0,0);"></span><br/>Service Tank<br/><span id="service_tank_level" style="color:rgb(0, 32, 129);"></span>
+				          	</b>
+				          	</span>
 				        </div>
 
 				        <div class="col-sm-3 text-center other ">
@@ -249,7 +305,11 @@
 				        </div>
 
 		       			<div class="col-sm-2 ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter IN 2<br/><span id="flowmeter_2_in"></span></span>
+		       				<span style="color:black;"class="btn btn-info btn-lg">
+		       				<b>
+		       				Flowmeter IN 2<br/><span id="flowmeter_2_in" style="color:rgb(0, 32, 129);"></span>
+				          	<b>
+				          	</span>
 				        </div>
 		       		</div>
 
@@ -270,11 +330,21 @@
 		       		<div class="row">
 		      		    			        
 				        <div class="col-sm-2 text-center other ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Engine 1<br/><span id="engine_1_level"></span></span>
+				        	<span style="color:black;"class="btn btn-info btn-lg">
+				        	<b>
+				        	<span id="engine_1_status" style="color:rgb(184,0,0) ;"></span><br/>
+				        	Engine 1<br/><span id="engine_1_level" style="color:rgb(0, 32, 129);"></span>
+				        	</b>
+				        	</span>
 				        </div>
 				        
 				        <div class="col-sm-2 text-center col-sm-offset-8 other ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Engine 2<br/><span id="engine_2_level"></span></span>
+				          	<span style="color:black;"class="btn btn-info btn-lg">
+				          	<b>
+				          	<span id="engine_2_status" style="color:rgb(184,0,0) ;"></span><br/>
+				          	Engine 2<br/><span id="engine_2_level" style="color:rgb(0, 32, 129);"></span>
+				          	</b>
+				          	</span>
 				        </div>
 		       		</div>
 
@@ -295,12 +365,19 @@
 		       		<div class="row">
 		      		    			        
 				        <div class="col-sm-2 text-center other ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter Out 1<br/><span id="flowmeter_1_out"></span></span>
+				          	<span style="color:black;"class="btn btn-info btn-lg">
+				          	<b>
+				          	Flowmeter Out 1<br/><span id="flowmeter_1_out" style="color:rgb(0, 32, 129);"></span>
+				          	</b>
+				          	</span>
 				        </div>
 
 				        
 				        <div class="col-sm-2 text-center col-sm-offset-8 other ">
-				          	<span style="color:black;"class="btn btn-info btn-lg">Flowmeter Out 2<br/><span id="flowmeter_2_out"></span></span>
+				          	<span style="color:black;"class="btn btn-info btn-lg">
+				          	<b>
+				          	Flowmeter Out 2<br/><span id="flowmeter_2_out" style="color:rgb(0, 32, 129);"></span></b>
+				          	</span>
 				        </div>
 		       		</div>
 
