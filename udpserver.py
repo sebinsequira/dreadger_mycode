@@ -68,24 +68,32 @@ def parsedata(data):
     the function parameter should be a string 
     return type is a (devicename,level,datetime)
     """
-    data = data.strip()     # It removes all the newline character from the string
-    data = data.split(';')  # Splits the string at every ';' character
-    dictRow={}
-    dictRow['dreadger_name']       = data[0]
-    dictRow['time']                = datetime.strptime( data[2], "%d/%m/%Y %H:%M:%S")
-    dictRow['storage_tank_level']  = int(data[2])
-    dictRow['storage_tank_cap']    = data[3]
-    dictRow['service_tank_level']  = int(data[4])
-    dictRow['service_tank_cap']    = data[5]
-    dictRow['flowmeter_1_in']      = int(data[6])
-    dictRow['flowmeter_1_out']     = int(data[7])
-    dictRow['engine_1_status']     = data[8]
-    dictRow['flowmeter_2_in']      = int(data[9])
-    dictRow['flowmeter_2_out']     = int(data[10])
-    dictRow['engine_2_status']     = data[11]
+    try:
+        data = data.strip()     # It removes all the newline character from the string
+        data = data.split(';')  # Splits the string at every ';' character
+        
+        s = session()
+        
 
-    return (dictRow)
+        dictRow={}
+        dictRow['dreadger_name']       = data[0]
+        dictRow['time']                = datetime.strptime( data[1], "%d/%m/%Y %H:%M:%S")
+        dictRow['storage_tank_level']  = int(data[2])
+        dictRow['storage_tank_cap']    = data[3]
+        dictRow['service_tank_level']  = int(data[4])
+        dictRow['service_tank_cap']    = data[5]
+        dictRow['flowmeter_1_in']      = int(data[6])
+        dictRow['flowmeter_1_out']     = int(data[7])
+        dictRow['engine_1_status']     = data[8]
+        dictRow['flowmeter_2_in']      = int(data[9])
+        dictRow['flowmeter_2_out']     = int(data[10])
+        dictRow['engine_2_status']     = data[11]
 
+        s.add(dreadger(dictRow))
+        s.commit()
+        s.close()
+    except Exception as e:
+        print e
 
 ## Main function 
 ## Here the code for opening the port is written.
@@ -107,10 +115,7 @@ if __name__ == '__main__':
     while 1: #infinite loop running to see if packets are coming to the server.
         data, addr = sock.recvfrom(256) # Recieving 256 bits from the port.
         try:
-            #device, level, time = parsedata(data)
-            #ip,port = addr
-            #s = session()
-            #s.add(dreadger(device, level, time, ip))
+            parsedata(data)
             data=data.strip()
             data=data.split(';')
             for elem in data:
