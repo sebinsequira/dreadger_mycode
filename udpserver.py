@@ -57,7 +57,7 @@ class dreadger(Base):
 
 
 ##creating a mysql database object object 
-engine = create_engine('mysql://root:aaggss@localhost/dreadger')
+engine = create_engine('mysql://admin:aaggss@localhost/dreadger')
 
 # packet should be or the format given below
 # "ABC123;1000;15/9/2014 13:10"
