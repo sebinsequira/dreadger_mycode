@@ -12,10 +12,20 @@
     <meta http-equiv="refresh" content="0; url={{ url_for('home', page=1) }}" />
   {% else %}
             
-    <br/>           
+    <br/>
+    
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-info">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ message }}
+      </div>
+    {% endfor %}
+
     <div class="page-header">
         <h1 style="color:silver;">Login</h1>
     </div>
+
+
 
     <div class="container">
       <form class="form-horizontal" role="form">
