@@ -227,7 +227,8 @@ def filter(page=1,fromTime=None,toTime=None):
 			#fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
 		except ValueError as e:
 			if 'format' in str(e):
-				flash('(From, '+str(fromDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
+				flash('Error in format! Invalid Entry:- "'+str(fromDate)+'".'+\
+					'  Use "yyyy-mm-dd" format for "From Date"')
 			else:
 				flash('(From, '+str(fromDate)+'): '+str(e))
 			#print "------------>1: " + 'results= None, ' + str(len(results.items))
@@ -240,7 +241,8 @@ def filter(page=1,fromTime=None,toTime=None):
 			#toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
 		except ValueError as e:
 			if 'format' in str(e):
-				flash('(To, '+str(toDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
+				flash('Error in format! Invalid Entry:- "'+str(toDate)+'".'+\
+					'  Use "yyyy-mm-dd" format for "To Date"')
 			else:
 				flash('(To, '+str(toDate)+'): '+str(e))
 			#print "------------>2: " + 'results= None, ' + str(len(results.items))
