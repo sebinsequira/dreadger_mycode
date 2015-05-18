@@ -1,0 +1,44 @@
+
+{% extends "base.html" %}
+{% block title %}Date{% endblock %}
+
+{% block scripts %}
+
+ {{super()}}
+	
+	<script src="{{ url_for('static', filename='/js/jquery-ui.js') }}"></script>
+	
+	
+	<script>
+	   (function() {
+	      var elem = document.createElement('input');
+	      elem.setAttribute('type', 'date');
+	 
+	      if ( elem.type === 'text' ) {
+	         $('.date').datepicker({ 
+		dateFormat:'yy-mm-dd',
+		changeMonth: true,
+		changeYear: true});
+	      }
+	   })();
+ 
+	</script>
+{% endblock scripts %}
+
+{% block styles %}
+	{{super()}}
+
+	<link href="{{ url_for('static', filename='/css/jquery-ui.css') }}" rel="stylesheet">
+
+	
+{% endblock %}
+
+
+
+{% block page_content %}
+<input type="date" class="date"></input>
+<input type="date" class="date"></input>
+{% endblock %}
+
+
+

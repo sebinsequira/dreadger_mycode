@@ -153,7 +153,8 @@ class database():
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
- 
+
+"""
 @app.route('/',methods=['GET','POST'])
 def login():
 	#form = LoginForm()
@@ -172,13 +173,34 @@ def login():
 			return redirect(request.args.get('next') or url_for('home'))
 		flash ('Invalid credentials!!')
 	return render_template('login.html')
+"""
+
+
+@app.route('/',methods=['GET','POST'])
+def login():
+	#form = LoginForm()
+	if request.method == 'POST':
+		userName=request.form['username']
+		
+		if 'checkbox' in request.form:
+			checkbox = True
+		else:
+			checkbox = False
+
+		#print '--------->((('+str(userName)+')))<--------, '+ str(checkbox) + ','+ str(type(checkbox))
+		#user = User.query.filter_by(email=userName).first()
+		if True:
+			#login_user(user,checkbox)
+			return redirect(request.args.get('next') or url_for('home'))
+		flash ('Invalid credentials!!')
+	return render_template('login.html')
 
 
 @app.route ("/filter", methods=['GET', 'POST'])
 @app.route ("/filter/", methods=['GET', 'POST'])
 @app.route('/filter/<int:page>', methods=['GET', 'POST'])
 
-@login_required
+#@login_required
 def filter(page=1,fromTime=None,toTime=None):
 	#-------------Filter Page starts here--------------#  
 	
@@ -205,7 +227,8 @@ def filter(page=1,fromTime=None,toTime=None):
 			#fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
 		except ValueError as e:
 			if 'format' in str(e):
-				flash('(From, '+str(fromDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
+				flash('Error in format! Invalid Entry:- "'+str(fromDate)+'".'+\
+					'  Use "yyyy-mm-dd" format for "From Date"')
 			else:
 				flash('(From, '+str(fromDate)+'): '+str(e))
 			#print "------------>1: " + 'results= None, ' + str(len(results.items))
@@ -218,7 +241,8 @@ def filter(page=1,fromTime=None,toTime=None):
 			#toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
 		except ValueError as e:
 			if 'format' in str(e):
-				flash('(To, '+str(toDate)+'), '+"Use format: yyyy-mm-dd hh:mm:ss")
+				flash('Error in format! Invalid Entry:- "'+str(toDate)+'".'+\
+					'  Use "yyyy-mm-dd" format for "To Date"')
 			else:
 				flash('(To, '+str(toDate)+'): '+str(e))
 			#print "------------>2: " + 'results= None, ' + str(len(results.items))
@@ -285,13 +309,18 @@ def filter(page=1,fromTime=None,toTime=None):
 #########################New code
 
 @app.route ("/home", methods=['GET', 'POST'])
-@login_required
+#@login_required
 def home():
 	return render_template('home.html')
 
 ##################################
+@app.route ("/date", methods=['GET', 'POST'])
+#@login_required
+def date():
+	return render_template('datepicker.html')
+
 @app.route("/logout",methods=["GET"])
-@login_required
+#@login_required
 def logout():
 	form = LoginForm()
 	logout_user()

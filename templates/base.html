@@ -15,7 +15,7 @@
     
     <nav class="navbar navbar-inverse navbar-fixed-top" >
       <div class="container">
-      {% if current_user.is_authenticated()%}
+      
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
             <span class="icon-bar"></span>
@@ -29,7 +29,7 @@
             
             <li><a href="/home">Home</a></li>
             <li><a href="/filter">Filter</a></li>
-
+            <li><a href="/date">Date</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -39,7 +39,7 @@
                 </li>
             </ul>
         </div>
-        {% endif %}
+        
       </div>
     </nav>
 
@@ -49,12 +49,10 @@
 {% block content %}
 <div class="container">
     <br/><br/><br/>
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-    </div>
-    {% endfor %}
+    
+    
+    
+
 
     {% block page_content %}{% endblock %}
 </div>
