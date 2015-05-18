@@ -342,6 +342,8 @@ def pagination(page=1,fromTime=None,toTime=None):
 			else:
 				flash('(From, '+str(fromDate)+'): '+str(e))
 			#print "------------>1: " + 'results= None, ' + str(len(results.items))
+			flash('1. fromTime:'+str(fromTime)+', toTime: '+str(toTime))
+			flash(request.method)
 			return render_template('pagination.html',results=None,fromDate=fromDate,toDate=toDate)
 		
 
@@ -356,6 +358,8 @@ def pagination(page=1,fromTime=None,toTime=None):
 			else:
 				flash('(To, '+str(toDate)+'): '+str(e))
 			#print "------------>2: " + 'results= None, ' + str(len(results.items))
+			flash('2. fromTime:'+str(fromTime)+', toTime: '+str(toTime))
+			flash(request.method)
 			return render_template('pagination.html',results=None,fromDate=fromDate,toDate=toDate)
 		
 		#print 'from:'+str(type(fromTime))+': '+str(fromTime)
@@ -384,16 +388,22 @@ def pagination(page=1,fromTime=None,toTime=None):
 			toDate
 		except NameError:
 			#print "------------>3: " + 'results= ' + str(len(results.items))
+			flash('3. fromTime:'+str(fromTime)+', toTime: '+str(toTime))
+			flash(request.method)
 			return render_template('pagination.html',results=results,fromTime=fromTime,toTime=toTime)        # If fromDate and toDate doesn't exist, then the page is being loaded for the first time                          
 			#return "Hello"
 		else:
 			#print "------------>4: " + 'results= ' + str(len(results.items))
+			flash('4. fromTime:'+str(fromTime)+', toTime: '+str(toTime))
+			flash(request.method)
 			return render_template('pagination.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)  # To make sure the date and time data doesn't vanish when clicking accept
 			#return render_template('pagination.html',results=results)
 			#return "Hello World"
 		
 	fromTime=request.args.get('fromTime','')
 	toTime=request.args.get('toTime','')
+
+	
 	#2
 	#print '-----------------------------------------------------------'
 	
@@ -414,6 +424,8 @@ def pagination(page=1,fromTime=None,toTime=None):
 	#print 'results='+str(results)
 	#print 'request.method='+str(request.method)
 	#print '-----------------------------------------------------------'
+	flash('6.fromTime:'+str(fromTime)+', toTime: '+str(toTime))
+	flash(request.method)
 	return render_template('pagination.html',results=results,fromTime=fromTime,toTime=toTime)
 
 @app.route ("/home", methods=['GET', 'POST'])
