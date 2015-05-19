@@ -34,11 +34,12 @@ login_manager.login_view = "/"
 login_manager.init_app(app)
 
 
+
 class LoginForm(Form):
-	email=StringField('Email',validators=[Required(),Length(1,64),Email()])
-	password=PasswordField('Password',validators=[Required()])
-	remember_me = BooleanField('Keep me logged in')
-	submit = SubmitField('Login')
+    email=StringField('Email',validators=[Required(),Length(1,64),Email()])
+    password=PasswordField('Password',validators=[Required()])
+    remember_me = BooleanField('Keep me logged in')
+    submit = SubmitField('Login')
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -70,7 +71,7 @@ class dieselLevel(db.Model):
     ip = db.Column(db.String(15))
 
     def __init__(self, id,device, level,mTime,ip):
-    	#self.id=id
+        #self.id=id
         self.device = device
         self.level = level
         self.mTime = mTime
@@ -124,7 +125,7 @@ class database():
         db.drop_all()
 
     def fetchAll(self):
-        try:												# Will fail if table doesn't exist
+        try:                                                # Will fail if table doesn't exist
             data = dreadger.query.order_by(dreadger.time.desc()).all() # Select * FROM TABLE ORDER BY time
         except Exception as e:
             flash('fetchAll: '+str(e))
@@ -142,7 +143,7 @@ class database():
         
     
     def filterRange(self,fromTime,toTime,page):
-    	#print "---------------------------"
+        #print "---------------------------"
         results = dreadger.query.filter(dreadger.time <= toTime).filter(dreadger.time >= fromTime).order_by(dreadger.time.desc()).paginate(page, POSTS_PER_PAGE, False)
         #print results.__repr__()
         #print "---------------------------"
@@ -154,157 +155,157 @@ class database():
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-"""
-@app.route('/',methods=['GET','POST'])
-def login():
-	#form = LoginForm()
-	if request.method == 'POST':
-		userName=request.form['username']
-		
-		if 'checkbox' in request.form:
-			checkbox = True
-		else:
-			checkbox = False
-
-		#print '--------->((('+str(userName)+')))<--------, '+ str(checkbox) + ','+ str(type(checkbox))
-		user = User.query.filter_by(email=userName).first()
-		if user is not None and user.verify_password(request.form['password']):
-			login_user(user,checkbox)
-			return redirect(request.args.get('next') or url_for('home'))
-		flash ('Invalid credentials!!')
-	return render_template('login.html')
-"""
-
 
 @app.route('/',methods=['GET','POST'])
 def login():
-	#form = LoginForm()
-	if request.method == 'POST':
-		userName=request.form['username']
-		
-		if 'checkbox' in request.form:
-			checkbox = True
-		else:
-			checkbox = False
+    #form = LoginForm()
+    if request.method == 'POST':
+        userName=request.form['username']
+        
+        if 'checkbox' in request.form:
+            checkbox = True
+        else:
+            checkbox = False
 
-		#print '--------->((('+str(userName)+')))<--------, '+ str(checkbox) + ','+ str(type(checkbox))
-		#user = User.query.filter_by(email=userName).first()
-		if True:
-			#login_user(user,checkbox)
-			return redirect(request.args.get('next') or url_for('home'))
-		flash ('Invalid credentials!!')
-	return render_template('login.html')
+        #print '--------->((('+str(userName)+')))<--------, '+ str(checkbox) + ','+ str(type(checkbox))
+        user = User.query.filter_by(email=userName).first()
+        if user is not None and user.verify_password(request.form['password']):
+            login_user(user,checkbox)
+            return redirect(request.args.get('next') or url_for('home'))
+        flash ('Invalid credentials!!')
+    return render_template('login.html')
 
+
+""" ((Test code))
+@app.route('/',methods=['GET','POST'])
+def login():
+    #form = LoginForm()
+    if request.method == 'POST':
+        userName=request.form['username']
+        
+        if 'checkbox' in request.form:
+            checkbox = True
+        else:
+            checkbox = False
+
+        #print '--------->((('+str(userName)+')))<--------, '+ str(checkbox) + ','+ str(type(checkbox))
+        #user = User.query.filter_by(email=userName).first()
+        if True:
+            #login_user(user,checkbox)
+            return redirect(request.args.get('next') or url_for('home'))
+        flash ('Invalid credentials!!')
+    return render_template('login.html')
+"""
 
 @app.route ("/filter", methods=['GET', 'POST'])
 @app.route ("/filter/", methods=['GET', 'POST'])
 @app.route('/filter/<int:page>', methods=['GET', 'POST'])
 
-#@login_required
+@login_required
 def filter(page=1,fromTime=None,toTime=None):
 
-	
-	dbObj=database()
-	if request.method == 'POST':
-		results=None
-		fromDate=request.form['fromDate']
-		fromHour=request.form['fromHour']
-		fromMin=request.form['fromMin']
+    
+    dbObj=database()
+    if request.method == 'POST':
+        results=None
+        fromDate=request.form['fromDate']
+        fromHour=request.form['fromHour']
+        fromMin=request.form['fromMin']
 
-		toDate=request.form['toDate']
-		toHour=request.form['toHour']
-		toMin=request.form['toMin']
+        toDate=request.form['toDate']
+        toHour=request.form['toHour']
+        toMin=request.form['toMin']
 
-		#print 'From:'+ str(fromDate) +','+str(fromHour)+','+str(fromMin)
-		#print 'From:'+ str(toDate) +','+str(toHour)+','+str(toMin)
+        #print 'From:'+ str(fromDate) +','+str(fromHour)+','+str(fromMin)
+        #print 'From:'+ str(toDate) +','+str(toHour)+','+str(toMin)
 
-		fromTime= fromDate+' '+fromHour+':'+fromMin+':00'
-		toTime= toDate+' '+toHour+':'+toMin+':00'
-		
-		
-		try:
-			fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
-			#fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
-		except ValueError as e:
-			if 'format' in str(e):
-				flash('Error in format! Invalid Entry:- "'+str(fromDate)+'".'+\
-					'  Use "yyyy-mm-dd" format for "From Date"')
-			else:
-				flash('(From, '+str(fromDate)+'): '+str(e))
-			#print "------------>1: " + 'results= None, ' + str(len(results.items))
-			return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
-		
+        fromTime= fromDate+' '+fromHour+':'+fromMin+':00'
+        toTime= toDate+' '+toHour+':'+toMin+':00'
+        
+        
+        try:
+            fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
+            #fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
+        except ValueError as e:
+            if 'format' in str(e):
+                flash('Error in format! Invalid Entry:- "'+str(fromDate)+'".'+\
+                    '  Use "yyyy-mm-dd" format for "From Date"')
+            else:
+                flash('(From, '+str(fromDate)+'): '+str(e))
+            #print "------------>1: " + 'results= None, ' + str(len(results.items))
+            return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
+        
 
-		
-		try:
-			toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
-			#toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
-		except ValueError as e:
-			if 'format' in str(e):
-				flash('Error in format! Invalid Entry:- "'+str(toDate)+'".'+\
-					'  Use "yyyy-mm-dd" format for "To Date"')
-			else:
-				flash('(To, '+str(toDate)+'): '+str(e))
-			#print "------------>2: " + 'results= None, ' + str(len(results.items))
-			return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
-		
-		#print 'from:'+str(type(fromTime))+': '+str(fromTime)
-		#print 'to:'+str(type(toTime))+': '+str(toTime)
+        
+        try:
+            toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
+            #toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
+        except ValueError as e:
+            if 'format' in str(e):
+                flash('Error in format! Invalid Entry:- "'+str(toDate)+'".'+\
+                    '  Use "yyyy-mm-dd" format for "To Date"')
+            else:
+                flash('(To, '+str(toDate)+'): '+str(e))
+            #print "------------>2: " + 'results= None, ' + str(len(results.items))
+            return render_template('filter.html',results=None,fromDate=fromDate,toDate=toDate)
+        
+        #print 'from:'+str(type(fromTime))+': '+str(fromTime)
+        #print 'to:'+str(type(toTime))+': '+str(toTime)
 
-		#results=dbObj.filterRange(fromTime,toTime,page)
-		"""fromTime='2008-02-16 00:00:00'
-		toTime='2015-04-12 00:00:00'"""
-		#1
-		
+        #results=dbObj.filterRange(fromTime,toTime,page)
+        """fromTime='2008-02-16 00:00:00'
+        toTime='2015-04-12 00:00:00'"""
+        #1
+        
 
-		
-		results = dbObj.filterRange(fromTime,toTime,1)
-		#print 'fromTime='+str(fromTime)
-		#print 'toTime='+str(toTime)
-		#print 'results='+str(results)
-		#print 'request.method='+str(request.method)
-		
-		if not results:
-			results=None
+        
+        results = dbObj.filterRange(fromTime,toTime,1)
+        #print 'fromTime='+str(fromTime)
+        #print 'toTime='+str(toTime)
+        #print 'results='+str(results)
+        #print 'request.method='+str(request.method)
+        
+        if not results:
+            results=None
 
 
-		
-		try:
-			fromDate
-			toDate
-		except NameError:
-			#print "------------>3: " + 'results= ' + str(len(results.items))
-			return render_template('filter.html',results=results,fromTime=fromTime,toTime=toTime)        # If fromDate and toDate doesn't exist, then the page is being loaded for the first time                          
-			#return "Hello"
-		else:
-			#print "------------>4: " + 'results= ' + str(len(results.items))
-			return render_template('filter.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)  # To make sure the date and time data doesn't vanish when clicking accept
-			#return render_template('filter.html',results=results)
-			#return "Hello World"
-		
-	fromTime=request.args.get('fromTime','')
-	toTime=request.args.get('toTime','')
-	#2
-	#print '-----------------------------------------------------------'
-	
-	if fromTime and toTime:
-		results = dbObj.filterRange(fromTime,toTime,page)
-	else:
-		results=None
-	
-		
-	"""print "------------>5: " + 'page= '+str(page)+'results= ' ,
-				if results:
-					str(len(results.items))
-				else:
-					print 'None'"""
+        
+        try:
+            fromDate
+            toDate
+        except NameError:
+            #print "------------>3: " + 'results= ' + str(len(results.items))
+            return render_template('filter.html',results=results,fromTime=fromTime,toTime=toTime)        # If fromDate and toDate doesn't exist, then the page is being loaded for the first time                          
+            #return "Hello"
+        else:
+            #print "------------>4: " + 'results= ' + str(len(results.items))
+            return render_template('filter.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)  # To make sure the date and time data doesn't vanish when clicking accept
+            #return render_template('filter.html',results=results)
+            #return "Hello World"
+        
+    fromTime=request.args.get('fromTime','')
+    toTime=request.args.get('toTime','')
+    #2
+    #print '-----------------------------------------------------------'
+    
+    if fromTime and toTime:
+        results = dbObj.filterRange(fromTime,toTime,page)
+    else:
+        results=None
+    
+        
+    """print "------------>5: " + 'page= '+str(page)+'results= ' ,
+                if results:
+                    str(len(results.items))
+                else:
+                    print 'None'"""
 
-	#print 'fromTime='+str(fromTime)
-	#print 'toTime='+str(toTime)
-	#print 'results='+str(results)
-	#print 'request.method='+str(request.method)
-	#print '-----------------------------------------------------------'
-	return render_template('filter.html',results=results,fromTime=fromTime,toTime=toTime)
+    #print 'fromTime='+str(fromTime)
+    #print 'toTime='+str(toTime)
+    #print 'results='+str(results)
+    #print 'request.method='+str(request.method)
+    #print '-----------------------------------------------------------'
+    return render_template('filter.html',results=results,fromTime=fromTime,toTime=toTime)
 
 @app.route ("/pagination", methods=['GET', 'POST'])
 @app.route ("/pagination/", methods=['GET', 'POST'])
@@ -313,153 +314,69 @@ def filter(page=1,fromTime=None,toTime=None):
 @login_required
 def pagination(page=1,fromTime=None,toTime=None):
 
-	
-	dbObj=database()
-	if request.method == 'POST':
-		results=None
-		fromDate=request.form['fromDate']
-		fromHour=request.form['fromHour']
-		fromMin=request.form['fromMin']
+    
+    dbObj=database()
+    if request.method == 'POST':
+        results=None
+        fromDate=request.form['fromDate']
+        fromHour=request.form['fromHour']
+        fromMin=request.form['fromMin']
 
-		toDate=request.form['toDate']
-		toHour=request.form['toHour']
-		toMin=request.form['toMin']
+        toDate=request.form['toDate']
+        toHour=request.form['toHour']
+        toMin=request.form['toMin']
 
-		#print 'From:'+ str(fromDate) +','+str(fromHour)+','+str(fromMin)
-		#print 'From:'+ str(toDate) +','+str(toHour)+','+str(toMin)
-
-		fromTime= fromDate+' '+fromHour+':'+fromMin+':00'
-		toTime= toDate+' '+toHour+':'+toMin+':00'
-		
-		
-		try:
-			fromTime = datetime.strptime(fromTime, "%Y-%m-%d %H:%M:%S")
-			#fromTime = fromTime.strftime("%Y-%m-%d %H:%M:%S")
-		except ValueError as e:
-			if 'format' in str(e):
-				flash('Error in format! Invalid Entry:- "'+str(fromDate)+'".'+\
-					'  Use "yyyy-mm-dd" format for "From Date"')
-			else:
-				flash('(From, '+str(fromDate)+'): '+str(e))
-			#print "------------>1: " + 'results= None, ' + str(len(results.items))
-			flash('1. fromTime:'+str(fromTime)+', toTime: '+str(toTime))
-			flash(request.method)
-			return render_template('pagination.html',results=None,fromDate=fromDate,toDate=toDate)
-		
-
-		
-		try:
-			toTime = datetime.strptime(toTime, "%Y-%m-%d %H:%M:%S")
-			#toTime = toTime.strftime("%Y-%m-%d %H:%M:%S")
-		except ValueError as e:
-			if 'format' in str(e):
-				flash('Error in format! Invalid Entry:- "'+str(toDate)+'".'+\
-					'  Use "yyyy-mm-dd" format for "To Date"')
-			else:
-				flash('(To, '+str(toDate)+'): '+str(e))
-			#print "------------>2: " + 'results= None, ' + str(len(results.items))
-			flash('2. fromTime:'+str(fromTime)+', toTime: '+str(toTime))
-			flash(request.method)
-			return render_template('pagination.html',results=None,fromDate=fromDate,toDate=toDate)
-		
-		#print 'from:'+str(type(fromTime))+': '+str(fromTime)
-		#print 'to:'+str(type(toTime))+': '+str(toTime)
-
-		#results=dbObj.filterRange(fromTime,toTime,page)
-		"""fromTime='2008-02-16 00:00:00'
-		toTime='2015-04-12 00:00:00'"""
-		#1
-		
-
-		
-		results = dbObj.filterRange(fromTime,toTime,1)
-		#print 'fromTime='+str(fromTime)
-		#print 'toTime='+str(toTime)
-		#print 'results='+str(results)
-		#print 'request.method='+str(request.method)
-		
-		if not results:
-			results=None
+        fromTime= fromDate+' '+fromHour+':'+fromMin+':00'
+        toTime= toDate+' '+toHour+':'+toMin+':00'
+        
+        results = dbObj.filterRange(fromTime,toTime,1)
+        
+        if not results:
+            results=None
 
 
-		
-		try:
-			fromDate
-			toDate
-		except NameError:
-			#print "------------>3: " + 'results= ' + str(len(results.items))
-			flash('3. fromTime:'+str(fromTime)+', toTime: '+str(toTime))
-			flash(request.method)
-			return render_template('pagination.html',results=results,fromTime=fromTime,toTime=toTime)        # If fromDate and toDate doesn't exist, then the page is being loaded for the first time                          
-			#return "Hello"
-		else:
-			#print "------------>4: " + 'results= ' + str(len(results.items))
-			flash('4. fromTime:'+str(fromTime)+', toTime: '+str(toTime))
-			flash(request.method)
-			return render_template('pagination.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)  # To make sure the date and time data doesn't vanish when clicking accept
-			#return render_template('pagination.html',results=results)
-			#return "Hello World"
-		
-	fromTime=request.args.get('fromTime','')
-	toTime=request.args.get('toTime','')
+        flash(request.method +':- fromTime:'+str(fromTime)+', toTime: '+str(toTime))
+        return render_template('pagination.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)  # To make sure the date and time data doesn't vanish when clicking accept
+        
+    fromTime=request.args.get('fromTime','')
+    toTime=request.args.get('toTime','')
 
-	
-	#2
-	#print '-----------------------------------------------------------'
-	
-	if fromTime and toTime:
-		results = dbObj.filterRange(fromTime,toTime,page)
-	else:
-		results=None
-	
-		
-	"""print "------------>5: " + 'page= '+str(page)+'results= ' ,
-				if results:
-					str(len(results.items))
-				else:
-					print 'None'"""
+    
+    
+    if fromTime and toTime:
+        results = dbObj.filterRange(fromTime,toTime,page)
+    else:
+        results=None
 
-	#print 'fromTime='+str(fromTime)
-	#print 'toTime='+str(toTime)
-	#print 'results='+str(results)
-	#print 'request.method='+str(request.method)
-	#print '-----------------------------------------------------------'
-	flash('6.fromTime:'+str(fromTime)+', toTime: '+str(toTime))
-	flash(request.method)
-	return render_template('pagination.html',results=results,fromTime=fromTime,toTime=toTime)
+    fromDate=0
+    toDate=0
+    flash(request.method +':- fromTime:'+str(fromTime)+', toTime: '+str(toTime))
+    return render_template('pagination.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)
 
 @app.route ("/home", methods=['GET', 'POST'])
-#@login_required
+@login_required
 def home():
-	return render_template('home.html')
+    return render_template('home.html')
 
 
 @app.route ("/date", methods=['GET', 'POST'])
-#@login_required
+@login_required
 def date():
-	return render_template('datepicker.html')
+    return render_template('datepicker.html')
 
 @app.route("/logout",methods=["GET"])
-#@login_required
+@login_required
 def logout():
-	form = LoginForm()
-	logout_user()
-	flash("You've logged out!!")
-	return redirect(url_for('login'))
-
-	
-
-	
-
-
-
-
+    form = LoginForm()
+    logout_user()
+    flash("You've logged out!!")
+    return redirect(url_for('login'))
 
 
 if __name__ == "__main__":
-	#dbObj=database()
-	dbObj.db_init()
-	#dbObj.randomPacket("2015-04-01 00:00:00", "2015-04-30 00:00:00",'192.168.1.1')				
-	#db.create_all()
-	app.run(host='0.0.0.0',debug=True)
+    #dbObj=database()
+    dbObj.db_init()
+    #dbObj.randomPacket("2015-04-01 00:00:00", "2015-04-30 00:00:00",'192.168.1.1')             
+    #db.create_all()
+    app.run(host='0.0.0.0',debug=True)
 
