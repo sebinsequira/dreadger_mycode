@@ -31,12 +31,12 @@
   {% if results!=None%}
   <script type='text/javascript'>                         
         var options = {
-            currentPage: 1,
+            currentPage: {{results.page}},
             totalPages: {{results.pages}},
             numberOfPages: 10,
             pageUrl: function(type, page, current){
 
-                return "{{url_for('pagination', page=results.page+1,fromTime=fromTime,toTime=toTime)}}";
+                return "/pagination/"+page+"?fromTime={{fromTime}}&toTime={{toTime}}";
 
             }
 
@@ -50,6 +50,7 @@
 
 {% block page_content %}
 <div id="example"></div>
+
 <div class="container">
 {% for message in get_flashed_messages() %}
         <div class="alert alert-danger">
