@@ -1,6 +1,6 @@
 
 {% extends "base.html" %}
-{% block title %}Report{% endblock %}
+{% block title %}Filter{% endblock %}
 
 {% block styles %}
 {{super()}}
@@ -11,6 +11,7 @@
     color: white;
 }
 </style>
+<link href="{{url_for('.static', filename='/css/bootstrap-combined.min.css')}}" rel="stylesheet">
 {% endblock %}
 
 {% block scripts %}
@@ -30,10 +31,42 @@
         });
     });
   </script>
+
+  <!--Pagination script-->
+  <script src="{{url_for('.static', filename='/js/bootstrap-paginator.js')}}"></script> 
+
+
+  <!--Pagination Script-->
+  {% if results!=None%}
+  <script type='text/javascript'>                         
+        var options = {
+            currentPage: {{results.page}},
+            totalPages: {{results.pages}},
+            numberOfPages: 10,
+            size:'normal',
+            pageUrl: function(type, page, current){
+
+                return "/filter/"+page+"?fromTime={{fromTime}}&toTime={{toTime}}";
+
+            }
+
+        }
+
+        $('.pagination').bootstrapPaginator(options);
+    </script>
+
+    
+{% endif %}     
+    
 {% endblock scripts %}
 
+
 {% block page_content %}
+
+
+
 <div class="container">
+
 
   {% if results==None or results.page==1%} 
   
@@ -145,7 +178,7 @@ and results.pages > 1
   </div>  
 
 
-      <br/>
+     
       <div class="container">
         <div class="row">
           <div class="col-md-2">
@@ -155,22 +188,26 @@ and results.pages > 1
     </div>
     </form>
   </div>
-  <br/><br/>
+ 
 
 
 {%endif%}
 
 {% if  results != None and results.pages !=0 %}
  
-
+<div class="container">
   <div class="page-header">
     <h2 style="color:silver;">Data</h2>
   </div>
-  <br/>
+  
+  
+  <div class="pull-right">
+    <div class="pagination"></div>
+  </div>
 
   
     <div class="table-responsive">
-      <table class="table table-hover">
+      <table class="table table-hover table-bordered">
         <thead>
           <tr>
             <td>
@@ -255,57 +292,13 @@ and results.pages > 1
       {% endif %}
         </tbody>
       </table>
-      <br/>
+      
     </div>
-  
+</div> 
   <nav>
-
-    <ul class="pagination">
-      
-      {% if results.has_prev %}
-      <li>
-        <a href="{{ url_for('filter', page=results.prev_num,fromTime=fromTime,toTime=toTime) }}" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-        </li>
-      {% else %}
-      <li class="disabled">
-        <a href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      {% endif %}
-
-      {% set cntr = 1 %}
-      
-      {% for cntr in range(1,results.pages+1) %}
-        {% if cntr== results.page%}
-        	
-        	<li class="active"><a href="{{ url_for('filter', page=cntr,fromTime=fromTime,toTime=toTime) }}">{{cntr}}</a></li>
-
-        {% else %}
-        
-        	<li><a href="{{ url_for('filter', page=cntr,fromTime=fromTime,toTime=toTime) }}">{{cntr}}</a></li>
-        
-        {% endif %}
-        
-        {% set cntr = cntr+1 %}
-      
-      {% endfor %}
-      {% if results.has_next %}
-        <li>
-          <a href="{{ url_for('filter', page=results.next_num,fromTime=fromTime,toTime=toTime) }}" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      {% else %}
-      <li class="disabled">
-        <a href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            </a>
-      </li>
-      {% endif %}
-    </ul>
+   <div class="pull-right">
+      <div class="pagination"></div>
+    </div>
   </nav>
 
 

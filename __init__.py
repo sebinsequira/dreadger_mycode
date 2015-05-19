@@ -307,51 +307,7 @@ def filter(page=1,fromTime=None,toTime=None):
     #print '-----------------------------------------------------------'
     return render_template('filter.html',results=results,fromTime=fromTime,toTime=toTime)
 
-@app.route ("/pagination", methods=['GET', 'POST'])
-@app.route ("/pagination/", methods=['GET', 'POST'])
-@app.route('/pagination/<int:page>', methods=['GET', 'POST'])
 
-@login_required
-def pagination(page=1,fromTime=None,toTime=None):
-
-    
-    dbObj=database()
-    if request.method == 'POST':
-        results=None
-        fromDate=request.form['fromDate']
-        fromHour=request.form['fromHour']
-        fromMin=request.form['fromMin']
-
-        toDate=request.form['toDate']
-        toHour=request.form['toHour']
-        toMin=request.form['toMin']
-
-        fromTime= fromDate+' '+fromHour+':'+fromMin+':00'
-        toTime= toDate+' '+toHour+':'+toMin+':00'
-        
-        results = dbObj.filterRange(fromTime,toTime,1)
-        
-        if not results:
-            results=None
-
-
-        flash(request.method +':- fromTime:'+str(fromTime)+', toTime: '+str(toTime))
-        return render_template('pagination.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)  # To make sure the date and time data doesn't vanish when clicking accept
-        
-    fromTime=request.args.get('fromTime','')
-    toTime=request.args.get('toTime','')
-
-    
-    
-    if fromTime and toTime:
-        results = dbObj.filterRange(fromTime,toTime,page)
-    else:
-        results=None
-
-    fromDate=0
-    toDate=0
-    flash(request.method +':- fromTime:'+str(fromTime)+', toTime: '+str(toTime))
-    return render_template('pagination.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)
 
 @app.route ("/home", methods=['GET', 'POST'])
 @login_required
