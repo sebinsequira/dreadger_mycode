@@ -335,7 +335,7 @@ def pagination(page=1,fromTime=None,toTime=None):
             results=None
 
 
-        flash(request.method +':- fromTime:'+str(fromTime)+', toTime: '+str(toTime))
+        
         return render_template('pagination.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)  # To make sure the date and time data doesn't vanish when clicking accept
         
     fromTime=request.args.get('fromTime','')
@@ -350,7 +350,7 @@ def pagination(page=1,fromTime=None,toTime=None):
 
     fromDate=0
     toDate=0
-    flash(request.method +':- fromTime:'+str(fromTime)+', toTime: '+str(toTime))
+    
     return render_template('pagination.html',results=results,fromDate=fromDate,toDate=toDate,fromTime=fromTime,toTime=toTime)
 
 @app.route ("/home", methods=['GET', 'POST'])
