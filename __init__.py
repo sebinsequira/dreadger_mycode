@@ -315,10 +315,7 @@ def home():
     return render_template('home.html')
 
 
-@app.route ("/date", methods=['GET', 'POST'])
-@login_required
-def date():
-    return render_template('datepicker.html')
+
 
 @app.route("/logout",methods=["GET"])
 @login_required

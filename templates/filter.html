@@ -4,6 +4,7 @@
 
 {% block styles %}
 {{super()}}
+<link href="{{ url_for('static', filename='/css/jquery-ui.css') }}" rel="stylesheet">
 <style type="text/css">
 .table-hover tbody tr:hover td {
     background: rgb(45, 45, 45);
@@ -17,6 +18,25 @@
 {% block scripts %}
 
  {{super()}}
+ <!--Datepicker starts-->
+  <script src="{{ url_for('static', filename='/js/jquery-ui.js') }}"></script>
+  
+  
+  <script>
+     (function() {
+        var elem = document.createElement('input');
+        elem.setAttribute('type', 'date');
+   
+        if ( elem.type === 'text' ) {
+           $('.date').datepicker({ 
+    dateFormat:'yy-mm-dd',
+    changeMonth: true,
+    changeYear: true});
+        }
+     })();
+ 
+  </script>
+ <!--Datepicker ends-->
   <script type="text/javascript">
     $(document).on('change', 'table thead input', function() {
     var checked = $(this).is(":checked");
@@ -111,7 +131,7 @@ and results.pages > 1
           <div class="form-group">
           <label for="fromDate">Date:</label>
               
-              <input type="date" class="form-control" id="fromDate" name="fromDate" value="{{ fromDate }}" required placeholder="yyyy-mm-dd"> 
+              <input type="date" class="form-control date" id="fromDate" name="fromDate" value="{{ fromDate }}" required placeholder="yyyy-mm-dd"> 
           </div>
         </div>
           
@@ -149,7 +169,7 @@ and results.pages > 1
             <div class="form-group">
 
               <label for="toDate">Date:</label>
-              <input type="date" class="form-control" id="toDate" name="toDate"  value="{{ toDate }}" required placeholder="yyyy-mm-dd"> 
+              <input type="date" class="form-control date" id="toDate" name="toDate"  value="{{ toDate }}" required placeholder="yyyy-mm-dd"> 
             </div>
         </div>
           
@@ -199,13 +219,15 @@ and results.pages > 1
   <div class="page-header">
     <h2 style="color:silver;">Data</h2>
   </div>
-  
-  
-  <div class="pull-right">
-    <div class="pagination"></div>
   </div>
 
-  
+  <div class="container">
+    <div class="pull-right">
+      <div class="pagination"></div>
+    </div>
+  </div>
+
+  <div class="container">
     <div class="table-responsive">
       <table class="table table-hover table-bordered">
         <thead>
@@ -296,10 +318,13 @@ and results.pages > 1
     </div>
 </div> 
   <nav>
-   <div class="pull-right">
+   
+  <div class="container">
+    <div class="pull-right">
       <div class="pagination"></div>
     </div>
-  </nav>
+  </div>
+
 
 
 {%endif%}
