@@ -2,6 +2,18 @@
 {% extends "base.html" %}
 {% block title %}Report{% endblock %}
 
+{% block styles %}
+{{super()}}
+<style type="text/css">
+.table-hover tbody tr:hover td {
+    background: rgb(45, 45, 45);
+    font-weight: bold;
+    color: white;
+}
+</style>
+
+{% endblock %}
+
 
 {% block scripts %}
 
@@ -160,7 +172,7 @@ and results.pages > 1
 
   
     <div class="table-responsive">
-      <table class="table table-bordered">
+      <table class="table table-hover " id="myTbl">
         <thead>
           <tr>
             <td>
@@ -201,8 +213,10 @@ and results.pages > 1
              </td>
           </tr>
 
+
         </thead>
         <tbody>
+
           <tr>
              <td>#</td>
              <td>Time</td>
