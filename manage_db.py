@@ -151,7 +151,7 @@ class database_dredger():
             #flash('DB_init:'+str(e))
             print 'DB_init:'+str(e)
     
-    def dummyRange(self,num=50,fromDate='2014-01-01 00:00:00',toDate='2014-12-30 00:00:00'):
+    def dummyRange(self,num=2,fromDate='2014-01-01 00:00:00',toDate='2014-12-30 00:00:00'):
         """
             - Inserts a range of random values into db for time between the specified 
                 date range 
@@ -209,10 +209,10 @@ class database_dredger():
 if __name__ == '__main__':
     dredger_obj = database_dredger()
     users_obj = database_users()
-    users_obj.insertDb()
-    #dredger_obj.db_init()
+    #users_obj.insertDb()
+    dredger_obj.db_init()
     #dredger_obj.drop_all
-    #dredger_obj.dummyRange()
+    dredger_obj.dummyRange()
     #dredger_obj.fetchAll()
     #dredger_obj.filterRange('2014-08-01 00:00:00','2014-12-30 00:00:00')
 
