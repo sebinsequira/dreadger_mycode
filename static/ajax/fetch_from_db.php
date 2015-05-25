@@ -1,6 +1,6 @@
 <?php 
     $hostname_connection = "localhost"; 
-    $database_connection = "dreadger"; 
+    $database_connection = "dredger"; 
     $username_connection = "admin"; 
     $password_connection = "aaggss"; 
     $connection = mysql_connect($hostname_connection, $username_connection, $password_connection) or trigger_error(mysql_error(),E_USER_ERROR); 
