@@ -3,6 +3,13 @@
 
 {% block title %}Login{% endblock %}
 
+{% block styles %}
+  
+  {{super()}}
+  <link rel="stylesheet"
+        href="{{url_for('.static', filename='select.css')}}">
+
+{% endblock %}
 
 
 
@@ -22,7 +29,7 @@
     {% endfor %}
 
     <div class="page-header">
-        <h1 style="color:silver;">Login</h1>
+        <h1 style="color:black;">Login</h1>
     </div>
 
 
@@ -30,13 +37,13 @@
     <div class="container">
       <form class="form-horizontal" role="form">
         <div class="form-group">
-          <label class="control-label col-sm-2" for="userName" style="color:silver;">User Name:</label>
+          <label class="control-label col-sm-2" for="userName" style="color:white;">User Name:</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" id="userName" placeholder="Enter User Name"   name="username" value="{{ request.form.username }}" required>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd" style="color:silver;">Password:</label>
+          <label class="control-label col-sm-2" for="pwd" style="color:white;">Password:</label>
           <div class="col-sm-4">          
             <input type="password" class="form-control" id="pwd" placeholder="Enter password"  name="password" value="{{ request.form.password }}" required>
           </div>
@@ -44,7 +51,7 @@
         <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
             <div class="checkbox">
-              <label style="color:silver;"><input name="checkbox" type="checkbox"> Remember me</label>
+              <label style="color:white;"><input name="checkbox" type="checkbox"> Remember me</label>
             </div>
           </div>
         </div>
