@@ -8,7 +8,7 @@
 ?>
 
 <?php 
-    $dredger_name = 'dredger2';
+    $dredger_name = 'dredger1';
     $display = sprintf("select * from db where dredger_name='%s' order by time desc limit 1",mysql_real_escape_string($dredger_name)); 
     $result=mysql_query($display,$connection) or die(mysql_error()); 
     if($result == FALSE) 
