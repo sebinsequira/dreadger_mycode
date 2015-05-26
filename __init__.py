@@ -174,7 +174,7 @@ def login():
         user = User.query.filter_by(username=userName).first()
         if user is not None and user.verify_password(request.form['password']):
             login_user(user,checkbox)
-            return redirect(request.args.get('next') or url_for('home'))
+            return redirect(request.args.get('next') or url_for('select'))
         flash ('Invalid credentials!!')
     return render_template('login.html')
 
@@ -206,20 +206,6 @@ def login():
 @app.route ("/select", methods=['GET', 'POST'])
 @login_required
 def select():
-    if request.method == 'POST':
-        userName=request.form['username']
-        
-        if 'checkbox' in request.form:
-            checkbox = True
-        else:
-            checkbox = False
-
-            #print '--------->((('+str(userName)+')))<--------, '+ str(checkbox) + ','+ str(type(checkbox))
-            user = User.query.filter_by(email=userName).first()
-        if user is not None and user.verify_password(request.form['password']):
-            login_user(user,checkbox)
-            return redirect(request.args.get('next') or url_for('home'))
-        flash ('Invalid credentials!!')
     return render_template('select.html')
 
 ################# DREDGER 1 Start #############################
