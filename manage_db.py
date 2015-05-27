@@ -5,16 +5,34 @@ import random
 import time
 from sqlalchemy import event
 from sqlalchemy import DDL
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask (__name__)
 db = SQLAlchemy(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:aaggss@localhost/dreadger'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:aaggss@localhost/dredger'
+
+class users(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(64), unique=True, index=True)
+    username = db.Column(db.String(64), unique=True, index=True)
+    password_hash = db.Column(db.String(128))
+
+    def __init__(self,arg):
+        self.id = arg['id']
+        self.email = arg['email']
+        self.username = arg['username']
+        self.password_hash = arg['password_hash']
 
 
-class dreadger(db.Model):
+
+    def __repr__(self):
+        return '<username: %r Password: %r>' % (self.username,self.password_hash)
+
+class dredger(db.Model):
     __tablename__ = 'db'
     id                  = db.Column(db.Integer, primary_key=True)
-    dreadger_name       = db.Column(db.String(25))
+    dredger_name        = db.Column(db.String(25))
     time                = db.Column(db.DateTime,unique=True)  # If not unique then there will be logical errors
     storage_tank_level  = db.Column(db.Integer)
     storage_tank_cap    = db.Column(db.String(25))
@@ -28,14 +46,14 @@ class dreadger(db.Model):
     engine_2_status     = db.Column(db.String(25))
 
     def __repr__(self):
-        return self.dreadger_name+ ',' +str(self.time)+ ',' +str(self.storage_tank_level)+ ',' +\
+        return self.dredger_name+ ',' +str(self.time)+ ',' +str(self.storage_tank_level)+ ',' +\
                 self.storage_tank_cap+ ',' +str(self.service_tank_level)+ ',' +self.service_tank_cap+ ',' +\
                 str(self.flowmeter_1_in)+ ',' +str(self.flowmeter_1_out)+ ',' +self.engine_1_status+ ',' +str(self.flowmeter_2_in)+ ',' +\
                 str(self.flowmeter_2_out)+ ',' +str(self.engine_2_status)+'\n'
 
     def __init__(self, arg):
         
-        self.dreadger_name       = arg['dreadger_name']
+        self.dredger_name       = arg['dredger_name']
         self.time                = arg['time']
         self.storage_tank_level  = arg['storage_tank_level']
         self.storage_tank_cap    = arg['storage_tank_cap']
@@ -48,8 +66,28 @@ class dreadger(db.Model):
         self.flowmeter_2_out     = arg['flowmeter_2_out']
         self.engine_2_status     = arg['engine_2_status']
     
+class database_users():
+    def db_init(self):
+        db.create_all()
+    def drop_all(self):
+        db.drop_all()
+    def insertDb(self):
+        try:
+            arg={}
+            arg['id']           = 1
+            arg['email']        = 'admin@mail.com'
+            arg['username']     = 'admin'
+            arg['password_hash'] = generate_password_hash('admin')
+            
+            data=users(arg)
+            print data
+            db.session.add(data)
+            db.session.commit()
+        except Exception as e:
+            #flash('insertDb: '+str(e))
+            print 'insertDb: '+str(e)
 
-class database():
+class database_dredger():
     def db_init(self):
         db.create_all()
     def drop_all(self):
@@ -57,7 +95,7 @@ class database():
 
     def fetchAll(self):
         try:                                                # Will fail if table doesn't exist
-            data = dreadger.query.order_by(dreadger.time.desc()).all() # Select * FROM TABLE ORDER BY time
+            data = dredger.query.order_by(dredger.time.desc()).all() # Select * FROM TABLE ORDER BY time
         except Exception as e:
             #flash('fetchAll: '+str(e))
             print 'Error:' + str(e)
@@ -65,7 +103,7 @@ class database():
         
     def insertDb(self,arg):
         try:
-            data=dreadger(arg)
+            data=dredger(arg)
             db.session.add(data)
             db.session.commit()
         except Exception as e:
@@ -75,7 +113,7 @@ class database():
     
     def filterRange(self,fromTime,toTime,page):
         #print "---------------------------"
-        results = dreadger.query.filter(dreadger.time <= toTime).filter(dreadger.time >= fromTime).order_by(dreadger.time.desc()).paginate(page, POSTS_PER_PAGE, False)
+        results = dredger.query.filter(dredger.time <= toTime).filter(dredger.time >= fromTime).order_by(dredger.time.desc()).paginate(page, POSTS_PER_PAGE, False)
         
         #print results.__repr__()
         #print "---------------------------"
@@ -90,11 +128,13 @@ class database():
         service_tank_cap = ['Open','Close']
         engine_1_status = ['ON','OFF']
         engine_2_status = ['ON','OFF']
+        dredger_name = ['dredger1','dredger2']
+
 
         try:
             self.db_init()
             arg={}
-            arg['dreadger_name']        = 'dreadger_name'
+            arg['dredger_name']         = dredger_name[random.randint(0,1)]
             arg['time']                 = time
             arg['storage_tank_level']   = random.randint(1,1000)
             arg['storage_tank_cap']     = storage_tank_cap[random.randint(0,1)]
@@ -106,12 +146,12 @@ class database():
             arg['flowmeter_2_in']       = random.randint(1,1000)
             arg['flowmeter_2_out']      = random.randint(1,1000)
             arg['engine_2_status']      = engine_2_status[random.randint(0,1)]
-            dbObj.insertDb(arg)
+            dredger_obj.insertDb(arg)
         except Exception as e:
             #flash('DB_init:'+str(e))
             print 'DB_init:'+str(e)
     
-    def dummyRange(self,num=3000,fromDate='2014-01-01 00:00:00',toDate='2014-12-30 00:00:00'):
+    def dummyRange(self,num=300,fromDate='2014-01-01 00:00:00',toDate='2014-12-30 00:00:00'):
         """
             - Inserts a range of random values into db for time between the specified 
                 date range 
@@ -138,19 +178,19 @@ class database():
 
         
     def randomPacket(self,start,end,ip):
-        dbObj=database()
+        dredger_obj=database_dredger()
         i=1
         while i in range(1,10):
             device='d'
-            date=dbObj.randomDate(start,end,'%Y-%m-%d %H:%M:%S',random.random())
+            date=dredger_obj.randomDate(start,end,'%Y-%m-%d %H:%M:%S',random.random())
             level=str(random.randrange(100, 900, 2))
-            dbObj.insertDb(device,level,date,ip)
+            dredger_obj.insertDb(device,level,date,ip)
             i=i+1
     def fetchData(self):
         try:
-            results = dreadger.query.order_by(dreadger.time.desc()).first()
+            results = dredger.query.order_by(dredger.time.desc()).first()
             dictRow={}
-            dictRow['dreadger_name']        = results.dreadger_name
+            dictRow['dredger_name']        = results.dredger_name
             dictRow['time']                 = results.time
             dictRow['storage_tank_level']   = results.storage_tank_level
             dictRow['storage_tank_cap']     = results.storage_tank_cap
@@ -167,14 +207,15 @@ class database():
             #flash('insertDb: '+str(e))
             print 'deleteDb: '+str(e)
 if __name__ == '__main__':
-    dbObj = database()
-    #dbObj.db_init()
-    dbObj.dummyRange()
-    #dbObj.fetchAll()
-    #dbObj.filterRange('2014-08-01 00:00:00','2014-12-30 00:00:00')
-    """res=dbObj.fetchData()
-                for key in res:
-                    print key,'\t',res[key]"""
+    dredger_obj = database_dredger()
+    users_obj = database_users()
+    #users_obj.insertDb()
+    dredger_obj.db_init()
+    #dredger_obj.drop_all
+    dredger_obj.dummyRange()
+    #dredger_obj.fetchAll()
+    #dredger_obj.filterRange('2014-08-01 00:00:00','2014-12-30 00:00:00')
+
     
 
     

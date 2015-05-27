@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Login{% endblock %}
+
+
+
+
+{% block page_content %}
+
+  {% if current_user.is_authenticated()%}
+    <meta http-equiv="refresh" content="0; url={{ url_for('home', page=1) }}" />
+  {% else %}
+            
+    <br/>
+    
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-info">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ message }}
+      </div>
+    {% endfor %}
+
+    <div class="page-header">
+        <h1 style="color:silver;">Login</h1>
+    </div>
+
+
+
+    <div class="container">
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="userName" style="color:silver;">User Name:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="userName" placeholder="Enter User Name"   name="username" value="{{ request.form.username }}" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="pwd" style="color:silver;">Password:</label>
+          <div class="col-sm-4">          
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password"  name="password" value="{{ request.form.password }}" required>
+          </div>
+        </div>
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+              <label style="color:silver;"><input name="checkbox" type="checkbox"> Remember me</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+            <button id="loginButton" formmethod="post"  type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  {% endif %}
+
+{% endblock %}
+ 
+
+
+
+
