@@ -23,18 +23,20 @@
       	{% if current_user.is_authenticated()%}			<!--To hide navbar contents on login page-->
 	        <div class="navbar-header">
 	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	           <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>                        
+	            <span class="icon-bar"></span>                       
 	          </button>
 	          
 	        </div>
 	        <div class="collapse navbar-collapse" id="myNavbar">
-	          	<a class="navbar-brand" href="#">Dredger</a>
+
+	          	<a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='favicon.ico') }}"> Dredger</a>
 	            <ul class="nav navbar-nav navbar-right">
-	                <li>
 	                
-	                <a class="navbar-brand" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+	                
+	                <li class="navbar-brand">Welcome Sachin!</li>
+	                <li><a class="navbar-brand" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
 	                
 	                </li>
 	            </ul>

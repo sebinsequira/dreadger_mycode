@@ -11,3 +11,26 @@ body {
 table{
 	color:silver;
     }
+
+#img1{
+	background: url("/static/img/dredger 1 bw.jpg")  ;
+	display:inline-block; 
+		
+}
+
+#img1:hover {
+    background: url("/static/img/dredger 1.jpg"); 
+	display:inline-block; 
+}
+
+#img2{
+	background: url("/static/img/dredger 2 bw.jpg") ; 
+	display:inline-block; width: 400px;height: 300px;
+	
+   
+}
+
+#img2:hover {
+    background: url("/static/img/dredger 2.jpg"); 
+	display:inline-block; width: 400px;height: 300px;
+}

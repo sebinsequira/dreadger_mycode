@@ -9,12 +9,36 @@
 {% block page_content %}
 <div class="container">
 <div class="page-header">
-<h1 style="color:silver;">Select Dredger</h1>
+<h2 style="color:silver;">Please select your Dredger</h2>
 </div>
 </div>
+<!--
 <div class="container">
-<a href="/dredger1/home" class="btn btn-info btn-lg" role="button">Dredger 1</a>
-<a href="/dredger2/home" class="btn btn-info btn-lg" role="button">Dredger 2</a>
 
-<div class="container">
+	<a style="display:inline-block" href="/dredger1/home">Dredger 1<br/><img style="display:inline-block" src="{{url_for('.static', filename='/img/dredger 1.jpg')}}" class="img-responsive inline-block" width="400" height="300"/></a>
+
+	<a style="display:inline-block" href="/dredger2/home">Dredger 2<br/><img style="display:inline-block" src="{{url_for('.static', filename='/img/dredger 2.jpg')}}" class="img-responsive inline-block" width="400" height="300"/></a>
+
+</div>-->
+
+<!--<div class="row">
+	<div id="small-img" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
+	  <ul>
+	    <li><a href="/dredger1/home">Dredger 1<img style="display:inline-block" src="{{url_for('.static', filename='/img/dredger 1.jpg')}}" class="img-responsive inline-block" width="400" height="300"/></a></li>
+	    <li><a href="/dredger2/home">Dredger 2<img style="display:inline-block" src="{{url_for('.static', filename='/img/dredger 2.jpg')}}" class="img-responsive inline-block" width="400" height="300"/></a></li>
+	    
+	   </ul>            
+	</div>
+	</div>
+-->
+
+	<div  class="container center">
+	  
+	    <a  style="display:inline-block" href="/dredger1/home">Dredger 1<br/><img style="width: 400px;height: 300px;" id="img1"   class="img-responsive" /></a>
+	    
+	    <a style="display:inline-block" href="/dredger2/home">Dredger 2<br/><img  id="img2"   class="img-responsive" /></a>
+	    
+	               
+	</div>
+
 {% endblock %}

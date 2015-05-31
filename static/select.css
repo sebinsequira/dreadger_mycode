@@ -1,7 +1,7 @@
 
 body {
 	background-image: url("/static/img/dredger.jpg") ;
-	background-size : cover;
+	background-size : 100% auto;
 	 
 }
 
@@ -10,3 +10,5 @@ body {
 table{
 	color:silver;
     }
+
+
