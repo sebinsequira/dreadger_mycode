@@ -13,24 +13,32 @@ table{
     }
 
 #img1{
-	background: url("/static/img/dredger 1 bw.jpg")  ;
+	background: url("/static/img/dredger 1 scale bw.jpg") no-repeat;
 	display:inline-block; 
-		
+	height: 300px;
+	width: 400px;
+
 }
 
 #img1:hover {
-    background: url("/static/img/dredger 1.jpg"); 
-	display:inline-block; 
+    display:inline-block; 
+    height: 300px;
+	width: 400px;
+	background: url("/static/img/dredger 1 scale.jpg") ;
 }
 
 #img2{
-	background: url("/static/img/dredger 2 bw.jpg") ; 
-	display:inline-block; width: 400px;height: 300px;
+	background: url("/static/img/dredger 2 scale bw.jpg") ; 
+	height: 300px;
+	width: 400px;
+	display:inline-block; 
 	
    
 }
 
 #img2:hover {
-    background: url("/static/img/dredger 2.jpg"); 
-	display:inline-block; width: 400px;height: 300px;
+    background: url("/static/img/dredger 2 scale.jpg"); 
+    height: 300px;
+	width: 400px;
+	display:inline-block; 
 }
