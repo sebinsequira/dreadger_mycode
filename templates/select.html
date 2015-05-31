@@ -2,8 +2,18 @@
 {% extends "base.html" %}
 {% block title %}Select{% endblock %}
 
+{% block styles %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/default.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/component.css') }}" />
+{{super()}}
+	
+{%endblock%}
 
-
+{% block scripts %}
+{{super()}}
+	<script src="{{ url_for('static', filename='/js/modernizr.custom.js') }}"></script>
+	<script src="{{ url_for('static', filename='/js/toucheffects.js') }}"></script>
+{% endblock%}
 
 
 {% block page_content %}
@@ -14,21 +24,34 @@
 </div>
 
 
-	<div  class="container center">
-	<div class="row">
-	  	<div class="col-xs-3">
-	    <span  class="btn btn-info btn-sm">
-	    	<a   style="text-decoration: none;color:rgb(0, 0, 122);display:inline-block;" href="/dredger1/home">DREDGER 1<br/><img  id="img1"   class="img-responsive"/></a>
-	    </span>
-	    </div>
+	
 
-   		<div class="col-xs-3 col-xs-offset-3">
-	    <span  class="btn btn-info btn-sm">
-	    <a style="text-decoration: none;color:rgb(0, 0, 122);display:inline-block;" href="/dredger2/home">DREDGER 2<br/><img  id="img2"   class="img-responsive" /></a>
-	    </span>
-	    </div>
-	    
-	</div>
-	</div>
+	<div class="container demo-3">
+		
+		<ul class="grid cs-style-4">
+			<li>
+				<figure>
+					<div><img src="{{ url_for('static', filename='/img/dredger 1 scale.jpg') }}" ></div>
+					<figcaption>
+						<h3>DREDGER 1</h3>
+						<span>Some Text here. .</span>
+						<a href="/dredger1/home">Take a look</a>
+					</figcaption>
+				</figure>
+				
+			</li>
+			<li>
+				<figure>
+					<div><img src="{{ url_for('static', filename='/img/dredger 2 scale.jpg') }}"></div>
+					<figcaption>
+						<h3>DREDGER 2</h3>
+						<span>Some text here. .</span>
+						<a href="/dredger2/home">Take a look</a>
+					</figcaption>
+				</figure>
+			</li>
+			
+		</ul>
+	</div><!-- /container -->
 
 {% endblock %}
