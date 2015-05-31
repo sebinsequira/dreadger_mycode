@@ -209,10 +209,10 @@ class database_dredger():
 if __name__ == '__main__':
     dredger_obj = database_dredger()
     users_obj = database_users()
-    users_obj.insertDb()
+    #users_obj.insertDb()
     dredger_obj.db_init()
     #dredger_obj.drop_all
-    #dredger_obj.dummyRange()
+    dredger_obj.dummyRange()
     #dredger_obj.fetchAll()
     #dredger_obj.filterRange('2014-08-01 00:00:00','2014-12-30 00:00:00')
 
