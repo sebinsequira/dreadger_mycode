@@ -113,7 +113,7 @@ tbody:hover{
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>                        
             </button>
-            <a class="navbar-brand" href="/select"><img width="20" height="20" src="{{ url_for('static', filename='favicon.ico') }}"> Dredger</a>
+            <a class="navbar-brand" href="/select"><img width="20" height="20" src="{{ url_for('static', filename='/img/favicon.ico') }}"> Dredger</a>
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -156,7 +156,7 @@ tbody:hover{
   {% if results==None or results.page==1%} 
   
       <div class="page-header">
-        <h2 style="color:silver;">Filter</h2>
+        <h2 style="color:silver;">Dredger 1: Filter</h2>
       </div>
     
       {% for message in get_flashed_messages() %}

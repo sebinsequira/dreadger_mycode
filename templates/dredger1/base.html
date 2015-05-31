@@ -4,10 +4,10 @@
 
 {% block styles %}
 	<link rel="stylesheet"
-	      href="{{url_for('.static', filename='bg.css')}}">
+	      href="{{url_for('.static', filename='/css/bg.css')}}">
 	{{super()}}
 
-	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='/img/favicon.ico') }}">
 	<style type="text/css"></style>
 {% endblock %}
 
