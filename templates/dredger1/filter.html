@@ -10,7 +10,26 @@
     background: rgb(45, 45, 45);
     font-weight: bold;
     color: white;
+    vertical-align: middle;
 }
+thead {
+    background: rgb(45, 45, 45);
+    font-weight: bold;
+    color: white;
+    vertical-align: middle;
+}
+#style1{
+    background: rgb(45, 45, 45);
+    font-weight: bold;
+    color: white;
+    vertical-align: middle;
+}
+
+
+tbody:hover{
+  text-align: center;
+}
+
 </style>
 <link href="{{url_for('.static', filename='/css/bootstrap-combined.min.css')}}" rel="stylesheet">
 {% endblock %}
@@ -285,52 +304,52 @@ and results.pages > 1
                  <input type="checkbox" checked="checked" />Time
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />storage tank level
+                 <input type="checkbox" checked="checked" />Storage tank level
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />storage tank cap
+                 <input type="checkbox" checked="checked" />Storage tank cap
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />service tank level
+                 <input type="checkbox" checked="checked" />Service tank level
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />service tank cap
+                 <input type="checkbox" checked="checked" />Service tank cap
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />flowmeter 1 in
+                 <input type="checkbox" checked="checked" />Flowmeter 1 in
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />flowmeter 1 out
+                 <input type="checkbox" checked="checked" />Flowmeter 1 out
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />engine 1 status
+                 <input type="checkbox" checked="checked" />Engine 1 status
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />flowmeter 2 in
+                 <input type="checkbox" checked="checked" />Flowmeter 2 in
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />flowmeter 2 out
+                 <input type="checkbox" checked="checked" />Flowmeter 2 out
              </td>
              <td>
-                 <input type="checkbox" checked="checked" />engine 2 status
+                 <input type="checkbox" checked="checked" />Engine 2 status
              </td>
           </tr>
 
         </thead>
         <tbody>
-          <tr>
+          <tr  id="style1">
              <td>#</td>
              <td>Time</td>
-             <td>storage tank level</td>
-             <td>storage tank cap</td>
-             <td>service tank level</td>
-             <td>service tank cap</td>
-             <td>flowmeter 1 in</td>
-             <td>flowmeter 1 out</td>
-             <td>engine 1 status</td>
-             <td>flowmeter 2 in</td>
-             <td>flowmeter 2 out</td>
-             <td>engine 2 status</td>
+             <td>Storage tank level</td>
+             <td>Storage tank cap</td>
+             <td>Service tank level</td>
+             <td>Service tank cap</td>
+             <td>Flowmeter 1 in</td>
+             <td>Flowmeter 1 out</td>
+             <td>Engine 1 status</td>
+             <td>Flowmeter 2 in</td>
+             <td>Flowmeter 2 out</td>
+             <td>Engine 2 status</td>
           </tr>
 
       {%if results != None%}
