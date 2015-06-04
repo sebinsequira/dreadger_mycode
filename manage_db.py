@@ -151,7 +151,7 @@ class database_dredger():
             #flash('DB_init:'+str(e))
             print 'DB_init:'+str(e)
     
-    def dummyRange(self,num=300,fromDate='2014-01-01 00:00:00',toDate='2014-12-30 00:00:00'):
+    def dummyRange(self,num=2,fromDate='2014-01-01 00:00:00',toDate='2014-12-30 00:00:00'):
         """
             - Inserts a range of random values into db for time between the specified 
                 date range 

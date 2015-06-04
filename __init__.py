@@ -276,7 +276,7 @@ def dredger1_filter(page=1,fromTime=None,toTime=None):
         
 
         
-        results = dbObj.filterRange(fromTime,toTime,1,"dredger2")
+        results = dbObj.filterRange(fromTime,toTime,1,"dredger1")
         #print 'fromTime='+str(fromTime)
         #print 'toTime='+str(toTime)
         #print 'results='+str(results)
