@@ -14,14 +14,14 @@ Base = declarative_base()
 
 """
 Declaring the tables in the database
-DB name : dreadger
+DB name : dredger
 Table name : db
 """
 # Declaring the fields in the database using the ORM(Object relational mapper) library
-class dreadger(Base):
+class dredger(Base):
     __tablename__ = 'db'
     id                  = Column(Integer, primary_key=True)
-    dreadger_name       = Column(String(25))
+    dredger_name       = Column(String(25))
     time                = Column(DateTime,unique=True)  # If not unique then there will be logical errors
     storage_tank_level  = Column(Integer)
     storage_tank_cap    = Column(String(25))
@@ -35,14 +35,14 @@ class dreadger(Base):
     engine_2_status     = Column(String(25))
 
     def __repr__(self):
-        return self.dreadger_name+ ',' +str(self.time)+ ',' +str(self.storage_tank_level)+ ',' +\
+        return self.dredger_name+ ',' +str(self.time)+ ',' +str(self.storage_tank_level)+ ',' +\
                 self.storage_tank_cap+ ',' +str(self.service_tank_level)+ ',' +self.service_tank_cap+ ',' +\
                 str(self.flowmeter_1_in)+ ',' +str(self.flowmeter_1_out)+ ',' +self.engine_1_status+ ',' +str(self.flowmeter_2_in)+ ',' +\
                 str(self.flowmeter_2_out)+ ',' +str(self.engine_2_status)+'\n'
 
     def __init__(self, arg):
         
-        self.dreadger_name       = arg['dreadger_name']
+        self.dredger_name       = arg['dredger_name']
         self.time                = arg['time']
         self.storage_tank_level  = arg['storage_tank_level']
         self.storage_tank_cap    = arg['storage_tank_cap']
@@ -57,7 +57,7 @@ class dreadger(Base):
 
 
 ##creating a mysql database object object 
-engine = create_engine('mysql://admin:aaggss@localhost/dreadger')
+engine = create_engine('mysql://admin:aaggss@localhost/dredger')
 
 # packet should be or the format given below
 # "ABC123;1000;15/9/2014 13:10"
@@ -76,7 +76,7 @@ def parsedata(data):
         
 
         dictRow={}
-        dictRow['dreadger_name']       = data[0]
+        dictRow['dredger_name']       = data[0]
         dictRow['time']                = datetime.strptime( data[1], "%d/%m/%Y %H:%M:%S")
         dictRow['storage_tank_level']  = int(data[2])
         dictRow['storage_tank_cap']    = data[3]
@@ -89,7 +89,7 @@ def parsedata(data):
         dictRow['flowmeter_2_out']     = int(data[10])
         dictRow['engine_2_status']     = data[11]
 
-        s.add(dreadger(dictRow))
+        s.add(dredger(dictRow))
         s.commit()
         s.close()
     except Exception as e:
