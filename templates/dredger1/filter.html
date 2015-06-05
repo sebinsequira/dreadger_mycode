@@ -34,7 +34,9 @@ tbody {
 
 
 </style>
+
 <link href="{{url_for('.static', filename='/css/bootstrap-combined.min.css')}}" rel="stylesheet">
+
 {% endblock %}
 
 {% block scripts %}
@@ -43,7 +45,9 @@ tbody {
  <!--Datepicker starts-->
   <script src="{{ url_for('static', filename='/js/jquery-ui.js') }}"></script>
   
-  
+
+
+
   <script>
      (function() {
         var elem = document.createElement('input');
@@ -59,6 +63,16 @@ tbody {
  
   </script>
  <!--Datepicker ends-->
+ 
+ <!--Tooltip-->
+ 
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+  </script>
+
+ <!--Show/Hide table td-->
   <script type="text/javascript">
     $(document).on('change', 'table thead input', function() {
     var checked = $(this).is(":checked");
@@ -363,22 +377,77 @@ and results.pages > 1
           {% set cntr = 1 %}
           
           {% for result in results.items %}
-          
-          
-          
+       
           <tr>
-            <td >{{ (results.page-1)* results.per_page +cntr }}</td>
-            <td >{{ result.time }}</td>
-            <td >{{ result.storage_tank_level}}</td>
-            <td >{{ result.storage_tank_cap}}</td>
-            <td >{{ result.service_tank_level}}</td>
-            <td >{{ result.service_tank_cap}}</td>
-            <td >{{ result.flowmeter_1_in}}</td>
-            <td >{{ result.flowmeter_1_out}}</td>
-            <td >{{ result.engine_1_status}}</td>
-            <td >{{ result.flowmeter_2_in}}</td>
-            <td >{{ result.flowmeter_2_out}}</td>
-            <td >{{ result.engine_2_status}}</td>
+            <td >
+
+              {{ (results.page-1)* results.per_page +cntr }}
+
+            </td>
+            
+            <td  class="test" href="#" data-toggle="tooltip" data-placement="top" title="Time"data-container="body" >
+
+              {{ result.time }}
+            
+            </td>
+
+            <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Storage Tank Level" data-container="body">
+              
+              {{ result.storage_tank_level}}
+
+            </td>
+
+            <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Storage Tank Cap" data-container="body">
+
+              {{ result.storage_tank_cap}}
+
+              </td>
+
+            <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Service Tank Level" data-container="body">
+
+              {{ result.service_tank_level}}
+
+            </td>
+
+            <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Service Tank Cap" data-container="body">
+
+              {{ result.service_tank_cap}}
+
+            </td>
+
+            <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Flowmeter 1 In" data-container="body" >
+
+              {{ result.flowmeter_1_in}}
+
+            </td>
+
+            <td  class="test" href="#" data-toggle="tooltip" data-placement="top" title="Flowmeter 1 Out" data-container="body">
+
+              {{ result.flowmeter_1_out}}
+
+            </td>
+
+            <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Engine 1 Status" data-container="body">
+
+              {{ result.engine_1_status}}
+
+            </td>
+
+            <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Flowmeter 2 In" data-container="body">
+
+              {{ result.flowmeter_2_in}}
+
+            </td>
+
+            <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Flowmeter 2 Out" data-container="body">
+
+              {{ result.flowmeter_2_out}}
+
+            </td>
+            
+            <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Engine 2 Status" data-container="body">
+              {{ result.engine_2_status}}
+            </td>
 
           </tr>
           {% set cntr = cntr+1 %}
