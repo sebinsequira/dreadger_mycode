@@ -43,7 +43,9 @@ tbody {
  <!--Datepicker starts-->
   <script src="{{ url_for('static', filename='/js/jquery-ui.js') }}"></script>
   
-  
+
+
+
   <script>
      (function() {
         var elem = document.createElement('input');
@@ -59,6 +61,16 @@ tbody {
  
   </script>
  <!--Datepicker ends-->
+ 
+ <!--Tooltip-->
+ 
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+  </script>
+
+ <!--Show/Hide table td-->
   <script type="text/javascript">
     $(document).on('change', 'table thead input', function() {
     var checked = $(this).is(":checked");
@@ -101,6 +113,7 @@ tbody {
 {% endif %}     
     
 {% endblock scripts %}
+
 
 {% block navbar %}
    
