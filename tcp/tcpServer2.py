@@ -23,7 +23,7 @@ while 1:
                 data = conn.recv(1024)
                 if data:
                     print 'Client: '+ data
-                    conn.send(data.upper())
+                    
             except Exception as e:
                 print e
                 break                   # Break and wait for new conn, if dummy send fails
