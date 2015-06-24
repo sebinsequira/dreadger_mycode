@@ -19,7 +19,7 @@ while 1:
         
         while 1:
             try:
-                conn.send('ACK_FROM SERVER')          #Dummy send to make sure that connection is correct
+                conn.send('ACK_FROM_SERVER')          #Dummy send to make sure that connection is correct
                 data = conn.recv(1024)
                 if data:
                     print 'Client: '+ data
