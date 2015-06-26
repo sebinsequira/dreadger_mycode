@@ -1,7 +1,7 @@
 import socket
 import time
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, create_engine
+"""from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, create_engine
 from sqlalchemy.ext.declarative import declarative_base 
 from sqlalchemy.orm import sessionmaker 
 from datetime import datetime
@@ -55,8 +55,43 @@ class dredger(Base):
         self.flowmeter_2_out     = arg['flowmeter_2_out']
         self.engine_2_status     = arg['engine_2_status']
         self.error_code          = arg['error_code']
+"""
+from sqlalchemy import *
+from datetime import datetime as dt
+
+db = create_engine('mysql+mysqlconnector://admin:aaggss@localhost/dredger')
+#FUll- PAth : sqlite:////tmp/tutorial/joindemo.db
+# sudo apt-get install python3-mysql.connector
 
 
+metadata = MetaData(db)
+
+
+backfill = Table('backfill', metadata, autoload=True)
+
+
+
+
+def insertDb(self,arg):
+    try:
+        i = backfill.insert()
+        i.execute(dredger_name = arg['dredger_name'],
+        time                = arg['time'],                  
+        storage_tank_level  = arg['storage_tank_level'],
+        storage_tank_cap    = arg['storage_tank_cap'],
+        service_tank_level  = arg['service_tank_level'],
+        service_tank_cap    = arg['service_tank_cap'],
+        flowmeter_1_in      = arg['flowmeter_1_in'],
+        flowmeter_1_out     = arg['flowmeter_1_out'],
+        engine_1_status     = arg['engine_1_status'],
+        flowmeter_2_in      = arg['flowmeter_2_in'],
+        flowmeter_2_out     = arg['flowmeter_2_out'],
+        engine_2_status     = arg['engine_2_status'],
+        error_code          = arg['error_code'],
+
+        )
+    except Exception as e:
+        print ('insertDb: '+str(e))
 
 
 def parsedata(data):
@@ -87,9 +122,10 @@ def parsedata(data):
         dictRow['engine_2_status']     = data[11]
         dictRow['error_code']          = data[12]
 
-        s.add(dredger(dictRow))
-        s.commit()
-        s.close()
+        """s.add(dredger(dictRow))
+                                s.commit()
+                                s.close()"""
+        insertDb(dictRow)
     except Exception as e:
         print e
 
