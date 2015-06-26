@@ -127,7 +127,7 @@ def parsedata(data):
                                 s.close()"""
         insertDb(dictRow)
     except Exception as e:
-        print e
+        print (e)
 
 ## Main function 
 ## Here the code for opening the port is written.
@@ -141,8 +141,8 @@ if __name__ == '__main__':
     #s.settimeout(TIMEOUT)
     s.bind((HOST, PORT))
     s.listen(1)  
-    session = sessionmaker() 
-    session.configure(bind=engine)
+    #session = sessionmaker() 
+    #session.configure(bind=engine)
 
     while 1:
         try:
@@ -155,13 +155,13 @@ if __name__ == '__main__':
                     data = conn.recv(1024)
 
                     if data:
-                        print 'Client: '+ data
+                        print ('Client: '+ data)
                         parsedata(data)
                         
                 except Exception as e:
-                    print e
+                    print (e)
                     break                   # Break and wait for new conn, if dummy send fails
 
         except socket.timeout:
-            print "Timeout!!\nConnection lost. Listening for a new controller."
+            print ("Timeout!!\nConnection lost. Listening for a new controller.")
             
