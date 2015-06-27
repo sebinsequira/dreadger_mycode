@@ -2,7 +2,7 @@ import socket
 import time
 import sys
 from sqlalchemy import *
-from datetime import datetime as dt
+from datetime import datetime
 
 db = create_engine('mysql+mysqldb://admin:aaggss@localhost/dredger')
 
