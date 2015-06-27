@@ -49,7 +49,7 @@ def parsedata(data):
 
         dictRow={}
         dictRow['dredger_name']       = data[0]
-        dictRow['time']                = datetime.strptime( data[1], "%d/%m/%Y %H:%M:%S")
+        dictRow['time']                = datetime.strptime( data[1], "%Y-%m-%d %H:%M:%S")
         dictRow['storage_tank_level']  = int(data[2])
         dictRow['storage_tank_cap']    = data[3]
         dictRow['service_tank_level']  = int(data[4])
