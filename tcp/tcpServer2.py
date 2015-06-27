@@ -15,7 +15,7 @@ backfill = Table('db', metadata, autoload=True)
 
 
 
-def insertDb(self,arg):
+def insertDb(arg):
     try:
         i = backfill.insert()
         i.execute(dredger_name = arg['dredger_name'],
