@@ -9,27 +9,23 @@ db.echo = True  					# Print SQL for each SQLAlchemy instruction
 metadata = MetaData(db)
 
 
+def table_create():
+    table = Table('db', metadata,
+    Column('id',Integer, primary_key=True),
+    Column('dredger_name',String(25)),
+    Column('time',DateTime,unique=True),  # If not unique then there will be logical errors
+    Column('storage_tank_level',Integer),
+    Column('storage_tank_cap',String(25)),
+    Column('service_tank_level',Integer),
+    Column('service_tank_cap',String(25)),
+    Column('flowmeter_1_in',Integer),
+    Column('flowmeter_1_out',Integer),
+    Column('engine_1_status',String(25)),
+    Column('flowmeter_2_in',Integer),
+    Column('flowmeter_2_out',Integer),
+    Column('engine_2_status',String(25)),
+    Column('error_code',String(25))
+    )
 
-
-
-class backfill_manage():
-    def table_create(self):
-        backfill = Table('db', metadata,
-        Column('id',Integer, primary_key=True),
-        Column('dredger_name',String(25)),
-        Column('time',DateTime,unique=True),  # If not unique then there will be logical errors
-        Column('storage_tank_level',Integer),
-        Column('storage_tank_cap',String(25)),
-        Column('service_tank_level',Integer),
-        Column('service_tank_cap',String(25)),
-        Column('flowmeter_1_in',Integer),
-        Column('flowmeter_1_out',Integer),
-        Column('engine_1_status',String(25)),
-        Column('flowmeter_2_in',Integer),
-        Column('flowmeter_2_out',Integer),
-        Column('engine_2_status',String(25)),
-        Column('error_code',String(25))
-        )
-
-        backfill.create()
+    table.create()
 
