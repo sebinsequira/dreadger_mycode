@@ -5,8 +5,6 @@ from sqlalchemy import *
 from datetime import datetime as dt
 
 db = create_engine('mysql+mysqldb://admin:aaggss@localhost/dredger')
-#FUll- PAth : sqlite:////tmp/tutorial/joindemo.db
-# sudo apt-get install python3-mysql.connector
 
 
 metadata = MetaData(db)
@@ -48,9 +46,6 @@ def parsedata(data):
     try:
         data = data.strip()     # It removes all the newline character from the string
         data = data.split(';')  # Splits the string at every ';' character
-        
-        s = session()
-        
 
         dictRow={}
         dictRow['dredger_name']       = data[0]
@@ -67,15 +62,11 @@ def parsedata(data):
         dictRow['engine_2_status']     = data[11]
         dictRow['error_code']          = data[12]
 
-        """s.add(dredger(dictRow))
-                                s.commit()
-                                s.close()"""
+        
         insertDb(dictRow)
     except Exception as e:
         print e
 
-## Main function 
-## Here the code for opening the port is written.
 if __name__ == '__main__':
     HOST = ''              
     PORT = 5000             
@@ -83,12 +74,9 @@ if __name__ == '__main__':
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    #s.settimeout(TIMEOUT)
     s.bind((HOST, PORT))
     s.listen(1)  
-    #session = sessionmaker() 
-    #session.configure(bind=engine)
-
+    
     while 1:
         try:
             conn, addr = s.accept()         # Blocking statement, waits for a connection
