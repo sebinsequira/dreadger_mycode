@@ -24,7 +24,9 @@ def table_create():
     Column('flowmeter_2_in',Integer),
     Column('flowmeter_2_out',Integer),
     Column('engine_2_status',String(25)),
-    Column('error_code',String(25))
+    Column('error_other',String(25)),
+    Column('error_gsm',String(25)),
+    Column('error_gsm_timeout',String(25))
     )
 
     table.create()
