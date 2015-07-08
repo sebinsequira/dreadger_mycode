@@ -4,6 +4,14 @@ import sys
 from sqlalchemy import *
 from datetime import datetime
 
+import logging
+logger = logging.getLogger('serverLog')
+hdlr = logging.FileHandler('serverLog.log')
+formatter = logging.Formatter('%(asctime)s\t%(message)s',"%Y-%m-%d %H:%M:%S")
+hdlr.setFormatter(formatter)
+logger.addHandler(hdlr) 
+logger.setLevel(logging.WARNING)
+
 db = create_engine('mysql+mysqldb://admin:aaggss@localhost/dredger')
 
 
@@ -38,6 +46,7 @@ def insertDb(arg):
 
         )
     except Exception as e:
+        logger.error('insertDb\t'+str(e))
         print 'insertDb: '+str(e)
 
 
@@ -72,6 +81,7 @@ def parsedata(data):
         
         insertDb(dictRow)
     except Exception as e:
+        logger.error('parsedata\t'+str(e))
         print e
 
 if __name__ == '__main__':
