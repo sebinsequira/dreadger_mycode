@@ -1,16 +1,9 @@
-import socket
-import time
-import sys
+import SocketServer
 from sqlalchemy import *
 from datetime import datetime
 
 import logging
-logger = logging.getLogger('serverLog')
-hdlr = logging.FileHandler('serverLog.log')
-formatter = logging.Formatter('%(asctime)s\t%(message)s',"%Y-%m-%d %H:%M:%S")
-hdlr.setFormatter(formatter)
-logger.addHandler(hdlr) 
-logger.setLevel(logging.WARNING)
+
 
 db = create_engine('mysql+mysqldb://admin:aaggss@localhost/dredger')
 
@@ -18,14 +11,30 @@ db = create_engine('mysql+mysqldb://admin:aaggss@localhost/dredger')
 metadata = MetaData(db)
 
 
-backfill = Table('db', metadata, autoload=True)
+table = Table('db', metadata, autoload=True)
 
+class MyTCPHandler(SocketServer.BaseRequestHandler):
+    """
+    The RequestHandler class for our server.
 
+    It is instantiated once per connection to the server, and must
+    override the handle() method to implement communication to the
+    client.
+    """
+
+    def handle(self):
+        # self.request is the TCP socket connected to the client
+        self.data = self.request.recv(1024).strip()
+        print 'Client: '+ self.data
+        parsedata(self.data)
+        
+        # just send back the same data, but upper-cased
+        self.request.sendall("ACK_FROM_SERVER")
 
 
 def insertDb(arg):
     try:
-        i = backfill.insert()
+        i = table.insert()
         i.execute(dredger_name = arg['dredger_name'],
         time                = arg['time'],                  
         storage_tank_level  = arg['storage_tank_level'],
@@ -42,11 +51,11 @@ def insertDb(arg):
         error_main          = arg['error_main'],
         error_timeout       = arg['error_timeout'],
         error_unknown       = arg['error_unknown'],
-
-
         )
+
     except Exception as e:
         logger.error('insertDb\t'+str(e))
+        logger.error('data:\t\t'+str(arg))
         print 'insertDb: '+str(e)
 
 
@@ -59,9 +68,9 @@ def parsedata(data):
     try:
         data = data.strip()     # It removes all the newline character from the string
         data = data.split(';')  # Splits the string at every ';' character
-
+        print "DATA: "+str(data)
         dictRow={}
-        dictRow['dredger_name']       = data[0]
+        dictRow['dredger_name']        = data[0]
         dictRow['time']                = datetime.strptime( data[1], "%Y-%m-%d %H:%M:%S")
         dictRow['storage_tank_level']  = int(data[2])
         dictRow['storage_tank_cap']    = data[3]
@@ -82,36 +91,31 @@ def parsedata(data):
         insertDb(dictRow)
     except Exception as e:
         logger.error('parsedata\t'+str(e))
+        logger.error('data:\t\t'+str(data))
         print e
 
 if __name__ == '__main__':
     HOST = ''              
     PORT = 5000             
 
-
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    s.bind((HOST, PORT))
-    s.listen(1)  
+    logger      = logging.getLogger('serverLog')
+    hdlr        = logging.FileHandler('serverLog.log')
+    formatter   = logging.Formatter('%(asctime)s\t%(message)s',"%Y-%m-%d %H:%M:%S")
     
-    while 1:
-        try:
-            conn, addr = s.accept()         # Blocking statement, waits for a connection
+    hdlr.setFormatter(formatter)
+    logger.addHandler(hdlr) 
+    logger.setLevel(logging.WARNING)
 
-            
-            while 1:
-                try:
-                    conn.send('ACK_FROM_SERVER')          #Dummy send to make sure that connection is correct
-                    data = conn.recv(1024)
 
-                    if data:
-                        print 'Client: '+ data
-                        parsedata(data)
-                        
-                except Exception as e:
-                    print e
-                    break                   # Break and wait for new conn, if dummy send fails
+    HOST, PORT = "", 5000
 
-        except socket.timeout:
-            print "Timeout!!\nConnection lost. Listening for a new controller."
+    SocketServer.TCPServer.allow_reuse_address = True
+    # Create the server, binding to localhost on port 9999
+    server = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
+
+    # Activate the server; this will keep running until you
+    # interrupt the program with Ctrl-C
+    server.serve_forever()  
+    
+    
             
