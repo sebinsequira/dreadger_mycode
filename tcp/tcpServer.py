@@ -54,8 +54,11 @@ def insertDb(arg):
         )
 
     except Exception as e:
-        logger.error('insertDb\t'+str(e))
-        logger.error('data:\t\t'+str(arg))
+        if 'Duplicate entry' in str(e):
+            logger.error('insertDb\t'+"Duplicate entry for time: "+\
+                str(arg['time'])+'\n\t\t\t'+'data:\t\t'+str(arg)+'\n')
+        else:
+            logger.error('insertDb\t'+str(e)+'\n')
         print 'insertDb: '+str(e)
 
 
@@ -90,8 +93,8 @@ def parsedata(data):
         
         insertDb(dictRow)
     except Exception as e:
-        logger.error('parsedata\t'+str(e))
-        logger.error('data:\t\t'+str(data))
+        logger.error('parsedata\t'+str(e)+'\n\t\t\t'+\
+            'data:\t\t'+str(data)+'\n')
         print e
 
 if __name__ == '__main__':
