@@ -29,7 +29,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
         parsedata(self.data)
         
         # just send back the same data, but upper-cased
-        self.request.sendall("ACK_FROM_SERVER")
+        #self.request.sendall("ACK_FROM_SERVER")
 
 
 def insertDb(arg):
