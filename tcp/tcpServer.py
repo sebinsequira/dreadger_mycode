@@ -71,7 +71,6 @@ def parsedata(data):
     try:
         data = data.strip()     # It removes all the newline character from the string
         data = data.split(';')  # Splits the string at every ';' character
-        
         dictRow={}
         dictRow['dredger_name']        = data[0]
         dictRow['time']                = datetime.strptime( data[1], "%Y-%m-%d %H:%M:%S")
