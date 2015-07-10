@@ -111,7 +111,7 @@ if __name__ == '__main__':
 
                     if data:
                         print 'Client: '+ data
-                        #parsedata(data)
+                        parsedata(data)
                         
                 except Exception as e:
                     print e
