@@ -5,8 +5,8 @@ from sqlalchemy import *
 from datetime import datetime
 
 import logging
-logger = logging.getLogger('serverLog')
-hdlr = logging.FileHandler('serverLog.log')
+logger = logging.getLogger('serverLog2')
+hdlr = logging.FileHandler('serverLog2.log')
 formatter = logging.Formatter('%(asctime)s\t%(message)s',"%Y-%m-%d %H:%M:%S")
 hdlr.setFormatter(formatter)
 logger.addHandler(hdlr) 
@@ -46,7 +46,11 @@ def insertDb(arg):
 
         )
     except Exception as e:
-        logger.error('insertDb\t'+str(e))
+        if 'Duplicate entry' in str(e):
+            logger.error('insertDb\t'+"Duplicate entry for time: "+\
+                str(arg['time'])+'\n\t\t\t'+'data:\t\t'+str(arg)+'\n')
+        else:
+            logger.error('insertDb\t'+str(e)+'\n')
         print 'insertDb: '+str(e)
 
 
@@ -81,7 +85,8 @@ def parsedata(data):
         
         insertDb(dictRow)
     except Exception as e:
-        logger.error('parsedata\t'+str(e))
+        logger.error('parsedata\t'+str(e)+'\n\t\t\t'+\
+            'data:\t\t'+str(data)+'\n')
         print e
 
 if __name__ == '__main__':
