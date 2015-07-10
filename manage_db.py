@@ -21,7 +21,6 @@ def table_create():
      error_main VARCHAR(20),\
      error_timeout VARCHAR(20),\
      error_unknown VARCHAR(20),\
-     PRIMARY KEY (id),'\
-     )
+     PRIMARY KEY (id)')
 
 table_create()
