@@ -1,0 +1,54 @@
+2015-07-09 11:23:36	insertDb	Duplicate entry for time: 2015-07-06 10:04:25
+			data:		{'flowmeter_1_in': 0, 'error_main': '0x1e', 'service_tank_cap': 'Close', 'storage_tank_cap': 'Close', 'engine_2_status': 'Off', 'error_gsm': '0x0', 'flowmeter_1_out': 0, 'service_tank_level': 0, 'flowmeter_2_out': 0, 'engine_1_status': 'Off', 'error_unknown': '0x0', 'time': datetime.datetime(2015, 7, 6, 10, 4, 25), 'dredger_name': 'dredger1', 'error_timeout': '0x0', 'flowmeter_2_in': 0, 'storage_tank_level': 0}
+
+2015-07-09 11:24:16	insertDb	Duplicate entry for time: 2015-07-06 10:04:25
+			data:		{'flowmeter_1_in': 0, 'error_main': '0x1e', 'service_tank_cap': 'Close', 'storage_tank_cap': 'Close', 'engine_2_status': 'Off', 'error_gsm': '0x0', 'flowmeter_1_out': 0, 'service_tank_level': 0, 'flowmeter_2_out': 0, 'engine_1_status': 'Off', 'error_unknown': '0x0', 'time': datetime.datetime(2015, 7, 6, 10, 4, 25), 'dredger_name': 'dredger1', 'error_timeout': '0x0', 'flowmeter_2_in': 0, 'storage_tank_level': 0}
+
+2015-07-09 11:32:39	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 11:35:20	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 11:37:30	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 11:37:44	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 11:38:26	insertDb	Duplicate entry for time: 2015-07-06 10:04:37
+			data:		{'flowmeter_1_in': 0, 'error_main': '0x1e', 'service_tank_cap': 'Close', 'storage_tank_cap': 'Close', 'engine_2_status': 'Off', 'error_gsm': '0x0', 'flowmeter_1_out': 0, 'service_tank_level': 0, 'flowmeter_2_out': 0, 'engine_1_status': 'Off', 'error_unknown': '0x0', 'time': datetime.datetime(2015, 7, 6, 10, 4, 37), 'dredger_name': 'dredger1', 'error_timeout': '0x0', 'flowmeter_2_in': 0, 'storage_tank_level': 0}
+
+2015-07-09 11:57:16	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 12:01:33	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 12:07:52	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 12:21:47	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 12:22:50	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 12:52:12	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 14:04:00	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 14:09:35	insertDb	Duplicate entry for time: 2015-07-09 19:38:24
+			data:		{'flowmeter_1_in': 399, 'error_main': '0x4', 'service_tank_cap': 'Close', 'storage_tank_cap': 'Open', 'engine_2_status': 'On', 'error_gsm': '0x8', 'flowmeter_1_out': 351, 'service_tank_level': 0, 'flowmeter_2_out': 22, 'engine_1_status': 'Off', 'error_unknown': '0x0', 'time': datetime.datetime(2015, 7, 9, 19, 38, 24), 'dredger_name': 'dredger1', 'error_timeout': '0x0', 'flowmeter_2_in': 336, 'storage_tank_level': 0}
+
+2015-07-09 15:19:38	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 15:24:21	parsedata	list index out of range
+			data:		['']
+
+2015-07-09 15:25:09	parsedata	list index out of range
+			data:		['']
+
