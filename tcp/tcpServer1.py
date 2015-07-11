@@ -26,7 +26,8 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
         # self.request is the TCP socket connected to the client
         self.data = self.request.recv(1024).strip()
         print 'Client: '+ self.data
-        parsedata(self.data)
+        if len(self.data)>1:
+            parsedata(self.data)
         
         # just send back the same data, but upper-cased
         #self.request.sendall("ACK_FROM_SERVER")
@@ -117,6 +118,8 @@ if __name__ == '__main__':
 
     # Activate the server; this will keep running until you
     # interrupt the program with Ctrl-C
+    print '\t\tINFO\t\t'+"Starting Server\n\n"
+    logger.error('\t\tINFO\t\t'+'Starting Server\n\n')
     server.serve_forever()  
     
     
