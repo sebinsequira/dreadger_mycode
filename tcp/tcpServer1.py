@@ -27,6 +27,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
         self.data = self.request.recv(1024).strip()
         logger.info("Data: "+self.data)
         print 'Client: '+ self.data
+	logger.info('Client: '+ self.data)
         if len(self.data)>1:
             parsedata(self.data)
         
@@ -102,8 +103,8 @@ if __name__ == '__main__':
     HOST = ''              
     PORT = 5000             
 
-    logger      = logging.getLogger('serverLog1')
-    hdlr        = logging.FileHandler('serverLog1.log')
+    logger      = logging.getLogger('/home/ubuntu/dreadger_mycode/tcp/serverLog1')
+    hdlr        = logging.FileHandler('/home/ubuntu/dreadger_mycode/tcp/serverLog1.log')
     formatter   = logging.Formatter('%(asctime)s\t%(message)s',"%Y-%m-%d %H:%M:%S")
     
     hdlr.setFormatter(formatter)
