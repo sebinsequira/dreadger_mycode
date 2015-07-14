@@ -55,7 +55,7 @@ def insertDb(arg):
         error_timeout       = arg['error_timeout'],
         error_unknown       = arg['error_unknown'],
         )
-        logger.info("Packet: "+arg['time'])
+        logger.info("Packet: "+str(arg['time']))
     except Exception as e:
         if 'Duplicate entry' in str(e):
             logger.error('insertDb\t'+"Duplicate entry for time: "+\
