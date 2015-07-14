@@ -1,3 +1,792 @@
 2015-07-13 13:11:12			INFO		Starting Server
 
 
+2015-07-13 13:14:31			INFO		Starting Server
+
+
+2015-07-13 13:37:58			INFO		Starting Server
+
+
+2015-07-13 14:00:01			INFO		Starting Server
+
+
+2015-07-13 15:00:02			INFO		Starting Server
+
+
+2015-07-13 16:00:02			INFO		Starting Server
+
+
+2015-07-13 17:00:01			INFO		Starting Server
+
+
+2015-07-13 18:00:01			INFO		Starting Server
+
+
+2015-07-13 19:00:01			INFO		Starting Server
+
+
+2015-07-13 20:00:02			INFO		Starting Server
+
+
+2015-07-13 21:00:02			INFO		Starting Server
+
+
+2015-07-13 22:00:02			INFO		Starting Server
+
+
+2015-07-13 23:00:01			INFO		Starting Server
+
+
+2015-07-14 00:00:02			INFO		Starting Server
+
+
+2015-07-14 01:00:02			INFO		Starting Server
+
+
+2015-07-14 02:00:02			INFO		Starting Server
+
+
+2015-07-14 03:00:01			INFO		Starting Server
+
+
+2015-07-14 04:00:01			INFO		Starting Server
+
+
+2015-07-14 05:00:02			INFO		Starting Server
+
+
+2015-07-14 06:00:02			INFO		Starting Server
+
+
+2015-07-14 07:00:02			INFO		Starting Server
+
+
+2015-07-14 08:00:02			INFO		Starting Server
+
+
+2015-07-14 09:00:01			INFO		Starting Server
+
+
+2015-07-14 10:00:01			INFO		Starting Server
+
+
+2015-07-14 11:00:02			INFO		Starting Server
+
+
+2015-07-14 12:00:02			INFO		Starting Server
+
+
+2015-07-14 12:00:31	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:01:17	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:03:24	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:04:10	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:04:57	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:05:42	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:06:28	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:07:14	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:07:59	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:08:45	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:09:30	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:10:02			INFO		Starting Server
+
+
+2015-07-14 12:10:15	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:11:00	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:11:47	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:12:33	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:13:19	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:14:04	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:14:49	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:15:38	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:16:24	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:17:11	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:17:55	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:18:42	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:19:29	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:20:01			INFO		Starting Server
+
+
+2015-07-14 12:20:14	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:21:00	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:21:47	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:22:33	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:23:18	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:24:04	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:24:49	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:25:34	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:26:19	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:27:05	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:27:50	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:28:35	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:29:20	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:30:01			INFO		Starting Server
+
+
+2015-07-14 12:30:07	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:30:52	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:31:36	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:32:21	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:33:07	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:33:53	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:34:39	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:35:24	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:36:09	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:36:54	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:37:39	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:38:25	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:39:11	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:39:58	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:40:01			INFO		Starting Server
+
+
+2015-07-14 12:40:44	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:41:31	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:42:17	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:43:01	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:43:47	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:44:34	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:45:19	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:46:04	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:46:50	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:47:35	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:48:20	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:49:06	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:49:51	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:50:01			INFO		Starting Server
+
+
+2015-07-14 12:50:37	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:51:24	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:52:09	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:52:54	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:53:40	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:54:25	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:55:11	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:55:57	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:56:43	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:57:27	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:58:20	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:59:06	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 12:59:54	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:00:01			INFO		Starting Server
+
+
+2015-07-14 13:00:40	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:01:28	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:02:13	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:02:59	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:03:45	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:04:31	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:05:17	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:06:02	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:06:47	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:07:33	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:08:17	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:09:06	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:09:51	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:10:01			INFO		Starting Server
+
+
+2015-07-14 13:10:36	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:11:24	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:12:09	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:12:55	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:13:40	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:14:26	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:15:14	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:16:01	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:16:46	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:17:31	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:18:18	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:19:05	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:19:56	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:20:01			INFO		Starting Server
+
+
+2015-07-14 13:20:43	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:21:28	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:22:18	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:23:04	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:23:52	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:24:37	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:25:29	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:26:20	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:26:28	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:27:04	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:27:50	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:28:36	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:29:19	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:30:01			INFO		Starting Server
+
+
+2015-07-14 13:30:05	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:30:50	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:31:35	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:32:23	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:33:10	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:33:55	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:34:41	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:35:27	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:36:13	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:37:00	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:37:44	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:38:30	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:39:15	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:40:00	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:40:01			INFO		Starting Server
+
+
+2015-07-14 13:40:46	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:41:33	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:42:21	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:43:07	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:43:52	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:44:37	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:45:23	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:46:08	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:46:53	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:47:37	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:48:23	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:49:09	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:50:01			INFO		Starting Server
+
+
+2015-07-14 13:50:13	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:50:49	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:51:40	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:52:25	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:53:11	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:54:02	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:54:48	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:55:35	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:56:21	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:57:06	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:57:50	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:58:36	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 13:59:24	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:00:02			INFO		Starting Server
+
+
+2015-07-14 14:00:09	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:00:56	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:01:43	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:02:28	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:03:12	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:04:01	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:04:47	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:05:32	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:06:17	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:07:02	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:07:47	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:08:31	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:09:16	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:10:02			INFO		Starting Server
+
+
+2015-07-14 14:10:14	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:10:51	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:11:35	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:12:20	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:13:05	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:13:50	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:14:40	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:15:26	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:16:12	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:16:57	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:17:43	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:18:28	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:19:14	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:20:00	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:20:02			INFO		Starting Server
+
+
+2015-07-14 14:20:45	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:21:32	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:22:19	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:23:04	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:23:53	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:24:37	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:25:23	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:26:10	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:26:55	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:27:41	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:28:27	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:29:12	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:29:58	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:30:02			INFO		Starting Server
+
+
+2015-07-14 14:30:44	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:31:29	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:32:15	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:33:01	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:33:47	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:34:34	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:35:20	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:36:07	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:36:53	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:37:39	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:38:26	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:39:11	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:39:56	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:40:02			INFO		Starting Server
+
+
+2015-07-14 14:40:42	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:41:28	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:42:13	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:42:59	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:43:43	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:44:29	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:45:16	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:46:01	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:46:46	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:47:32	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:48:17	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:49:02	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:49:48	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:50:02			INFO		Starting Server
+
+
+2015-07-14 14:50:35	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:51:20	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:52:05	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:52:50	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:53:36	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:54:21	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:55:06	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:55:51	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:56:36	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:57:22	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:58:07	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:58:52	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 14:59:37	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:00:02			INFO		Starting Server
+
+
+2015-07-14 15:00:23	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:01:09	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:01:56	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:02:42	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:03:28	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:04:15	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:05:05	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:05:51	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:06:36	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:07:20	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:08:08	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:08:54	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:09:40	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:10:01			INFO		Starting Server
+
+
+2015-07-14 15:10:24	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:11:08	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:11:53	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:12:39	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:13:25	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:14:10	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:14:56	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:15:42	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:16:27	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:17:13	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:17:59	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:18:45	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:19:31	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:20:01			INFO		Starting Server
+
+
+2015-07-14 15:20:16	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:21:32	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:22:20	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:23:06	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:23:53	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:24:38	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:25:24	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:26:10	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:26:55	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:27:43	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:28:29	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:29:17	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:30:01			INFO		Starting Server
+
+
+2015-07-14 15:30:34	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:30:58	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:31:44	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:32:32	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:33:17	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:34:05	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:34:50	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:35:36	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:36:21	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:37:10	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:37:55	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:38:40	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:39:25	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:40:01			INFO		Starting Server
+
+
+2015-07-14 15:40:09	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:40:54	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:41:40	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:42:27	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:43:14	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:44:00	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:44:46	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:45:32	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:46:17	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:47:03	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:47:49	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:48:35	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:49:20	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:50:01			INFO		Starting Server
+
+
+2015-07-14 15:50:34	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:50:59	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:51:44	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:52:29	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:53:15	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:54:00	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:54:48	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:55:34	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:56:19	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:57:04	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:57:49	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:58:34	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 15:59:19	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 16:00:01			INFO		Starting Server
+
+
+2015-07-14 16:00:09	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 16:00:46	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 16:01:32	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 16:02:17	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 16:03:03	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 16:03:49	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 16:04:36	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 16:05:21	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 16:06:07	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
+2015-07-14 16:06:53	insertDb	cannot concatenate 'str' and 'datetime.datetime' objects
+
