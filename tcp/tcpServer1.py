@@ -25,7 +25,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
     def handle(self):
         # self.request is the TCP socket connected to the client
         self.data = self.request.recv(1024).strip()
-        logger.info("Data: "+self.data)
+        
         print 'Client: '+ self.data
 	logger.info('Client: '+ self.data)
         if len(self.data)>1:
@@ -55,7 +55,7 @@ def insertDb(arg):
         error_timeout       = arg['error_timeout'],
         error_unknown       = arg['error_unknown'],
         )
-
+        logger.info("Packet: "+arg['time'])
     except Exception as e:
         if 'Duplicate entry' in str(e):
             logger.error('insertDb\t'+"Duplicate entry for time: "+\
