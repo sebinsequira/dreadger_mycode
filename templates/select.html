@@ -29,15 +29,17 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>                       
 	          </button>
-	          
+	          <a class="navbar-brand" href="#"><p><img  width="20" height="20" src="{{ url_for('static', filename='/img/favicon.ico') }}"> Dredger</p></a>
 	        </div>
 	        <div class="collapse navbar-collapse" id="myNavbar">
 
-	          	<a class="navbar-brand" href="#"><p><img  width="20" height="20" src="{{ url_for('static', filename='/img/favicon.ico') }}"> Dredger</p></a>
+	          	
 	            <ul class="nav navbar-nav navbar-right">
-	                
-	                
-	                <li class="navbar-brand">Hello Sachin!</li>
+	                <!--
+	                <div class="hidden-xs">
+	                	<li class="navbar-brand">Hello Sachin!</li>
+	                </div>
+					-->
 	                <li><a class="navbar-brand" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
 	                
 	                </li>
@@ -53,7 +55,7 @@
 {% block page_content %}
 <div class="container">
 <div class="page-header">
-<h2 style="color:silver;">Please select your Dredger</h2>
+<h2 style="color:white;">Please select your Dredger</h2>
 </div>
 </div>
 
