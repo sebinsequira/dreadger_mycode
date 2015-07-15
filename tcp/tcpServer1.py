@@ -27,7 +27,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 		self.data = self.request.recv(1024).strip()
 		
 		print 'Client: '+ self.data
-		logger.info('Client: '+ self.data)
+		#logger.info('Client: '+ self.data)
 		if len(self.data)>1:
 			parsedata(self.data)
 		
