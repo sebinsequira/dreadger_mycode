@@ -25,11 +25,12 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 	def handle(self):
 		# self.request is the TCP socket connected to the client
 		self.data = self.request.recv(1024).strip()
-		
 		print 'Client: '+ self.data
-		#logger.info('Client: '+ self.data)
 		if len(self.data)>1:
+			logger.info('data: '+ self.data)
 			parsedata(self.data)
+		else:
+			logger.info('(len<1)data: '+ self.data)
 		
 		# just send back the same data, but upper-cased
 		#self.request.sendall("ACK_FROM_SERVER")
@@ -55,7 +56,7 @@ def insertDb(arg):
 		error_timeout       = arg['error_timeout'],
 		error_unknown       = arg['error_unknown'],
 		)
-		logger.error("Packet: "+str(arg['time']))
+		logger.error("Added to db, packet: "+str(arg['time']))
 	except Exception as e:
 		if 'Duplicate entry' in str(e):
 			logger.error('insertDb\t'+"Duplicate entry for time: "+\
