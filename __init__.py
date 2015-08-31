@@ -454,7 +454,7 @@ def logout():
 
 if __name__ == "__main__":
     #dbObj=database()
-    dbObj.db_init()
+    #dbObj.db_init()
     #dbObj.randomPacket("2015-04-01 00:00:00", "2015-04-30 00:00:00",'192.168.1.1')             
     #db.create_all()
     app.run(host='0.0.0.0',debug=True)
