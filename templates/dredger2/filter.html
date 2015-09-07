@@ -386,12 +386,19 @@ and results.pages > 1
             
             </td>
 
-            <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Storage Tank Level" data-container="body">
-              
-              {{ result.storage_tank_level}}
+            {% if result.storage_tank_level>600%}
+              <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Storage Tank Level" data-container="body" style="color:rgb(184,0,0);">
+                
+                {{ result.storage_tank_level}}
 
-            </td>
+              </td>
+            {% else %}
+              <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Storage Tank Level" data-container="body" >
+                
+                {{ result.storage_tank_level}}
 
+              </td>
+            {% endif%}
             <td class="test" href="#" data-toggle="tooltip" data-placement="top" title="Storage Tank Cap" data-container="body">
 
               {{ result.storage_tank_cap}}
